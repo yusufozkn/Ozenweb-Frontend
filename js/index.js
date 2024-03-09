@@ -1,23 +1,35 @@
 // Sayfa yüklenmeden önce API isteği göndermek için
 (function () {
     // API endpoint'i
-    var apiUrl = 'http://localhost:8080/product/hello';
+    var apiUrl = 'http://localhost:8080/product/hello'
 
     // Fetch kullanarak GET isteği gönderme
     fetch(apiUrl)
         .then(response => {
-            // Başarılı bir cevap alındığında JSON'u çözümle
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            console.log(response)
+            const reader = response.body.getReader();
+
+            // read() fonksiyonu bir promise döndürür
+            return reader.read();
         })
-        .then(data => {
-            // API'den gelen verileri kullan
-            console.log(data);
+        .then(({ done, value }) => {
+            // done, okuma işleminin tamamlanıp tamamlanmadığını gösterir
+            // value, okunan veriyi içerir
+
+            if (done) {
+                console.log("Veri okuma tamamlandı");
+                return;
+            }
+
+            // value, Uint8Array türünde bir veri parçasıdır
+            console.log("Okunan veri:", new TextDecoder().decode(value));
+            const okunanveri = new TextDecoder().decode(value)
+            
+            const kategori = document.getElementById("kategori")
+
+            kategori.innerText = okunanveri
+            // Bir sonraki parçayı okumak için read() fonksiyonunu tekrar çağırın
         })
         .catch(error => {
-            // Hata durumunda hata mesajını göster
-            console.error('There was a problem with the fetch operation:', error);
+            console.error('Hata oluştu:', error);
         });
 })();
