@@ -49,29 +49,28 @@ body, ul, li, p, a, label, input, div {
   font-size: 22px !important;
 }
 /* General */
-.logo { font-weight: 500 !important;}
 .text-warning {  color: #ede861 !important;}
-.text-muted { color: #bcbcbc !important;}
-.text-success { color: #53a1e4 !important;}
-.text-light { color: #cfd6e1 !important;}
-.bg-dark { background-color: #212934 !important;}
-.bg-light { background-color: #e9eef5 !important;}
-.bg-black { background-color: #1d242d !important;}
-.bg-success { background-color: #53a1e4 !important;}
+.text-muted { color: #ffffff !important;}
+.text-success { color: #e45353 !important;}
+.text-light { color: #ffffff !important;}
+.bg-dark { background-color: #ed1c24 !important;}
+.bg-light { background-color: #ffffff !important;}
+.bg-black { background-color: #ed1c24 !important;}
+.bg-success { background-color: #e45353 !important;}
 .btn-success {
-  background-color: #53a1e4 !important;
-  border-color: #53a1e4 !important;
+  background-color: #e45353 !important;
+  border-color: #e45353 !important;
 }
 .pagination .page-link:hover {color: #000;}
 .pagination .page-link:hover, .pagination .page-link.active {
-  background-color: #56a1e4;
+  background-color: #e45656;
   color: #fff;
 }
 /* Nav */
 #templatemo_nav_top { min-height: 40px;}
 #templatemo_nav_top * { font-size: .9em !important;}
 #templatemo_main_nav a { color: #212934;}
-#templatemo_main_nav a:hover { color: #56a1e4;}
+#templatemo_main_nav a:hover { color: #e45656;}
 #templatemo_main_nav .navbar .nav-icon { margin-right: 20px;}
 
 /* Hero Carousel */
@@ -80,14 +79,14 @@ body, ul, li, p, a, label, input, div {
 .templatemo-accordion a { color: #000;}
 .templatemo-accordion a:hover { color: #333d4a;}
 /* Shop */
-.shop-top-menu a:hover { color: #56a1e4 !important;}
+.shop-top-menu a:hover { color: #e45656 !important;}
 /* Product */
 .product-wap { box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.10);}
 .product-wap .product-color-dot.color-dot-red { background:#f71515;}
-.product-wap .product-color-dot.color-dot-blue { background:#6db4fe;}
+.product-wap .product-color-dot.color-dot-blue { background:#fe6d6d;}
 .product-wap .product-color-dot.color-dot-black { background:#000000;}
 .product-wap .product-color-dot.color-dot-light { background:#e0e0e0;}
-.product-wap .product-color-dot.color-dot-green { background:#56a1e4;}
+.product-wap .product-color-dot.color-dot-green { background:#e45656;}
 .card.product-wap .card .product-overlay {
   background: rgba(0,0,0,.2);
   visibility: hidden;
@@ -117,11 +116,11 @@ body, ul, li, p, a, label, input, div {
 /* Carousel Hero */
 #template-mo-zay-hero-carousel .carousel-indicators li {
   margin-top: -50px;
-  background-color: #56a1e4;
+  background-color: #e45656;
 }
 #template-mo-zay-hero-carousel .carousel-control-next i,
 #template-mo-zay-hero-carousel .carousel-control-prev i {
-  color: #56a1e4 !important;
+  color: #e45656 !important;
   font-size: 2.8em !important;
 }
 /* Carousel Brand */
@@ -132,7 +131,7 @@ body, ul, li, p, a, label, input, div {
 /* Services */
 .services-icon-wap {transition: .3s;}
 .services-icon-wap:hover, .services-icon-wap:hover i {color: #fff;}
-.services-icon-wap:hover {background: #56a1e4;}
+.services-icon-wap:hover {background: #e45656;}
 /* Contact map */
 .leaflet-control a, .leaflet-control { font-size: 10px !important;}
 .form-control { border: 1px solid #e8e8e8;}
@@ -212,7 +211,7 @@ body, ul, li, p, a, label, input, div {
 }
 .info-box .icon i {
 	font-size: 20px;
-	color: #56a1e4;
+	color: #e45656;
 }
 .info-box .content {
 	display:inline-block;
@@ -237,7 +236,7 @@ body, ul, li, p, a, label, input, div {
 	color: #fff;
 	-webkit-transition: all 0.3s ease-in-out;
 	transition: all 0.3s ease-in-out;
-	background: #56a1e4;
+	background: #e45656;
 	padding: 12px 45px;
 	font-size: 15px;
 	border-radius: 30px;

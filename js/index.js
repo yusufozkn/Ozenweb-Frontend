@@ -33,3 +33,4 @@
             console.error('Hata oluştu:', error);
         });
 })();
+
