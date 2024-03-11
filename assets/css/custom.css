@@ -1,8 +1,7 @@
 .logo {
-    width: 250px;
+    width: 200px;
 
 }
-
 
 .sticky-header {
     position: fixed;
@@ -11,6 +10,13 @@
     z-index: 1000;
     background-color: #fff;
     /* Header arkaplan rengi */
-    transition: top 0.3s ease-in-out;
+    transition: top 0.1s ease-in-out;
     /* Animasyonlu geçiş efekti */
+}
+#templatemo_nav_top {
+    display: none; /* Üst menüyü gizle */
+}
+
+#mainNav.sticky-header #templatemo_nav_top {
+    display: block; /* Header yapıştırıldığında üst menüyü göster */
 }
