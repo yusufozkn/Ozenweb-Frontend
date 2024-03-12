@@ -19,45 +19,19 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
-    <!-- Slick -->
-    <link rel="stylesheet" type="text/css" href="assets/css/slick.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/slick-theme.css">
 
 </head>
 
 <body>
-    <!-- Start Top Nav -->
-    <nav class="navbar navbar-expand-lg bg-dark navbar-light d-none d-lg-block" id="templatemo_nav_top">
-        <div class="container text-light">
-            <div class="w-100 d-flex justify-content-between">
-                <div>
-                    <i class="fa fa-envelope mx-2"></i>
-                    <a class="navbar-sm-brand text-light text-decoration-none" href="#">info@ </a>
-                    <i class="fa fa-phone mx-2"></i>
-                    <a class="navbar-sm-brand text-light text-decoration-none" href="tel:">0212 871 34 58</a>
-                    <i class="fa fa-phone mx-2"></i>
-                    <a class="navbar-sm-brand text-light text-decoration-none" href="tel:">0532 416 54 58</a>
-                </div>
-                <div>
-                    <a class="text-light" href="https://fb.com/templatemo" target="_blank" rel="sponsored"><i
-                            class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
-                    <a class="text-light" href="https://www.instagram.com/" target="_blank"><i
-                            class="fab fa-instagram fa-sm fa-fw me-2"></i></a>
-                    <a class="text-light" href="https://twitter.com/" target="_blank"><i
-                            class="fab fa-twitter fa-sm fa-fw me-2"></i></a>
-                </div>
-            </div>
-        </div>
-    </nav>
-    <!-- Close Top Nav -->
-
 
     <!-- Header -->
-    <nav class="navbar navbar-expand-lg navbar-light shadow" id="mainNav">
+    <nav class="navbar navbar-expand-lg navbar-light shadow">
         <div class="container d-flex justify-content-between align-items-center">
             <a href="/">
                 <img src="assets/logo/logo.jpg" alt="Logo" class="logo">
+
             </a>
+
 
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
                 data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -99,79 +73,49 @@
 
                 </div>
             </div>
+
         </div>
     </nav>
-    <!-- Kapanış Header -->
+    <!-- Close Header -->
 
+    <!-- Giriş Formu -->
 
-    <!-- Modal -->
-    <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="w-100 pt-1 mb-5 text-right">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="" method="get" class="modal-content modal-body border-0 p-0">
-                <div class="input-group mb-2">
-                    <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
-                    <button type="submit" class="input-group-text bg-success text-light">
-                        <i class="fa fa-fw fa-search text-white"></i>
-                    </button>
-                </div>
-            </form>
+    <div style="margin-top: 50px ;" class="text-center">
+        <div class="col-lg-4 m-auto">
+            <h1 class="h2">Bayi Girişi</h1>
+            <p>
+                Bayi girişi, sadece firmamıza ait yetkili bayilerin erişimine özeldir.
+            </p>
         </div>
     </div>
 
 
+    <div style="margin-bottom: 100px;" class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">Giriş Yap</div>
+                    <div class="card-body">
+                        <form method="POST" action="#">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Kullanıcı Adı</label>
+                                <input type="text" class="form-control" id="username" name="username" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Şifre</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+                            <div class="text-end">
+                                <button type="submit" class="btn btn-success">Giriş</button>
+                            </div>
 
-    <!-- Open Content -->
-    <section class="bg-light">
-        <div class="container pb-5">
-            <div class="row">
-                <div class="col-lg-5 mt-5">
-                    <div class="card mb-3">
-                        <img class="card-img img-fluid" src="assets/img/z.jpg" alt="Card image cap" id="product-detail">
-                    </div>
-                </div>
-                <!-- col end -->
-                <div class="col-lg-7 mt-5">
-                    <div class="card">
-                        <div class="card-body">
-                            <h1 class="h2">Merdiven</h1>
-
-                            <ul class="list-inline">
-                                <li class="list-inline-item">
-                                    <h6>Kategori:</h6>
-                                </li>
-                                <li class="list-inline-item">
-                                    <p class="text-muted"><strong>Merdivenler</strong></p>
-                                </li>
-                            </ul>
-
-                            <h6>Açıklama: </h6>
-                            <p>Alüminyum merdivenimiz, hafif yapısıyla taşınabilirlik sağlarken, sağlam alüminyum
-                                malzemesiyle de uzun ömürlü bir kullanım sunar. İnşaat, bakım, ev işleri veya
-                                profesyonel atölye projelerinizde güvenle kullanabileceğiniz bu merdiven, kullanıcı
-                                dostu tasarımı ve kaymaz basamaklarıyla öne çıkıyor. Alüminyumun dayanıklılığı ve
-                                hafifliğiyle, her türlü işte size pratik ve güvenli bir yardımcı oluyor.</p>
-                            <ul class="list-inline">
-                                <li class="list-inline-item">
-                                    <h6>Ölçü :</h6>
-                                </li>
-                                <li class="list-inline-item">
-                                    <p class="text-muted"><strong> 2m/2.20m</strong></p>
-                                </li>
-                            </ul>
-
-
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- Close Content -->
-
+    </div>
+    <!-- /Giriş Formu -->
 
     <!-- Start Footer -->
     <footer class="bg-footer-dark" id="tempaltemo_footer">
@@ -267,6 +211,7 @@
     <script src="assets/js/templatemo.js"></script>
     <script src="assets/js/custom.js"></script>
     <!-- End Script -->
+
 </body>
 
 </html>
