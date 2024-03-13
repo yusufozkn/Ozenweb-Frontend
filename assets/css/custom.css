@@ -8,16 +8,15 @@
     margin-bottom: 50px;
 }
 
-.sticky-header {
-    position: fixed;
+#mainNav {
+    position: sticky;
     top: 0;
     width: 100%;
     z-index: 1000;
     background-color: #fff;
-    /* Header arkaplan rengi */
-    transition: top 0.1s ease-in-out;
-    /* Animasyonlu geçiş efekti */
+    transition: top 0.3s ease;
 }
+
 #templatemo_nav_top {
     display: none; /* Üst menüyü gizle */
 }
