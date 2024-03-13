@@ -75,5 +75,27 @@
     color: #a7a7a7;
 }
 
-/**/
+/*main-img*/
+.groove {border-style: groove;}
+.hidden {border-style: hidden;}
+.outset {border-style: outset;}
 
+.img-main{
+    width: 280px;
+    height: 360px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-border{
+    border-style: groove;
+    border: 2px solid #9999991e;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+    
+}
+.main-border:hover{
+    border-style: groove;
+    border-color: #6666662e;
+}

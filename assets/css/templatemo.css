@@ -26,10 +26,9 @@ body, ul, li, p, a, label, input, div {
 .bg-light { background-color: #ffffff !important;}
 .bg-black { background-color: #a8a8a8 !important;}
 .bg-success { background-color: #e45353 !important;}
-.btn-success {
-  background-color: #e45353 !important;
-  border-color: #e45353 !important;
-}
+.btn-success {background-color: #e45353 !important;border-color: #e45353 !important;}
+.btn-success:hover{background-color: #a03a3a !important; }
+
 .pagination .page-link:hover {color: #000;}
 .pagination .page-link:hover, .pagination .page-link.active {
   background-color: #e45656;
@@ -211,6 +210,9 @@ body, ul, li, p, a, label, input, div {
 	border-radius: 30px;
 	margin-top: 30px;
 	border: none;
+}
+.bttn:hover{
+  background: #a03a3a;
 }
 
 .resim-container {
