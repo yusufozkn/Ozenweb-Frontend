@@ -60,7 +60,8 @@
 
 .popup-overlay.show {
     display: block;
-    opacity: 0.5; /* Yarı saydam hale getir */
+    opacity: 1; /* Yarı saydam hale getir */
+    background-color: rgba(0, 0, 0, 0.5); /* Arkaplanı yarı saydam siyah yap */
 }
 
 .popup {

@@ -5,9 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     addButton.addEventListener("click", function () {
         popupOverlay.classList.add("show");
-        setTimeout(function () {
-            popup.classList.add("show");
-        }, 100); // 100 milisaniyede açılma süresi
+        popup.classList.add("show");
     });
 
     popupOverlay.addEventListener("click", function () {
