@@ -1,0 +1,126 @@
+.admin-header{
+    background-color: rgb(209, 209, 209) !important;
+}
+.admin-container{
+    background-color: rgb(129, 54, 54) !important;
+}
+
+.gg-add-r {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    width: 22px;
+    height: 22px;
+    border: 2px solid;
+    transform: scale(var(--ggs,1));
+    border-radius: 4px;
+}
+
+.gg-add-r::after,
+.gg-add-r::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 10px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 5px;
+    top: 8px;
+    left: 4px;
+}
+
+.gg-add-r::after {
+    width: 2px;
+    height: 10px;
+    top: 4px;
+    left: 8px;
+}
+
+/* Butonu yatay olarak merkezlemek için */
+.parent {
+    display: flex;
+    justify-content: center;
+}
+
+
+/*pop up*/
+.popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0); /* Başlangıçta tamamen saydam */
+    z-index: 9998;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out; /* Geçiş efekti ekle */
+}
+
+.popup-overlay.show {
+    display: block;
+    opacity: 0.5; /* Yarı saydam hale getir */
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    width: 400px;
+    height: auto;
+    max-height: 500px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.popup.show {
+    display: block;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.file-input-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.file-input-wrapper input[type='file'] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+
+.file-input-wrapper .btn {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.file-input-wrapper .file-name {
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+#imageCaption {
+    margin-top: 10px;
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
