@@ -14,9 +14,11 @@
     <link rel="stylesheet" href="assets/css/templatemo.css">
     <link rel="stylesheet" href="assets/css/custom.css">
     <link rel="stylesheet" href="assets/css/admin-custom.css">
+    <link rel="stylesheet" href="assets/css/icon.css">
     <script src="js/index.js" defer></script>
     <script src="script.js"></script>
     <script src="js/admin-mainCategory.js"></script>
+    <script src="js/admin-subCategory.js"></script>
 
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet"
@@ -91,82 +93,52 @@
                     <a class="nav-link h3 py-3 text-center text-light" href="#">Ürün Ekle</a>
                 </div>
             </div>
-            
             <div class="col-lg-10 admin-header">
 
                 <div>
-                    <h1 class="h2 py-3" style="margin: 10px;">Kategori Ekle</h1>
+                    <h1 class="h2 py-3" style="margin: 10px;">Alt Kategori Ekle</h1>
 
                 </div>
                 <div class="row" style="margin: 10px;">
                     <div class="col-lg-10 py-5 card product-wap">
-                        <h2 class="h4">Kategoriler</h2>
-                        <div class="row py-3 text-center">
-                            <div class="col-md-3 main-border">
-                                <img class="img-fluid" style="height: 180px; object-fit: cover;"
-                                    src="./assets/img/banner_img_07.jpg" alt="">
-                                Kategori Ismi
-                            </div>
-                            <div class="col-md-3 main-border">
-                                <img class="img-fluid" style="height: 180px; object-fit: cover;"
-                                    src="./assets/img/banner_img_07.jpg" alt="">
-                                Kategori Ismi
-                            </div>
-                            <div class="col-md-3 main-border">
-                                <img class="img-fluid" style="height: 180px; object-fit: cover;"
-                                    src="./assets/img/banner_img_07.jpg" alt="">
-                                Kategori Ismi
-                            </div>
-                            <div class="col-md-3 main-border">
-                                <img class="img-fluid" style="height: 180px; object-fit: cover;"
-                                    src="./assets/img/banner_img_07.jpg" alt="">
-                                Kategori Ismi
-                            </div>
-                        </div>
-                        <div class="row py-3 text-center">
-                            <div class="col-md-3 main-border">
-                                <img class="img-fluid" style="height: 180px; object-fit: cover;"
-                                    src="./assets/img/banner_img_07.jpg" alt="">
-                                Kategori Ismi
-                            </div>
-                            <div class="col-md-3 main-border">
-                                <img class="img-fluid" style="height: 180px; object-fit: cover;"
-                                    src="./assets/img/banner_img_07.jpg" alt="">
-                                Kategori Ismi
-                            </div>
-                            <div class="col-md-3 main-border">
-                                <img class="img-fluid" style="height: 180px; object-fit: cover;"
-                                    src="./assets/img/banner_img_07.jpg" alt="">
-                                Kategori Ismi
-                            </div>
-                            <div class="col-md-3 main-border">
-                                <img class="img-fluid" style="height: 180px; object-fit: cover;"
-                                    src="./assets/img/banner_img_07.jpg" alt="">
-                                Kategori Ismi
-                            </div>
-                        </div>
-                        <div class="row py-3 text-center">
-                            <div class="col-md-3 main-border">
-                                <img class="img-fluid" style="height: 180px; object-fit: cover;"
-                                    src="./assets/img/banner_img_07.jpg" alt="">
-                                Kategori Ismi
-                            </div>
-                            <div class="col-md-3 main-border">
-                                <img class="img-fluid" style="height: 180px; object-fit: cover;"
-                                    src="./assets/img/banner_img_07.jpg" alt="">
-                                Kategori Ismi
-                            </div>
-                            <div class="col-md-3 main-border">
-                                <img class="img-fluid" style="height: 180px; object-fit: cover;"
-                                    src="./assets/img/banner_img_07.jpg" alt="">
-                                Kategori Ismi
-                            </div>
-                        </div>
+                        <h2 class="h4">Alt Kategoriler</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Üst Kategori</th>
+                                    <th>Alt Kategori</th>
+                                    <th>Resim</th>
+                                    <th>Sil</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><button class="trash-button parent" id="trashButton">
+                                            <i class="gg-trash"></i>
+                                        </button></td>
+                                </tr>
+                            </tbody>
+                        </table>
 
                     </div>
                     <div class="col-lg-2 py-3 card product-wap text-center"
                         style="background-color: rgb(241, 241, 241);">
-                        <h1 class="h2">Kategori ekle</h1>
+                        <h1 class="h2">Alt Kategori ekle</h1>
                         <div class="parent">
                             <button class="gg-add-r"></button>
 
@@ -197,6 +169,7 @@
                 style="margin-top: 10px;">Kaydet</button>
         </div>
     </div>
+
     <!-- /Popup İçeriği -->
 
 
