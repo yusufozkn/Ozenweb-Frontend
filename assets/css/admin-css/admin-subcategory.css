@@ -1,0 +1,60 @@
+/*admin sub category*/
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    border: 1px solid black;
+    padding: 50px;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+
+/* Dropdown menüsü için stil */
+#categoryDropdown {
+    height: 50px;
+    padding-left: 20px;
+    /* Resim ve metin arasındaki mesafe */
+}
+
+#categoryDropdown option {
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 60px;
+    /* Resmin sağ tarafına metin arasındaki mesafe */
+    font-size: 18px;
+    /* Metin boyutu */
+    line-height: 50px;
+    /* Satır yüksekliği */
+    height: 50px;
+    /* Seçenek yüksekliği */
+}
+
+/* Seçeneklerin arka plan rengi (isteğe bağlı) */
+#categoryDropdown option:nth-child(odd) {
+    background-color: #f2f2f2;
+    /* Arka plan rengi */
+}
+
+/* Seçilen seçeneğin stili (isteğe bağlı) */
+#categoryDropdown option:checked {
+    font-weight: bold;
+    /* Kalın font */
+}
+
+.category-info {
+    display: flex; /* Flexbox kullanarak içerik hizalama */
+    align-items: center; /* Dikey hizalamayı ortala */
+}
+
+.category-image {
+    width: 150px;
+    height: 150px;
+    margin-right: 10px; /* Resim ile metin arasında boşluk bırakmak için */
+}

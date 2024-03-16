@@ -34,7 +34,7 @@
     transform: translate(-50%, -50%) scale(0.8);
     width: 400px;
     height: auto;
-    max-height: 500px;
+    max-height: 800px;
     background-color: white;
     border: 1px solid #ccc;
     border-radius: 10px;
@@ -79,25 +79,4 @@
     font-size: 14px;
 }
 
-#imageCaption {
-    margin-top: 10px;
-    width: 100%;
-    padding: 5px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-/*admin sub category*/
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-th, td {
-    border: 1px solid black;
-    padding: 50px;
-    text-align: center;
-}
-th {
-    background-color: #f2f2f2;
-}
+ 

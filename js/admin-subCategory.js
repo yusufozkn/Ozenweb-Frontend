@@ -13,6 +13,43 @@ document.addEventListener("DOMContentLoaded", function () {
         popup.classList.remove("show");
     });
 
+    // Kaydet butonuna tıklandığında çalışacak fonksiyon
+    document.getElementById("saveButton").addEventListener("click", function () {
+        // Seçilen seçeneğin değerini al
+        var selectedOption = document.getElementById("categoryDropdown").value;
+
+        // Eğer "Seçiniz" seçeneği seçili kaldıysa uyarı göster
+        if (!selectedOption) {
+            alert("Lütfen bir seçenek seçiniz!");
+            return;
+        }
+
+        // Kaydetme işlemini buraya yazabilirsiniz
+        // Örneğin: form.submit() gibi bir işlem
+    });
+
+    // Dropdown değiştirildiğinde çalışacak fonksiyon
+    document.getElementById("categoryDropdown").addEventListener("change", function () {
+        // Seçilen seçeneğin değerini al
+        var selectedOption = document.getElementById("categoryDropdown").value;
+        var selectedOptionInfo = document.getElementById("selectedOptionInfo");
+
+        // Varsayılan seçenek seçilmişse, hiçbir şey gösterme
+        if (!selectedOption) {
+            selectedOptionInfo.innerHTML = "";
+            return;
+        }
+
+        // Seçeneğe göre resim ve metni güncelle
+        if (selectedOption === "option1") {
+            selectedOptionInfo.innerHTML = '<img src="assets/img/banner_img_01.jpg" alt="Resim 1" style="width: 100px; height: 100px;"> <span style="margin-left: 20px;">Örnek İsim 1</span>';
+        } else if (selectedOption === "option2") {
+            selectedOptionInfo.innerHTML = '<img src="assets/img/banner_img_02.jpg" alt="Resim 2" style="width: 100px; height: 100px;"> <span style="margin-left: 20px;">Örnek İsim 2</span>';
+        } else if (selectedOption === "option3") {
+            selectedOptionInfo.innerHTML = '<img src="assets/img/banner_img_03.jpg" alt="Resim 3" style="width: 100px; height: 100px;"> <span style="margin-left: 20px;">Örnek İsim 3</span>';
+        }
+    });
+
     // Resim seçme işlevi
     var fileInput = document.getElementById("fileInput");
     var fileNameDisplay = document.getElementById("fileName");
@@ -42,3 +79,108 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+
+
+//-------------------------------------------------------------------------------------tablo
+// Örnek veri: Üst kategori ve alt kategori bilgileri
+
+// Örnek veri: Üst kategori ve alt kategori bilgileri
+var categories = [
+    {
+        categoryName: "Üst Kategori 1",
+        categoryImage: "assets/img/banner_img_01.jpg",
+        subCategories: [
+            { subCategoryName: "Alt Kategori 1", subCategoryImage: "assets/img/banner_img_03.jpg" },
+            { subCategoryName: "Alt Kategori 2", subCategoryImage: "assets/img/banner_img_04.jpg" },
+            // Diğer alt kategoriler buraya eklenebilir
+        ]
+    },
+    {
+        categoryName: "Üst Kategori 2",
+        categoryImage: "assets/img/banner_img_02.jpg",
+        subCategories: [
+            { subCategoryName: "Alt Kategori 1", subCategoryImage: "assets/img/banner_img_05.jpg" },
+            { subCategoryName: "Alt Kategori 2", subCategoryImage: "assets/img/banner_img_06.jpg" },
+            // Diğer alt kategoriler buraya eklenebilir
+        ]
+    },
+    // Diğer üst kategoriler buraya eklenebilir
+];
+
+// Tablo içeriğini oluşturan fonksiyon
+function createCategoryTable() {
+    var tableBody = document.getElementById("categoryTableBody");
+    tableBody.innerHTML = ""; // Tabloyu temizle
+
+    categories.forEach(function (category, categoryIndex) {
+        var rowSpan = category.subCategories.length || 1; // Satır sayısı (alt kategorilerin sayısı veya 1)
+
+        var categoryInfo = `
+                <td rowspan="${rowSpan}">
+                    <div class="category-info">
+                        <img src="${category.categoryImage}" alt="${category.categoryName}" class="category-image">
+                        <span class="category-name">${category.categoryName}</span>
+                    </div>
+                </td>
+            `;
+
+        // İlk satır
+        var firstRow = `
+                <tr>
+                    ${categoryInfo}
+                    <td>
+                        <div class="category-info">
+                            <img src="${category.subCategories[0].subCategoryImage}" alt="${category.subCategories[0].subCategoryName}" class="category-image">
+                            <span class="category-name">${category.subCategories[0].subCategoryName}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="trash-button" data-category-index="${categoryIndex}" data-sub-category-index="0"><i class="gg-trash"></i></button>
+                    </td>
+                </tr>
+            `;
+
+        // İlk satırı tabloya ekle
+        tableBody.innerHTML += firstRow;
+
+        // Diğer alt kategorileri tabloya ekle
+        for (var i = 1; i < category.subCategories.length; i++) {
+            var subCategory = category.subCategories[i];
+            var row = `
+                    <tr>
+                        <td>
+                            <div class="category-info">
+                                <img src="${subCategory.subCategoryImage}" alt="${subCategory.subCategoryName}" class="category-image">
+                                <span class="category-name">${subCategory.subCategoryName}</span>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="trash-button" data-category-index="${categoryIndex}" data-sub-category-index="${i}"><i class="gg-trash"></i></button>
+                        </td>
+                    </tr>
+                `;
+
+            // Satırı tabloya ekle
+            tableBody.innerHTML += row;
+        }
+    });
+}
+
+// Sayfa yüklendiğinde tabloyu oluştur
+document.addEventListener("DOMContentLoaded", function () {
+    createCategoryTable();
+
+    // Cop kutusu butonlarını seç
+    var trashButtons = document.querySelectorAll(".trash-button");
+    trashButtons.forEach(function (trashButton) {
+        trashButton.addEventListener("click", function () {
+            // Cop kutusu butonuna tıklanınca yapılacak işlemleri burada yapabilirsiniz
+            var categoryIndex = trashButton.getAttribute("data-category-index");
+            var subCategoryIndex = trashButton.getAttribute("data-sub-category-index");
+
+            // Buradan categoryIndex ve subCategoryIndex kullanarak istediğiniz işlemleri gerçekleştirebilirsiniz
+            console.log("Silme işlemi yapılacak kategori indeksi: ", categoryIndex);
+            console.log("Silme işlemi yapılacak alt kategori indeksi: ", subCategoryIndex);
+        });
+    });
+});

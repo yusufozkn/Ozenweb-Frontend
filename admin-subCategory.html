@@ -13,7 +13,8 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/templatemo.css">
     <link rel="stylesheet" href="assets/css/custom.css">
-    <link rel="stylesheet" href="assets/css/admin-custom.css">
+    <link rel="stylesheet" href="assets/css/admin-css/admin-custom.css">
+    <link rel="stylesheet" href="assets/css/admin-css/admin-subcategory.css">
     <link rel="stylesheet" href="assets/css/icon.css">
     <script src="js/index.js" defer></script>
     <script src="script.js"></script>
@@ -46,35 +47,23 @@
                 id="templatemo_main_nav">
                 <div class="flex-fill">
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+
                         <li class="nav-item">
-                            <a class="nav-link" href="/">Ana Sayfa</a>
+                            <a class="nav-link" href="/admin-mainCategory.html">Ana Kategori</a>
                         </li>
                         <li class="nav-item">
-                            <a id="kategori" class="nav-link" href="about.html">Hakkımızda</a>
+                            <a class="nav-link" href="/admin-subCategory.html">Alt Kategori</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="product.html">Ürünlerimiz</a>
+                            <a class="nav-link" href="#">Ürün Özellik Ekle</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="contact.html">İletişim</a>
+                            <a class="nav-link" href="#">Ürün Ekle</a>
                         </li>
+
                     </ul>
                 </div>
-                <div class="navbar align-self-center d-flex">
-                    <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
-                            <div class="input-group-text">
-                                <i class="fa fa-fw fa-search"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal"
-                        data-bs-target="#templatemo_search">
-                        <i class="fa fa-fw fa-search text-dark mr-2"></i>
-                    </a>
 
-                </div>
             </div>
 
         </div>
@@ -106,29 +95,11 @@
                                 <tr>
                                     <th>Üst Kategori</th>
                                     <th>Alt Kategori</th>
-                                    <th>Resim</th>
                                     <th>Sil</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><button class="trash-button" id="trashButton"><i class="gg-trash"></i></button></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><button class="trash-button" id="trashButton"><i class="gg-trash"></i></button></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><button class="trash-button" id="trashButton"><i class="gg-trash"></i></button></td>
-                                </tr>
+                            <tbody id="categoryTableBody">
+                                <!-- Tablo içeriği buraya dinamik olarak eklenecek -->
                             </tbody>
                         </table>
 
@@ -148,26 +119,34 @@
 
         </div>
     </div>
-    
-
-    
 
 
     <!-- Popup İçeriği -->
     <div id="popup-overlay" class="popup-overlay"></div>
     <div id="popup" class="popup">
-
         <div class="popup-content">
+            <!-- Üst Kategori seçimi için başlık -->
+            <h2 class="h2" style="text-align: left;">Alt Kategori ekle</h2>
 
-            <h2>Alt Kategori resimi seçin</h2>
+            <!-- Dropdown menü -->
+            <div style="text-align: left;">
+                <label class="h3" for="categoryDropdown">Üst Kategori seçin:</label>
+                <select id="categoryDropdown">
+                    <option value="">Seçiniz</option>
+                    <option value="option1">Seçenek 1</option>
+                    <option value="option2">Seçenek 2</option>
+                    <option value="option3">Seçenek 3</option>
+                </select>
+            </div>
+
+            <!-- Seçenek bilgilerinin gösterileceği alan -->
+            <div id="selectedOptionInfo"></div>
 
             <div class="file-input-wrapper">
-
                 <input type="file" id="fileInput" accept="image/*">
                 <button class="btn">Resim Seç</button>
-
             </div>
-            
+
             <div class="file-name" id="fileName"></div>
             <div id="preview"></div>
             <input type="text" id="imageCaption" placeholder="Kategori İçin İsim Girin">
@@ -176,7 +155,15 @@
         </div>
     </div>
 
+    <div id="confirmationPopup" class="popup">
+        <div class="popup-content">
+            <h2>Alt kategoriyi silmek istediğinize emin misiniz?</h2>
+            <button onclick="confirmDelete()">Evet</button>
+            <button onclick="cancelDelete()">Hayır</button>
+        </div>
+    </div>
     <!-- /Popup İçeriği -->
+
 
 
 </body>
