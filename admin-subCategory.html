@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="assets/css/icon.css">
     <script src="js/index.js" defer></script>
     <script src="script.js"></script>
-    <script src="js/admin-mainCategory.js"></script>
     <script src="js/admin-subCategory.js"></script>
 
     <!-- Load fonts style after rendering the layout styles -->
@@ -116,21 +115,19 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td></td>
+                                    <td><button class="trash-button" id="trashButton"><i class="gg-trash"></i></button></td>
                                 </tr>
                                 <tr>
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td></td>
+                                    <td><button class="trash-button" id="trashButton"><i class="gg-trash"></i></button></td>
                                 </tr>
                                 <tr>
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td><button class="trash-button parent" id="trashButton">
-                                            <i class="gg-trash"></i>
-                                        </button></td>
+                                    <td><button class="trash-button" id="trashButton"><i class="gg-trash"></i></button></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -151,17 +148,26 @@
 
         </div>
     </div>
+    
+
+    
 
 
     <!-- Popup İçeriği -->
     <div id="popup-overlay" class="popup-overlay"></div>
     <div id="popup" class="popup">
+
         <div class="popup-content">
-            <h2>Kategori resimi seçin</h2>
+
+            <h2>Alt Kategori resimi seçin</h2>
+
             <div class="file-input-wrapper">
+
                 <input type="file" id="fileInput" accept="image/*">
                 <button class="btn">Resim Seç</button>
+
             </div>
+            
             <div class="file-name" id="fileName"></div>
             <div id="preview"></div>
             <input type="text" id="imageCaption" placeholder="Kategori İçin İsim Girin">
