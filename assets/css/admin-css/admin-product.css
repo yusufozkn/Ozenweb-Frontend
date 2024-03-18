@@ -1,0 +1,48 @@
+.popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    width: 400px; /* Popup genişliğini ayarlayın */
+}
+
+.popup-content {
+    text-align: left; /* İçeriği sola hizalayın */
+}
+
+.form-group {
+    margin-bottom: 20px; /* Form grupları arasındaki boşluğu artırın */
+}
+
+.btn {
+    cursor: pointer;
+}
+
+.image-preview-container {
+    text-align: center;
+    margin-top: 20px; /* Ön izleme alanı ile diğer içerikler arasındaki boşluğu artırın */
+}
+
+.image-preview {
+    max-width: 100%; /* Ön izleme resminin maksimum genişliğini ayarlayın */
+    max-height: 200px;
+    border: 1px solid #ccc;
+    border-radius: 8px; /* Köşeleri yuvarlayın */
+}

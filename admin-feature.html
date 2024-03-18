@@ -14,11 +14,11 @@
     <link rel="stylesheet" href="assets/css/templatemo.css">
     <link rel="stylesheet" href="assets/css/custom.css">
     <link rel="stylesheet" href="assets/css/admin-css/admin-custom.css">
-    <link rel="stylesheet" href="assets/css/admin-css/admin-category.css">
+    <link rel="stylesheet" href="assets/css/admin-css/admin.feature.css">
     <link rel="stylesheet" href="assets/css/icon.css">
     <script src="js/index.js" defer></script>
     <script src="script.js"></script>
-    <script src="js/admin-mainCategory.js"></script>
+    <script src="js/admin-feature.js"></script>
 
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet"
@@ -47,6 +47,7 @@
                 id="templatemo_main_nav">
                 <div class="flex-fill">
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+
                         <li class="nav-item">
                             <a class="nav-link" href="/admin-mainCategory.html">Ana Kategori</a>
                         </li>
@@ -59,6 +60,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/admin-product.html">Ürün Ekle</a>
                         </li>
+
                     </ul>
                 </div>
 
@@ -83,78 +85,26 @@
             <div class="col-lg-10 admin-header">
 
                 <div>
-                    <h1 class="h2 py-3" style="margin: 10px;">Kategori Ekle</h1>
+                    <h1 class="h2 py-3" style="margin: 10px;">Özellik Ekle</h1>
 
                 </div>
                 <div class="row" style="margin: 10px;">
                     <div class="col-lg-10 py-5 card product-wap">
-                        <h2 class="h4">Kategoriler</h2>
-                        <div class="row py-3 text-center">
-                            <div class="col-md-3 main-border">
-                                <img class="img-fluid" style="height: 180px; object-fit: cover;"
-                                    src="./assets/img/banner_img_07.jpg" alt="">
-                                Kategori Ismi
+                        <h2 class="h4">Özellikler</h2>
+                        <div class="row">
+                            <div id="propertiesContainer" class="properties-container col-lg-11">
+                                <!-- Özellikler buraya eklenecek -->
                             </div>
-                            <div class="col-md-3 main-border">
-                                <img class="img-fluid" style="height: 180px; object-fit: cover;"
-                                    src="./assets/img/banner_img_07.jpg" alt="">
-                                Kategori Ismi
-                            </div>
-                            <div class="col-md-3 main-border">
-                                <img class="img-fluid" style="height: 180px; object-fit: cover;"
-                                    src="./assets/img/banner_img_07.jpg" alt="">
-                                Kategori Ismi
-                            </div>
-                            <div class="col-md-3 main-border">
-                                <img class="img-fluid" style="height: 180px; object-fit: cover;"
-                                    src="./assets/img/banner_img_07.jpg" alt="">
-                                Kategori Ismi
+                            <div class="col-lg-1">
+                                <!-- Boş bırakıyoruz, JavaScript kodu tarafından oluşturulacak -->
                             </div>
                         </div>
-                        <div class="row py-3 text-center">
-                            <div class="col-md-3 main-border">
-                                <img class="img-fluid" style="height: 180px; object-fit: cover;"
-                                    src="./assets/img/banner_img_07.jpg" alt="">
-                                Kategori Ismi
-                            </div>
-                            <div class="col-md-3 main-border">
-                                <img class="img-fluid" style="height: 180px; object-fit: cover;"
-                                    src="./assets/img/banner_img_07.jpg" alt="">
-                                Kategori Ismi
-                            </div>
-                            <div class="col-md-3 main-border">
-                                <img class="img-fluid" style="height: 180px; object-fit: cover;"
-                                    src="./assets/img/banner_img_07.jpg" alt="">
-                                Kategori Ismi
-                            </div>
-                            <div class="col-md-3 main-border">
-                                <img class="img-fluid" style="height: 180px; object-fit: cover;"
-                                    src="./assets/img/banner_img_07.jpg" alt="">
-                                Kategori Ismi
-                            </div>
-                        </div>
-                        <div class="row py-3 text-center">
-                            <div class="col-md-3 main-border">
-                                <img class="img-fluid" style="height: 180px; object-fit: cover;"
-                                    src="./assets/img/banner_img_07.jpg" alt="">
-                                Kategori Ismi
-                            </div>
-                            <div class="col-md-3 main-border">
-                                <img class="img-fluid" style="height: 180px; object-fit: cover;"
-                                    src="./assets/img/banner_img_07.jpg" alt="">
-                                Kategori Ismi
-                            </div>
-                            <div class="col-md-3 main-border">
-                                <img class="img-fluid" style="height: 180px; object-fit: cover;"
-                                    src="./assets/img/banner_img_07.jpg" alt="">
-                                Kategori Ismi
-                            </div>
-                        </div>
+
 
                     </div>
                     <div class="col-lg-2 py-3 card product-wap text-center"
                         style="background-color: rgb(241, 241, 241);">
-                        <h1 class="h2">Kategori ekle</h1>
+                        <h1 class="h2">Özellik ekle</h1>
                         <div class="parent">
                             <button class="gg-add-r"></button>
 
@@ -167,26 +117,17 @@
 
         </div>
     </div>
-
-
     <!-- Popup İçeriği -->
     <div id="popup-overlay" class="popup-overlay"></div>
     <div id="popup" class="popup">
         <div class="popup-content">
-            <h2>Kategori resimi seçin</h2>
-            <div class="file-input-wrapper">
-                <input type="file" id="fileInput" accept="image/*">
-                <button class="btn">Resim Seç</button>
-            </div>
-            <div class="file-name" id="fileName"></div>
-            <div id="preview"></div>
-            <input type="text" id="imageCaption" placeholder="Kategori İçin İsim Girin">
+            <h2>Özellik İçin İsim Girin</h2>
+            <input type="text" id="imageCaption" placeholder="Özellik İçin İsim Girin">
             <button id="saveButton" class="btn btn-primary text-center container-fluid"
                 style="margin-top: 10px;">Kaydet</button>
         </div>
     </div>
     <!-- /Popup İçeriği -->
-
 
 </body>
 
