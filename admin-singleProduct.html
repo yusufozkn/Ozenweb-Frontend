@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="tr">
 
 <head>
@@ -18,7 +17,7 @@
     <link rel="stylesheet" href="assets/css/icon.css">
     <script src="js/index.js" defer></script>
     <script src="script.js"></script>
-    <script src="js/admin-subCategory.js"></script>
+    <script src="js/admin-singleProduct.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- Load fonts style after rendering the layout styles -->
@@ -90,12 +89,12 @@
                 </div>
                 <div class="row" style="margin: 10px;">
                     <div class="col-lg-10 py-5 card product-wap">
-                        <h2 class="h4">Alt Kategoriler</h2>
+                        <h2 class="h4">URUN ISMI</h2>
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Üst Kategori</th>
-                                    <th>Alt Kategori</th>
+                                    <th>URUN</th>
+                                    <th>KOD</th>
                                     <th>Sil</th>
                                 </tr>
                             </thead>
@@ -107,10 +106,9 @@
                     </div>
                     <div class="col-lg-2 py-3 card product-wap text-center"
                         style="background-color: rgb(241, 241, 241);">
-                        <h1 class="h2">Alt Kategori ekle</h1>
+                        <h1 class="h2">KOD ekle</h1>
                         <div class="parent">
                             <button class="gg-add-r"></button>
-
                         </div>
                     </div>
 
@@ -126,35 +124,13 @@
     <div id="popup-overlay" class="popup-overlay"></div>
     <div id="popup" class="popup">
         <div class="popup-content">
-            <!-- Üst Kategori seçimi için başlık -->
-            <h2 class="h2" style="text-align: left;">Alt Kategori ekle</h2>
-
-            <!-- Dropdown menü -->
-            <div style="text-align: left;">
-                <label class="h3" for="categoryDropdown">Üst Kategori seçin:</label>
-                <select id="categoryDropdown">
-                    <option value="">Seçiniz</option>
-                    <option value="option1">Seçenek 1</option>
-                    <option value="option2">Seçenek 2</option>
-                    <option value="option3">Seçenek 3</option>
-                </select>
-            </div>
-
-            <!-- Seçenek bilgilerinin gösterileceği alan -->
-            <div id="selectedOptionInfo"></div>
-
-            <div class="file-input-wrapper">
-                <input type="file" id="fileInput" accept="image/*">
-                <button class="btn">Resim Seç</button>
-            </div>
-
-            <div class="file-name" id="fileName"></div>
-            <div id="preview"></div>
-            <input type="text" id="imageCaption" placeholder="Kategori İçin İsim Girin">
+            <h2>KOD Girin</h2>
+            <input type="text" id="imageCaption" placeholder="kodu girin">
             <button id="saveButton" class="btn btn-primary text-center container-fluid"
-                style="margin-top: 10px;">Kaydet</button>
+                style="margin-top: 10px;">Ekle</button>
         </div>
     </div>
+    <!-- /Popup İçeriği -->
 
     <div id="confirmationPopup" class="popup">
         <div class="popup-content">

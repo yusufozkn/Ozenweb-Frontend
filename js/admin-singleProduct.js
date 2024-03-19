@@ -84,29 +84,20 @@ document.addEventListener("DOMContentLoaded", function () {
 //-------------------------------------------------------------------------------------tablo
 // Örnek veri: Üst kategori ve alt kategori bilgileri
 
-// Örnek veri: Üst kategori ve alt kategori bilgileri
 var categories = [
     {
-        categoryName: "Üst Kategori 1",
-        categoryImage: "assets/img/banner_img_01.jpg",
+        categoryName: "URUN merdiven 1",
+        categoryImage: "assets/img/banner_img_03.jpg",
         subCategories: [
-            { subCategoryName: "Alt Kategori 1", subCategoryImage: "assets/img/banner_img_03.jpg" },
-            { subCategoryName: "Alt Kategori 2", subCategoryImage: "assets/img/banner_img_04.jpg" },
-            { subCategoryName: "Alt Kategori 2", subCategoryImage: "assets/img/banner_img_04.jpg" },
-            { subCategoryName: "Alt Kategori 2", subCategoryImage: "assets/img/banner_img_04.jpg" },
-            { subCategoryName: "Alt Kategori 2", subCategoryImage: "assets/img/banner_img_04.jpg" }
+            { subCategoryName: "AKG-1"},
+            { subCategoryName: "AKG-2"},
+            { subCategoryName: "AKG-3"},
+            { subCategoryName: "AKG-4"},
+            { subCategoryName: "AKG-5"}
             // Diğer alt kategoriler buraya eklenebilir
         ]
     },
-    {
-        categoryName: "Üst Kategori 2",
-        categoryImage: "assets/img/banner_img_02.jpg",
-        subCategories: [
-            { subCategoryName: "Alt Kategori 1", subCategoryImage: "assets/img/banner_img_05.jpg" },
-            { subCategoryName: "Alt Kategori 2", subCategoryImage: "assets/img/banner_img_06.jpg" },
-            // Diğer alt kategoriler buraya eklenebilir
-        ]
-    },
+
     // Diğer üst kategoriler buraya eklenebilir
 ];
 
@@ -133,7 +124,7 @@ function createCategoryTable() {
                     ${categoryInfo}
                     <td>
                         <div class="category-info">
-                            <img src="${category.subCategories[0].subCategoryImage}" alt="${category.subCategories[0].subCategoryName}" class="category-image">
+                            
                             <span class="category-name">${category.subCategories[0].subCategoryName}</span>
                         </div>
                     </td>
@@ -153,7 +144,6 @@ function createCategoryTable() {
                     <tr>
                         <td>
                             <div class="category-info">
-                                <img src="${subCategory.subCategoryImage}" alt="${subCategory.subCategoryName}" class="category-image">
                                 <span class="category-name">${subCategory.subCategoryName}</span>
                             </div>
                         </td>

@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         var trashButton = document.createElement("button");
         trashButton.classList.add("trash-button", "parent");
-        trashButton.innerHTML = '<i class="gg-trash"></i>'; // İkon buraya eklendi
+        trashButton.innerHTML = '<i class="gg-trash mt-3"></i>'; // İkon buraya eklendi
 
         propertyBox.appendChild(propertyNameElement);
         propertyRow.appendChild(propertyBox);

@@ -1,138 +1,45 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // Ürünlerin olduğu elementlerin referansları
-    var productElements = document.querySelectorAll('.main-border');
-
-    // Popup ve overlay referansları
-    var popupOverlay = document.getElementById("popup-overlay");
-    var productPopup = document.getElementById("productPopup");
-    var popupImage = document.getElementById("popupImage");
-    var popupProductName = document.getElementById("popupProductName");
-    var dropdownMenu = document.getElementById("dropdownMenu"); // Değişiklik burada
-    var textInput = document.getElementById("textInput");
-    var saveButton = document.getElementById("saveButtonPopup"); // Değişiklik burada
-
-    // Popup içeriğini güncelleme fonksiyonu
-    function updatePopupContent(productName) {
-        // Ürün adını güncelle
-        popupProductName.textContent = productName;
-
-        // Dropdown menüsünü güncelle (örnek veri)
-        var options = [
-            { value: "option1", text: "Seçenek 1" },
-            { value: "option2", text: "Seçenek 2" },
-            { value: "option3", text: "Seçenek 3" }
-        ];
-        options.forEach(function (option) {
-            var optionElement = document.createElement("option");
-            optionElement.value = option.value;
-            optionElement.textContent = option.text;
-            dropdownMenu.appendChild(optionElement);
-        });
-    }
-
-    // Ürünlerin üzerine tıklama olayını dinle
-    productElements.forEach(function (productElement, index) {
-        productElement.addEventListener("click", function () {
-            // Ürün bilgilerini al
-            var productName = this.querySelector('.product-name').textContent;
-            var productImgSrc = this.querySelector('.product-img').getAttribute('src');
-
-            // Popup içeriğini güncelle
-            popupProductName.textContent = productName;
-            popupImage.setAttribute('src', productImgSrc);
-
-            // Dropdown menüsünü güncelle (örnek veri)
-            dropdownMenu.innerHTML = ""; // Önceki seçenekleri temizle
-            updatePopupContent(productName);
-
-            // Popup'ı göster
-            popupOverlay.classList.add("show");
-            productPopup.classList.add("show");
-        });
+$(document).ready(function () {
+    // Icona tıklama olayı ekleniyor, popup penceresini görünür hale getiriyor
+    $("#addProductButton").click(function () {
+        $("#popup-overlay").addClass("show");
+        $("#popup").addClass("show");
     });
 
-    // Popup overlay'a tıklama olayını dinle, popup'ı kapat
-    popupOverlay.addEventListener("click", function () {
-        popupOverlay.classList.remove("show");
-        productPopup.classList.remove("show");
+    // Popup dışına tıklanınca popup penceresi kapatılıyor
+    $("#popup-overlay").click(function () {
+        $(this).removeClass("show");
+        $("#popup").removeClass("show");
     });
 
-    // Kaydet butonuna tıklama olayını dinle
-    saveButton.addEventListener("click", function () {
-        var selectedOption = dropdownMenu.value; // Değişiklik burada
-        var enteredText = textInput.value;
+    // Kaydet butonuna tıklanınca veriler alınıp konsola yazdırılıyor ve popup kapatılıyor
+    $("#saveButton").click(function () {
+        var mainCategory = $("#mainCategory").val();
+        var subCategory = $("#subCategory").val();
+        var productName = $("#productName").val();
+        var image = $("#image").prop("files")[0];
 
-        // Seçenek ve metin bilgilerini kullanarak istediğiniz işlemi yapabilirsiniz
-        console.log("Seçilen Seçenek:", selectedOption);
-        console.log("Girilen Metin:", enteredText);
+        // Resim önizleme alanını göster
+        $("#imageCaption").show();
 
-        // Popup'ı kapat
-        popupOverlay.classList.remove("show");
-        productPopup.classList.remove("show");
-    });
-});
-
-
-
-
-
-//###################################################################################
-
-document.addEventListener("DOMContentLoaded", function () {
-    var addButton = document.querySelector(".gg-add-r");
-    var popupOverlay = document.getElementById("popup-overlay");
-    var popup = document.getElementById("popup");
-    var saveButton = document.getElementById("saveButton");
-
-    addButton.addEventListener("click", function () {
-        popupOverlay.classList.add("show");
-        popup.classList.add("show");
-    });
-
-    popupOverlay.addEventListener("click", function () {
-        popupOverlay.classList.remove("show");
-        popup.classList.remove("show");
-    });
-
-    saveButton.addEventListener("click", function () {
-        var mainCategory = document.getElementById("mainCategory").value;
-        var subCategory = document.getElementById("subCategory").value;
-        var productName = document.getElementById("productName").value;
-        var image = document.getElementById("image").files[0];
-
-        // Resim için isim girme alanını göster
-        var imageCaption = document.getElementById("imageCaption");
-        imageCaption.style.display = "block";
-
-        // Burada kaydetme işlemini yapabilirsiniz. Verileri alıp işleyebilirsiniz.
-
-        // Örnek olarak konsola yazdırma:
+        // Verileri konsola yazdırma
         console.log("Ana Kategori:", mainCategory);
         console.log("Alt Kategori:", subCategory);
         console.log("Ürün İsmi:", productName);
         console.log("Seçilen Resim:", image);
 
         // Popup'ı kapat
-        popupOverlay.classList.remove("show");
-        popup.classList.remove("show");
+        $("#popup-overlay, #popup").removeClass("show");
     });
 
     // Resim seçme işlevi
-    var fileInput = document.getElementById("image");
-    var preview = document.getElementById("preview");
-
-    fileInput.addEventListener("change", function (event) {
+    $("#image").change(function (event) {
         var file = event.target.files[0];
 
         // Resmi önizle
         var reader = new FileReader();
         reader.onload = function (e) {
-            var img = document.createElement("img");
-            img.src = e.target.result;
-            img.style.maxWidth = "100%";
-            img.style.height = "auto";
-            preview.innerHTML = "";
-            preview.appendChild(img);
+            var img = $("<img>").attr("src", e.target.result).css({"max-width": "100%", "height": "auto"});
+            $("#preview").empty().append(img);
         };
         reader.readAsDataURL(file);
     });
@@ -168,28 +75,20 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     ];
 
-    // Kategorileri doldur
-    var mainCategoryDropdown = document.getElementById("mainCategory");
-    categories.forEach(function (category) {
-        var option = document.createElement("option");
-        option.value = category.id;
-        option.text = category.name;
-        mainCategoryDropdown.appendChild(option);
+    // Ana kategori dropdown menüsünü doldur
+    $.each(categories, function (index, category) {
+        $("<option>").val(category.id).text(category.name).appendTo("#mainCategory");
     });
 
     // Üst kategori seçildiğinde alt kategorileri doldur
-    mainCategoryDropdown.addEventListener("change", function () {
-        var selectedCategoryId = parseInt(this.value);
-        var selectedCategory = categories.find(category => category.id === selectedCategoryId);
+    $("#mainCategory").change(function () {
+        var selectedCategoryId = parseInt($(this).val());
+        var selectedCategory = $.grep(categories, function(category){ return category.id === selectedCategoryId; })[0];
 
-        var subCategoryDropdown = document.getElementById("subCategory");
-        subCategoryDropdown.innerHTML = ""; // Alt kategori dropdown'ını temizle
+        $("#subCategory").empty(); // Alt kategori dropdown'ını temizle
 
-        selectedCategory.subCategories.forEach(function (subCategory) {
-            var option = document.createElement("option");
-            option.value = subCategory.id;
-            option.text = subCategory.name;
-            subCategoryDropdown.appendChild(option);
+        $.each(selectedCategory.subCategories, function (index, subCategory) {
+            $("<option>").val(subCategory.id).text(subCategory.name).appendTo("#subCategory");
         });
     });
 });
