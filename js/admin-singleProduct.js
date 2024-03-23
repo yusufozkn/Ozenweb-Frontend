@@ -89,11 +89,11 @@ var categories = [
         categoryName: "URUN merdiven 1",
         categoryImage: "assets/img/banner_img_03.jpg",
         subCategories: [
-            { subCategoryName: "AKG-1"},
-            { subCategoryName: "AKG-2"},
-            { subCategoryName: "AKG-3"},
-            { subCategoryName: "AKG-4"},
-            { subCategoryName: "AKG-5"}
+            { subCategoryName: "AKG-1" },
+            { subCategoryName: "AKG-2" },
+            { subCategoryName: "AKG-3" },
+            { subCategoryName: "AKG-4" },
+            { subCategoryName: "AKG-5" }
             // Diğer alt kategoriler buraya eklenebilir
         ]
     },
@@ -122,14 +122,15 @@ function createCategoryTable() {
         var firstRow = `
                 <tr>
                     ${categoryInfo}
-                    <td>
+                    <td >
                         <div class="category-info">
                             
-                            <span class="category-name">${category.subCategories[0].subCategoryName}</span>
+                            <span class="category-name h5">${category.subCategories[0].subCategoryName}</span>
                         </div>
                     </td>
                     <td>
                         <button class="trash-button" data-category-index="${categoryIndex}" data-sub-category-index="0"><i class="gg-trash"></i></button>
+                        <button class="view-product-button" data-category-index="${categoryIndex}" data-sub-category-index="0">View Product</button>
                     </td>
                 </tr>
             `;
@@ -144,11 +145,12 @@ function createCategoryTable() {
                     <tr>
                         <td>
                             <div class="category-info">
-                                <span class="category-name">${subCategory.subCategoryName}</span>
+                                <span class="category-name h5">${subCategory.subCategoryName}</span>
                             </div>
                         </td>
                         <td>
                             <button class="trash-button" data-category-index="${categoryIndex}" data-sub-category-index="${i}"><i class="gg-trash"></i></button>
+                            <button class="view-product-button" data-category-index="${categoryIndex}" data-sub-category-index="${i}">View Product</button>
                         </td>
                     </tr>
                 `;
@@ -156,6 +158,21 @@ function createCategoryTable() {
             // Satırı tabloya ekle
             tableBody.innerHTML += row;
         }
+    });
+
+    // Tüm "View Product" düğmelerine tıklandığında yönlendirme yap
+    var viewProductButtons = document.querySelectorAll('.view-product-button');
+    viewProductButtons.forEach(function(button) {
+        button.addEventListener('click', function(event) {
+            var categoryIndex = event.target.getAttribute('data-category-index');
+            var subCategoryIndex = event.target.getAttribute('data-sub-category-index');
+            var productPage = "admin-singleProductFeatureAdd"; // Ürün sayfasının URL'si
+
+            // İstenilen ürün sayfasına yönlendirme yap
+            // Örneğin: window.location.href = productPage + "?category=" + categoryIndex + "&subcategory=" + subCategoryIndex;
+            
+            window.location.href = productPage+".html";//oldu la .html buraya ekliyince:D
+        });
     });
 }
 
@@ -177,3 +194,4 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
