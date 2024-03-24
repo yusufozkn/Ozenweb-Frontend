@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var addButton = document.querySelector(".gg-add-r");
     var popupOverlay = document.getElementById("popup-overlay");
     var popup = document.getElementById("popup");
+    var saveButton = document.getElementById("saveButton"); // saveButton tanımlanıyor
 
     addButton.addEventListener("click", function () {
         popupOverlay.classList.add("show");
@@ -40,4 +41,100 @@ document.addEventListener("DOMContentLoaded", function () {
         // Resim için isim girme alanını göster
         imageCaption.style.display = "block";
     });
+
+    // Kategori bilgilerini backend'e gönderme işlevi
+    saveButton.addEventListener("click", function () {
+        var categoryName = document.getElementById("imageCaption").value;
+        var categoryImage = preview.querySelector("img").src;
+
+        // Kategori bilgilerini oluştur
+        var categoryData = {
+            categoryName: categoryName,
+            categoryImage: categoryImage
+        };
+
+        // Backend'e POST isteği gönderme
+        fetch('http://localhost:8080/category/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(categoryData),
+        })
+            .then(response => response.json())
+            .then(data => {
+                // POST işlemi başarılı olduysa gerçekleştirilecek işlemler
+                console.log('Başarılı:', data);
+                // Başka işlemler yapılabilir, örneğin pop-up'ı kapatma
+                popupOverlay.classList.remove("show");
+                popup.classList.remove("show");
+            })
+            .catch((error) => {
+                console.error('Hata:', error);
+                // Hata durumunda kullanıcıya bilgilendirme yapılabilir
+            });
+    });
+
+    // Backend'den kategorileri almak için fetch işlemi
+    fetch('http://localhost:8080/category/getAll')
+        .then(response => response.json())
+        .then(data => {
+            // Gelen kategorileri işle
+            var categoryContainer = document.querySelector(".row.py-3.text-center");
+            categoryContainer.innerHTML = ""; // Önceki içeriği temizle
+
+            data.forEach(category => {
+                var categoryDiv = document.createElement("div");
+                categoryDiv.classList.add("col-md-3", "main-border");
+
+                var image = document.createElement("img");
+                image.classList.add("img-fluid");
+                image.style.height = "180px";
+                image.style.objectFit = "cover";
+                image.src = category.categoryImage;
+
+                var categoryName = document.createElement("div");
+                categoryName.textContent = category.categoryName;
+
+                // Silme butonu oluştur
+                var deleteButton = document.createElement("button");
+                deleteButton.textContent = "Sil";
+                deleteButton.classList.add("btn", "btn-danger");
+                deleteButton.addEventListener("click", function () {
+                    deleteCategory(category.id); // deleteCategory fonksiyonunu çağır
+                });
+
+                categoryDiv.appendChild(image);
+                categoryDiv.appendChild(categoryName);
+                categoryDiv.appendChild(deleteButton); // Silme butonunu ekle
+                categoryContainer.appendChild(categoryDiv);
+            });
+        })
+        .catch(error => console.error('Hata:', error));
+
+    // Kategoriyi silme işlevi
+    function deleteCategory(id) {
+        // Silme işleminden önce kullanıcıya onay mesajı göster
+        var confirmation = confirm("Silmek istiyor musunuz?");
+
+        if (confirmation) {
+            // Silme işlemi
+            fetch('http://localhost:8080/category/delete?id=' + id, {
+                method: 'DELETE'
+            })
+                .then(response => {
+                    if (response.ok) {
+                        console.log("Kategori başarıyla silindi.");
+                        // Sayfayı yeniden yükle
+                        window.location.reload();
+                    } else {
+                        console.error("Kategori silinirken bir hata oluştu.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Hata:', error);
+                });
+        }
+    }
+
 });

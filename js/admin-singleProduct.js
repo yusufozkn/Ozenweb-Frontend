@@ -129,8 +129,10 @@ function createCategoryTable() {
                         </div>
                     </td>
                     <td>
-                        <button class="trash-button" data-category-index="${categoryIndex}" data-sub-category-index="0"><i class="gg-trash"></i></button>
-                        <button class="view-product-button" data-category-index="${categoryIndex}" data-sub-category-index="0">View Product</button>
+                        <button class="view-product-button" data-category-index="${categoryIndex}" data-sub-category-index="${i}">Görüntüle</button>
+                    </td>
+                    <td>
+                        <button class="trash-button" data-category-index="${categoryIndex}" data-sub-category-index="${i}"><i class="gg-trash"></i></button>
                     </td>
                 </tr>
             `;
@@ -149,8 +151,10 @@ function createCategoryTable() {
                             </div>
                         </td>
                         <td>
+                            <button class="view-product-button" data-category-index="${categoryIndex}" data-sub-category-index="${i}">Görüntüle</button>
+                        </td>
+                        <td>
                             <button class="trash-button" data-category-index="${categoryIndex}" data-sub-category-index="${i}"><i class="gg-trash"></i></button>
-                            <button class="view-product-button" data-category-index="${categoryIndex}" data-sub-category-index="${i}">View Product</button>
                         </td>
                     </tr>
                 `;
@@ -162,16 +166,16 @@ function createCategoryTable() {
 
     // Tüm "View Product" düğmelerine tıklandığında yönlendirme yap
     var viewProductButtons = document.querySelectorAll('.view-product-button');
-    viewProductButtons.forEach(function(button) {
-        button.addEventListener('click', function(event) {
+    viewProductButtons.forEach(function (button) {
+        button.addEventListener('click', function (event) {
             var categoryIndex = event.target.getAttribute('data-category-index');
             var subCategoryIndex = event.target.getAttribute('data-sub-category-index');
             var productPage = "admin-singleProductFeatureAdd"; // Ürün sayfasının URL'si
 
             // İstenilen ürün sayfasına yönlendirme yap
             // Örneğin: window.location.href = productPage + "?category=" + categoryIndex + "&subcategory=" + subCategoryIndex;
-            
-            window.location.href = productPage+".html";//oldu la .html buraya ekliyince:D
+
+            window.location.href = productPage + ".html";//oldu la .html buraya ekliyince:D
         });
     });
 }

@@ -93,3 +93,34 @@ table {
       content: "Box Type";
     }
   }
+
+
+  #dropdownContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Öğeleri dikey eksende ortalar */
+}
+
+.input-row {
+    display: flex;
+    justify-content: center; /* Öğeleri yatay eksende ortalar */
+    margin-bottom: 10px; /* Her giriş satırı arasına 10px boşluk ekler */
+}
+
+.dropdown-with-value {
+    margin-right: 5px; /* Dropdown ve değer giriş alanı arasına 5px boşluk ekler */
+}
+
+.value-input {
+    margin-left: 5px; /* Değer giriş alanı ile sonraki öğe arasına 5px boşluk ekler */
+}
+
+.button {
+    margin-top: 10px; /* Butonlar ile sonraki öğe arasına 10px boşluk ekler */
+}
+
+.add-button {
+  width: auto; /* Butun genisligini otomatik ayarlar */
+  padding: 5px 10px; /* Butonun iç dolgusunu ayarlar */
+  font-size: 14px; /* Yazı boyutunu ayarlar */
+}
