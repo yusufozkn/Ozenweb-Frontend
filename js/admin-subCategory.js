@@ -89,6 +89,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var categoryTableBody = document.getElementById("categoryTableBody");
 
+    // Kategoriyi silme işlevi
+    function deleteSubCategory(id) {
+        // Silme işleminden önce kullanıcıya onay mesajı göster
+        var confirmation = confirm("Silmek istiyor musunuz?");
+    
+        if (confirmation) {
+            // Silme işlemi
+            fetch('http://localhost:8080/sub-category/delete?id=' + id, {
+                method: 'DELETE'
+            })
+                .then(response => {
+                    if (response.ok) {
+                        console.log("Alt kategori başarıyla silindi.");
+                        // Sayfayı yeniden yükle
+                        window.location.reload();
+                    } else {
+                        console.error("Alt kategori silinirken bir hata oluştu.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Hata:', error);
+                });
+        }
+    }
+    
     fetch('http://localhost:8080/sub-category/getWithCategory')
         .then(response => response.json())
         .then(data => {
@@ -96,7 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 var categoryId = categoryData.categoryId;
                 var categoryName = categoryData.categoryName;
                 var categoryImage = categoryData.categoryImage;
-
+    
                 var categoryRow = `
                     <tr>
                         <td rowspan="${categoryData.subCategories.length + 1}">
@@ -107,14 +132,14 @@ document.addEventListener("DOMContentLoaded", function () {
                         </td>
                     </tr>
                 `;
-
+    
                 categoryTableBody.innerHTML += categoryRow;
-
+    
                 categoryData.subCategories.forEach((subCategory, index) => {
                     var subCategoryId = subCategory.subCategoryId;
                     var subCategoryName = subCategory.subCategoryName;
                     var subCategoryImage = subCategory.subCategoryImage;
-
+    
                     var subCategoryRow = `
                         <tr>
                             <td>
@@ -124,17 +149,17 @@ document.addEventListener("DOMContentLoaded", function () {
                                 </div>
                             </td>
                             <td>
-                                <button class="trash-button" data-category-id="${categoryId}" data-sub-category-id="${subCategoryId}" data-index="${index}"><i class="gg-trash"></i></button>
+                                <button class="trash-button" onclick="deleteSubCategory(${subCategoryId})"><i class="gg-trash"></i></button>
                             </td>
                         </tr>
                     `;
                     categoryTableBody.innerHTML += subCategoryRow;
                 });
             }
-
+    
             // Kullanımı
             data.forEach(addCategory);
-
+    
         })
         .catch(error => console.error('Hata:', error));
 
