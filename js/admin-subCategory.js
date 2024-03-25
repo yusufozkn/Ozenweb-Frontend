@@ -1,11 +1,24 @@
 document.addEventListener("DOMContentLoaded", function () {
-    var addButton = document.querySelector(".gg-add-r");
     var popupOverlay = document.getElementById("popup-overlay");
     var popup = document.getElementById("popup");
+    var categoryDropdown = document.getElementById("categoryDropdown");
 
+    var addButton = document.querySelector(".gg-add-r");
     addButton.addEventListener("click", function () {
         popupOverlay.classList.add("show");
         popup.classList.add("show");
+
+        fetch('http://localhost:8080/category/getAll')
+            .then(response => response.json())
+            .then(categories => {
+                categories.forEach(category => {
+                    var option = document.createElement("option");
+                    option.value = category.id;
+                    option.textContent = category.categoryName;
+                    categoryDropdown.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Hata:', error));
     });
 
     popupOverlay.addEventListener("click", function () {
@@ -13,56 +26,15 @@ document.addEventListener("DOMContentLoaded", function () {
         popup.classList.remove("show");
     });
 
-    // Kaydet butonuna tıklandığında çalışacak fonksiyon
-    document.getElementById("saveButton").addEventListener("click", function () {
-        // Seçilen seçeneğin değerini al
-        var selectedOption = document.getElementById("categoryDropdown").value;
-
-        // Eğer "Seçiniz" seçeneği seçili kaldıysa uyarı göster
-        if (!selectedOption) {
-            alert("Lütfen bir seçenek seçiniz!");
-            return;
-        }
-
-        // Kaydetme işlemini buraya yazabilirsiniz
-        // Örneğin: form.submit() gibi bir işlem
-    });
-
-    // Dropdown değiştirildiğinde çalışacak fonksiyon
-    document.getElementById("categoryDropdown").addEventListener("change", function () {
-        // Seçilen seçeneğin değerini al
-        var selectedOption = document.getElementById("categoryDropdown").value;
-        var selectedOptionInfo = document.getElementById("selectedOptionInfo");
-
-        // Varsayılan seçenek seçilmişse, hiçbir şey gösterme
-        if (!selectedOption) {
-            selectedOptionInfo.innerHTML = "";
-            return;
-        }
-
-        // Seçeneğe göre resim ve metni güncelle
-        if (selectedOption === "option1") {
-            selectedOptionInfo.innerHTML = '<img src="assets/img/banner_img_01.jpg" alt="Resim 1" style="width: 100px; height: 100px;"> <span style="margin-left: 20px;">Örnek İsim 1</span>';
-        } else if (selectedOption === "option2") {
-            selectedOptionInfo.innerHTML = '<img src="assets/img/banner_img_02.jpg" alt="Resim 2" style="width: 100px; height: 100px;"> <span style="margin-left: 20px;">Örnek İsim 2</span>';
-        } else if (selectedOption === "option3") {
-            selectedOptionInfo.innerHTML = '<img src="assets/img/banner_img_03.jpg" alt="Resim 3" style="width: 100px; height: 100px;"> <span style="margin-left: 20px;">Örnek İsim 3</span>';
-        }
-    });
-
-    // Resim seçme işlevi
     var fileInput = document.getElementById("fileInput");
     var fileNameDisplay = document.getElementById("fileName");
     var preview = document.getElementById("preview");
-    var imageCaption = document.getElementById("imageCaption");
 
     fileInput.addEventListener("change", function (event) {
         var file = event.target.files[0];
 
-        // Seçilen dosyanın adını göster
         fileNameDisplay.textContent = file.name;
 
-        // Resmi önizle
         var reader = new FileReader();
         reader.onload = function (e) {
             var img = document.createElement("img");
@@ -73,117 +45,97 @@ document.addEventListener("DOMContentLoaded", function () {
             preview.appendChild(img);
         };
         reader.readAsDataURL(file);
-
-        // Resim için isim girme alanını göster
-        imageCaption.style.display = "block";
     });
-});
 
+    saveButton.addEventListener("click", function () {
+        // Alt kategori adını, üst kategori ID'sini ve resmi al
+        var subCategoryName = document.getElementById("subCategoryNameInput").value;
+        var categoryId = document.getElementById("categoryDropdown").value;
+        var subCategoryImage = preview.querySelector("img").src;
 
+        // POST isteği için alt kategori verilerini oluştur
+        var subCategoryData = {
+            subCategoryName: subCategoryName,
+            categoryId: categoryId,
+            subCategoryImage: subCategoryImage
+        };
 
-//-------------------------------------------------------------------------------------tablo
-// Örnek veri: Üst kategori ve alt kategori bilgileri
+        // Backend'e POST isteği gönderme
+        fetch('http://localhost:8080/sub-category/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(subCategoryData),
+        })
+            .then(response => response.json())
+            .then(data => {
+                // POST işlemi başarılı olduysa gerçekleştirilecek işlemler
+                console.log('Başarılı:', data);
+                console.log(subCategoryData)
+                // Başka işlemler yapılabilir, örneğin popup'ı kapatma
+                popupOverlay.classList.remove("show");
+                popup.classList.remove("show");
 
-// Örnek veri: Üst kategori ve alt kategori bilgileri
-var categories = [
-    {
-        categoryName: "Üst Kategori 1",
-        categoryImage: "assets/img/banner_img_01.jpg",
-        subCategories: [
-            { subCategoryName: "Alt Kategori 1", subCategoryImage: "assets/img/banner_img_03.jpg" },
-            { subCategoryName: "Alt Kategori 2", subCategoryImage: "assets/img/banner_img_04.jpg" },
-            { subCategoryName: "Alt Kategori 2", subCategoryImage: "assets/img/banner_img_04.jpg" },
-            { subCategoryName: "Alt Kategori 2", subCategoryImage: "assets/img/banner_img_04.jpg" },
-            { subCategoryName: "Alt Kategori 2", subCategoryImage: "assets/img/banner_img_04.jpg" }
-            // Diğer alt kategoriler buraya eklenebilir
-        ]
-    },
-    {
-        categoryName: "Üst Kategori 2",
-        categoryImage: "assets/img/banner_img_02.jpg",
-        subCategories: [
-            { subCategoryName: "Alt Kategori 1", subCategoryImage: "assets/img/banner_img_05.jpg" },
-            { subCategoryName: "Alt Kategori 2", subCategoryImage: "assets/img/banner_img_06.jpg" },
-            // Diğer alt kategoriler buraya eklenebilir
-        ]
-    },
-    // Diğer üst kategoriler buraya eklenebilir
-];
+                // Sayfayı yenile
+                window.location.reload();
+            })
+            .catch((error) => {
+                console.error('Hata:', error);
+                window.location.reload();
+                // Hata durumunda kullanıcıya bilgilendirme yapılabilir
+            });
+    });
 
-// Tablo içeriğini oluşturan fonksiyon
-function createCategoryTable() {
-    var tableBody = document.getElementById("categoryTableBody");
-    tableBody.innerHTML = ""; // Tabloyu temizle
+    var categoryTableBody = document.getElementById("categoryTableBody");
 
-    categories.forEach(function (category, categoryIndex) {
-        var rowSpan = category.subCategories.length || 1; // Satır sayısı (alt kategorilerin sayısı veya 1)
+    fetch('http://localhost:8080/sub-category/getWithCategory')
+        .then(response => response.json())
+        .then(data => {
+            function addCategory(categoryData) {
+                var categoryId = categoryData.categoryId;
+                var categoryName = categoryData.categoryName;
+                var categoryImage = categoryData.categoryImage;
 
-        var categoryInfo = `
-                <td rowspan="${rowSpan}">
-                    <div class="category-info">
-                        <img src="${category.categoryImage}" alt="${category.categoryName}" class="category-image">
-                        <span class="category-name">${category.categoryName}</span>
-                    </div>
-                </td>
-            `;
-
-        // İlk satır
-        var firstRow = `
-                <tr>
-                    ${categoryInfo}
-                    <td>
-                        <div class="category-info">
-                            <img src="${category.subCategories[0].subCategoryImage}" alt="${category.subCategories[0].subCategoryName}" class="category-image">
-                            <span class="category-name">${category.subCategories[0].subCategoryName}</span>
-                        </div>
-                    </td>
-                    <td>
-                        <button class="trash-button" data-category-index="${categoryIndex}" data-sub-category-index="0"><i class="gg-trash"></i></button>
-                    </td>
-                </tr>
-            `;
-
-        // İlk satırı tabloya ekle
-        tableBody.innerHTML += firstRow;
-
-        // Diğer alt kategorileri tabloya ekle
-        for (var i = 1; i < category.subCategories.length; i++) {
-            var subCategory = category.subCategories[i];
-            var row = `
+                var categoryRow = `
                     <tr>
-                        <td>
+                        <td rowspan="${categoryData.subCategories.length + 1}">
                             <div class="category-info">
-                                <img src="${subCategory.subCategoryImage}" alt="${subCategory.subCategoryName}" class="category-image">
-                                <span class="category-name">${subCategory.subCategoryName}</span>
+                                <img src="data:image/jpeg;base64,${categoryImage}" alt="${categoryName}" class="category-image">
+                                <span class="category-name">${categoryName}</span>
                             </div>
-                        </td>
-                        <td>
-                            <button class="trash-button" data-category-index="${categoryIndex}" data-sub-category-index="${i}"><i class="gg-trash"></i></button>
                         </td>
                     </tr>
                 `;
 
-            // Satırı tabloya ekle
-            tableBody.innerHTML += row;
-        }
-    });
-}
+                categoryTableBody.innerHTML += categoryRow;
 
-// Sayfa yüklendiğinde tabloyu oluştur
-document.addEventListener("DOMContentLoaded", function () {
-    createCategoryTable();
+                categoryData.subCategories.forEach((subCategory, index) => {
+                    var subCategoryId = subCategory.subCategoryId;
+                    var subCategoryName = subCategory.subCategoryName;
+                    var subCategoryImage = subCategory.subCategoryImage;
 
-    // Cop kutusu butonlarını seç
-    var trashButtons = document.querySelectorAll(".trash-button");
-    trashButtons.forEach(function (trashButton) {
-        trashButton.addEventListener("click", function () {
-            // Cop kutusu butonuna tıklanınca yapılacak işlemleri burada yapabilirsiniz
-            var categoryIndex = trashButton.getAttribute("data-category-index");
-            var subCategoryIndex = trashButton.getAttribute("data-sub-category-index");
+                    var subCategoryRow = `
+                        <tr>
+                            <td>
+                                <div class="category-info">
+                                    <img src="data:image/jpeg;base64,${subCategoryImage}" alt="${subCategoryName}" class="category-image">
+                                    <span class="category-name">${subCategoryName}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="trash-button" data-category-id="${categoryId}" data-sub-category-id="${subCategoryId}" data-index="${index}"><i class="gg-trash"></i></button>
+                            </td>
+                        </tr>
+                    `;
+                    categoryTableBody.innerHTML += subCategoryRow;
+                });
+            }
 
-            // Buradan categoryIndex ve subCategoryIndex kullanarak istediğiniz işlemleri gerçekleştirebilirsiniz
-            console.log("Silme işlemi yapılacak kategori indeksi: ", categoryIndex);
-            console.log("Silme işlemi yapılacak alt kategori indeksi: ", subCategoryIndex);
-        });
-    });
+            // Kullanımı
+            data.forEach(addCategory);
+
+        })
+        .catch(error => console.error('Hata:', error));
+
 });

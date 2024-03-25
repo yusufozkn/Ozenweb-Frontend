@@ -1,7 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
+    var propertiesContainer = document.getElementById("propertiesContainer");
     var addButton = document.querySelector(".gg-add-r");
     var popupOverlay = document.getElementById("popup-overlay");
     var popup = document.getElementById("popup");
+    var saveButton = document.getElementById("saveButton");
 
     addButton.addEventListener("click", function () {
         popupOverlay.classList.add("show");
@@ -13,67 +15,94 @@ document.addEventListener("DOMContentLoaded", function () {
         popup.classList.remove("show");
     });
 
-    // Resim seçme işlevi kaldırıldı
+    // Özellik eklemek için backend'e POST isteği gönderme işlevi
+    saveButton.addEventListener("click", function () {
+        var categoryName = document.getElementById("imageCaption").value;
+        
+        
+        // Kategori bilgilerini oluştur
+        var categoryData = {
+            categoryName: categoryName,
+            categoryImage: null//---------------------------------------------burda problem
+        };
 
-    var imageCaption = document.getElementById("imageCaption");
-
-    // Resim seçme işlevi yerine sadece isim girme alanını göster
-    imageCaption.style.display = "block";
-});
-
-
-
-//---
-document.addEventListener("DOMContentLoaded", function () {
-    var propertiesContainer = document.getElementById("propertiesContainer");
-
-    // Örnek özellik isimleri
-    var propertyNames = [
-        "Renk",
-        "Boyut",
-        "Malzeme",
-        "denem",
-        "1",
-        "ozellikelr",
-        "burayaymis",
-        "bundan cok olsa?",
-        "nasil olur ki?",
-        "Renk",
-        "Boyut",
-        "Malzeme",
-        "denem",
-        "1",
-        "ozellikelr",
-        "burayaymis",
-        "bundan cok olsa?",
-        "nasil olur ki?"
-        // Ek özellik isimleri buraya eklenebilir
-    ];
-
-    // Her özelliği kutucuk olarak ve yanına çöp kutusu ikonu ekleyerek ekle
-    propertyNames.forEach(function (propertyName) {
-        var propertyRow = document.createElement("div");
-        propertyRow.classList.add("row");
-
-        var propertyBox = document.createElement("div");
-        propertyBox.classList.add("properties-container", "col-lg-11");
-
-        var propertyNameElement = document.createElement("div");
-        propertyNameElement.classList.add("property-box");
-        propertyNameElement.textContent = propertyName;
-
-        var trashButtonContainer = document.createElement("div");
-        trashButtonContainer.classList.add("col-lg-1");
-
-        var trashButton = document.createElement("button");
-        trashButton.classList.add("trash-button", "parent");
-        trashButton.innerHTML = '<i class="gg-trash mt-3"></i>'; // İkon buraya eklendi
-
-        propertyBox.appendChild(propertyNameElement);
-        propertyRow.appendChild(propertyBox);
-        trashButtonContainer.appendChild(trashButton);
-        propertyRow.appendChild(trashButtonContainer);
-
-        propertiesContainer.appendChild(propertyRow);
+        // Backend'e POST isteği gönderme
+        fetch('http://localhost:8080/product-feature-category/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(categoryData),
+        })
+            .then(response => response.json())
+            .then(data => {
+                // POST işlemi başarılı olduysa gerçekleştirilecek işlemler
+                console.log('Başarılı:', data);
+                // Sayfayı yeniden yükle
+                window.location.reload();
+            })
+            .catch((error) => {
+                console.error('Hata:', error);
+                // Hata durumunda kullanıcıya bilgilendirme yapılabilir
+            });
     });
+
+    // Backend'den kategorileri almak için fetch işlemi
+    fetch('http://localhost:8080/product-feature-category/getAll')
+        .then(response => response.json())
+        .then(data => {
+            // Gelen verileri işle
+            data.forEach(feature => {
+                var propertyRow = document.createElement("div");
+                propertyRow.classList.add("row");
+
+                var propertyBox = document.createElement("div");
+                propertyBox.classList.add("properties-container", "col-lg-11");
+
+                var propertyNameElement = document.createElement("div");
+                propertyNameElement.classList.add("property-box");
+                propertyNameElement.textContent = feature.categoryName;
+
+                var trashButtonContainer = document.createElement("div");
+                trashButtonContainer.classList.add("col-lg-1");
+
+                var trashButton = document.createElement("button");
+                trashButton.classList.add("trash-button", "parent");
+                trashButton.innerHTML = '<i class="gg-trash mt-3"></i>'; // Çöp kutusu ikonu
+
+                trashButton.addEventListener("click", function () {
+                    deleteFeature(feature.id); // Silme fonksiyonunu çağır
+                });
+
+                propertyBox.appendChild(propertyNameElement);
+                propertyRow.appendChild(propertyBox);
+                trashButtonContainer.appendChild(trashButton);
+                propertyRow.appendChild(trashButtonContainer);
+
+                propertiesContainer.appendChild(propertyRow);
+            });
+        })
+        .catch(error => console.error('Hata:', error));
+
+    // Özelliği silme işlevi
+    function deleteFeature(id) {
+        var confirmation = confirm("Silmek istiyor musunuz?");
+
+        if (confirmation) {
+            fetch('http://localhost:8080/product-feature-category/delete?id=' + id, {
+                method: 'DELETE'
+            })
+                .then(response => {
+                    if (response.ok) {
+                        console.log("Özellik başarıyla silindi.");
+                        window.location.reload(); // Sayfayı yeniden yükle
+                    } else {
+                        console.error("Özellik silinirken bir hata oluştu.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Hata:', error);
+                });
+        }
+    }
 });

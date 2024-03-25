@@ -7,7 +7,7 @@ table {
 th,
 td {
     border: 1px solid black;
-    padding: 50px;
+    padding: 10px; /* Örnek olarak padding değerini 10px olarak ayarlayabilirsiniz */
     text-align: center;
 }
 
@@ -15,31 +15,26 @@ th {
     background-color: #f2f2f2;
 }
 
-
 /* Dropdown menüsü için stil */
 #categoryDropdown {
-    height: 50px;
-    padding-left: 20px;
+    height: 30px; /* Yüksekliği azaltabilirsiniz */
+    padding-left: 10px; /* Örnek olarak padding değerini 10px olarak ayarlayabilirsiniz */
     /* Resim ve metin arasındaki mesafe */
 }
 
 #categoryDropdown option {
     background-repeat: no-repeat;
     background-position: left center;
-    padding-left: 60px;
+    padding-left: 40px;
     /* Resmin sağ tarafına metin arasındaki mesafe */
-    font-size: 18px;
-    /* Metin boyutu */
-    line-height: 50px;
-    /* Satır yüksekliği */
-    height: 50px;
-    /* Seçenek yüksekliği */
+    font-size: 14px; /* Metin boyutunu küçültebilirsiniz */
+    line-height: 30px; /* Satır yüksekliğini azaltabilirsiniz */
+    height: 30px; /* Seçenek yüksekliğini azaltabilirsiniz */
 }
 
 /* Seçeneklerin arka plan rengi (isteğe bağlı) */
 #categoryDropdown option:nth-child(odd) {
-    background-color: #f2f2f2;
-    /* Arka plan rengi */
+    background-color: #f2f2f2; /* Arka plan rengini ayarlayabilirsiniz */
 }
 
 /* Seçilen seçeneğin stili (isteğe bağlı) */
@@ -54,7 +49,7 @@ th {
 }
 
 .category-image {
-    width: 150px;
-    height: 150px;
+    width: 100px; /* Resim boyutunu küçültebilirsiniz */
+    height: 100px; /* Resim boyutunu küçültebilirsiniz */
     margin-right: 10px; /* Resim ile metin arasında boşluk bırakmak için */
 }

@@ -126,43 +126,40 @@
     <div id="popup-overlay" class="popup-overlay"></div>
     <div id="popup" class="popup">
         <div class="popup-content">
-            <!-- Üst Kategori seçimi için başlık -->
-            <h2 class="h2" style="text-align: left;">Alt Kategori ekle</h2>
+            <h2 class="h2" style="text-align: left;">Alt Kategori Ekle</h2>
 
-            <!-- Dropdown menü -->
+            <!-- Alt Kategori Adı giriş alanı -->
+            <div style="text-align: left;">
+                <label class="h3" for="subCategoryNameInput">Alt Kategori Adı:</label>
+                <input type="text" id="subCategoryNameInput" placeholder="Alt Kategori Adı Girin">
+            </div>
+
+            <!-- Üst Kategori Seçimi için dropdown -->
             <div style="text-align: left;">
                 <label class="h3" for="categoryDropdown">Üst Kategori seçin:</label>
                 <select id="categoryDropdown">
-                    <option value="">Seçiniz</option>
-                    <option value="option1">Seçenek 1</option>
-                    <option value="option2">Seçenek 2</option>
-                    <option value="option3">Seçenek 3</option>
+                    <!-- Kategori seçenekleri buraya dinamik olarak eklenecek -->
                 </select>
             </div>
 
-            <!-- Seçenek bilgilerinin gösterileceği alan -->
-            <div id="selectedOptionInfo"></div>
-
+            <!-- Resim Seçme Butonu -->
             <div class="file-input-wrapper">
                 <input type="file" id="fileInput" accept="image/*">
                 <button class="btn">Resim Seç</button>
             </div>
 
+            <!-- Seçilen Dosyanın Adı -->
             <div class="file-name" id="fileName"></div>
+
+            <!-- Resim Önizleme Alanı -->
             <div id="preview"></div>
-            <input type="text" id="imageCaption" placeholder="Kategori İçin İsim Girin">
+
+            <!-- Kaydet Butonu -->
             <button id="saveButton" class="btn btn-primary text-center container-fluid"
                 style="margin-top: 10px;">Kaydet</button>
         </div>
     </div>
 
-    <div id="confirmationPopup" class="popup">
-        <div class="popup-content">
-            <h2>Alt kategoriyi silmek istediğinize emin misiniz?</h2>
-            <button onclick="confirmDelete()">Evet</button>
-            <button onclick="cancelDelete()">Hayır</button>
-        </div>
-    </div>
     <!-- /Popup İçeriği -->
 
 

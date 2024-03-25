@@ -65,12 +65,15 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(data => {
                 // POST işlemi başarılı olduysa gerçekleştirilecek işlemler
                 console.log('Başarılı:', data);
+                // Sayfayı yeniden yükle
+                window.location.reload();
                 // Başka işlemler yapılabilir, örneğin pop-up'ı kapatma
                 popupOverlay.classList.remove("show");
                 popup.classList.remove("show");
             })
             .catch((error) => {
                 console.error('Hata:', error);
+                window.location.reload();
                 // Hata durumunda kullanıcıya bilgilendirme yapılabilir
             });
     });
@@ -83,32 +86,43 @@ document.addEventListener("DOMContentLoaded", function () {
             var categoryContainer = document.querySelector(".row.py-3.text-center");
             categoryContainer.innerHTML = ""; // Önceki içeriği temizle
 
-            data.forEach(category => {
+            function addCategory(category) {
                 var categoryDiv = document.createElement("div");
                 categoryDiv.classList.add("col-md-3", "main-border");
 
+                var image = createImage(category.categoryImage);
+                var categoryName = document.createElement("div");
+                categoryName.textContent = category.categoryName;
+
+                var deleteButton = createDeleteButton(category.id);
+
+                categoryDiv.appendChild(image);
+                categoryDiv.appendChild(categoryName);
+                categoryDiv.appendChild(deleteButton);
+                categoryContainer.appendChild(categoryDiv);
+            }
+
+            function createImage(base64String) {
                 var image = document.createElement("img");
                 image.classList.add("img-fluid");
                 image.style.height = "180px";
                 image.style.objectFit = "cover";
-                image.src = category.categoryImage;
+                image.src = "data:image/jpeg;base64," + base64String; // JPEG formatı örnek olarak kullanıldı, resmin türüne göre değiştirilebilir.
+                return image;
+            }
 
-                var categoryName = document.createElement("div");
-                categoryName.textContent = category.categoryName;
-
-                // Silme butonu oluştur
+            function createDeleteButton(id) {
                 var deleteButton = document.createElement("button");
                 deleteButton.textContent = "Sil";
                 deleteButton.classList.add("btn", "btn-danger");
                 deleteButton.addEventListener("click", function () {
-                    deleteCategory(category.id); // deleteCategory fonksiyonunu çağır
+                    deleteCategory(id);
                 });
+                return deleteButton;
+            }
 
-                categoryDiv.appendChild(image);
-                categoryDiv.appendChild(categoryName);
-                categoryDiv.appendChild(deleteButton); // Silme butonunu ekle
-                categoryContainer.appendChild(categoryDiv);
-            });
+            // Kullanımı
+            data.forEach(addCategory);
         })
         .catch(error => console.error('Hata:', error));
 
