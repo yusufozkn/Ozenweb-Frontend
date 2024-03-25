@@ -1,3 +1,28 @@
+    // Kategoriyi silme işlevi
+    function deleteSubCategory(id) {
+        // Silme işleminden önce kullanıcıya onay mesajı göster
+        var confirmation = confirm("Silmek istiyor musunuz?");
+    
+        if (confirmation) {
+            // Silme işlemi
+            fetch('http://localhost:8080/sub-category/delete?id=' + id, {
+                method: 'DELETE'
+            })
+                .then(response => {
+                    if (response.ok) {
+                        console.log("Alt kategori başarıyla silindi.");
+                        // Sayfayı yeniden yükle
+                        window.location.reload();
+                    } else {
+                        console.error("Alt kategori silinirken bir hata oluştu.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Hata:', error);
+                });
+        }
+    }
+
 document.addEventListener("DOMContentLoaded", function () {
     var popupOverlay = document.getElementById("popup-overlay");
     var popup = document.getElementById("popup");
@@ -89,30 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var categoryTableBody = document.getElementById("categoryTableBody");
 
-    // Kategoriyi silme işlevi
-    function deleteSubCategory(id) {
-        // Silme işleminden önce kullanıcıya onay mesajı göster
-        var confirmation = confirm("Silmek istiyor musunuz?");
-    
-        if (confirmation) {
-            // Silme işlemi
-            fetch('http://localhost:8080/sub-category/delete?id=' + id, {
-                method: 'DELETE'
-            })
-                .then(response => {
-                    if (response.ok) {
-                        console.log("Alt kategori başarıyla silindi.");
-                        // Sayfayı yeniden yükle
-                        window.location.reload();
-                    } else {
-                        console.error("Alt kategori silinirken bir hata oluştu.");
-                    }
-                })
-                .catch(error => {
-                    console.error('Hata:', error);
-                });
-        }
-    }
+
     
     fetch('http://localhost:8080/sub-category/getWithCategory')
         .then(response => response.json())
@@ -149,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                 </div>
                             </td>
                             <td>
-                                <button class="trash-button" onclick="deleteSubCategory(${subCategoryId})"><i class="gg-trash"></i></button>
+                                <button class="trash-button" id="deleteSubCategory" onclick="deleteSubCategory(${subCategoryId})"><i class="gg-trash"></i></button>
                             </td>
                         </tr>
                     `;
