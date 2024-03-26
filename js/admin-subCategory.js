@@ -1,27 +1,28 @@
-    // Kategoriyi silme işlevi
-    function deleteSubCategory(id) {
-        // Silme işleminden önce kullanıcıya onay mesajı göster
-        var confirmation = confirm("Silmek istiyor musunuz?");
-    
-        if (confirmation) {
-            // Silme işlemi
-            fetch('http://localhost:8080/sub-category/delete?id=' + id, {
-                method: 'DELETE'
+// Kategoriyi silme işlevi
+function deleteSubCategory(id) {
+    // Silme işleminden önce kullanıcıya onay mesajı göster
+    var confirmation = confirm("Silmek istiyor musunuz?");
+
+    if (confirmation) {
+        // Silme işlemi
+        fetch('http://localhost:8080/sub-category/delete?id=' + id, {
+            method: 'DELETE'
+        })
+            .then(response => {
+                if (response.ok) {
+                    console.log("Alt kategori başarıyla silindi.");
+                    // Sayfayı yeniden yükle
+                    window.location.reload();
+                    location.reload();
+                } else {
+                    console.error("Alt kategori silinirken bir hata oluştu.");
+                }
             })
-                .then(response => {
-                    if (response.ok) {
-                        console.log("Alt kategori başarıyla silindi.");
-                        // Sayfayı yeniden yükle
-                        window.location.reload();
-                    } else {
-                        console.error("Alt kategori silinirken bir hata oluştu.");
-                    }
-                })
-                .catch(error => {
-                    console.error('Hata:', error);
-                });
-        }
+            .catch(error => {
+                console.error('Hata:', error);
+            });
     }
+}
 
 document.addEventListener("DOMContentLoaded", function () {
     var popupOverlay = document.getElementById("popup-overlay");
@@ -115,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var categoryTableBody = document.getElementById("categoryTableBody");
 
 
-    
+
     fetch('http://localhost:8080/sub-category/getWithCategory')
         .then(response => response.json())
         .then(data => {
@@ -123,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 var categoryId = categoryData.categoryId;
                 var categoryName = categoryData.categoryName;
                 var categoryImage = categoryData.categoryImage;
-    
+
                 var categoryRow = `
                     <tr>
                         <td rowspan="${categoryData.subCategories.length + 1}">
@@ -134,14 +135,14 @@ document.addEventListener("DOMContentLoaded", function () {
                         </td>
                     </tr>
                 `;
-    
+
                 categoryTableBody.innerHTML += categoryRow;
-    
+
                 categoryData.subCategories.forEach((subCategory, index) => {
                     var subCategoryId = subCategory.subCategoryId;
                     var subCategoryName = subCategory.subCategoryName;
                     var subCategoryImage = subCategory.subCategoryImage;
-    
+
                     var subCategoryRow = `
                         <tr>
                             <td>
@@ -158,10 +159,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     categoryTableBody.innerHTML += subCategoryRow;
                 });
             }
-    
+
             // Kullanımı
             data.forEach(addCategory);
-    
+
         })
         .catch(error => console.error('Hata:', error));
 

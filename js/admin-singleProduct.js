@@ -1,201 +1,169 @@
 document.addEventListener("DOMContentLoaded", function () {
-    var addButton = document.querySelector(".gg-add-r");
+
+    // URL'den ürün ID'sini al
+    var urlParams = new URLSearchParams(window.location.search);
+    var productId = urlParams.get("id");
+    console.log(productId)
+
+    // Ürün bilgilerini almak için istek yap
+    fetch('http://localhost:8080/product/getWithProductCode?productId=' + productId)
+        .then(response => response.json())
+        .then(productData => {
+            console.log(productData)
+
+            var tableBody = document.getElementById("productTableBody");
+            tableBody.innerHTML = ""; // Tabloyu temizle
+
+            var productName = productData.productName; // Ürün adı
+
+            // "Ürün İsmi" başlığını güncelle
+            var productNameHeader = document.querySelector(".product-wap h2");
+            productNameHeader.textContent = productName;
+
+            var rowSpan = productData.productCodes.length || 1; // Satır sayısı (ürün kodlarının sayısı veya 1)
+
+            var productInfo = `
+                <td rowspan="${rowSpan}">
+                    <div class="product-info">
+                        <img src="data:image/jpeg;base64,${productData.productMainImage}" alt="${productName}" class="product-image">
+                        <span class="product-name">${productName}</span>
+                    </div>
+                </td>
+                <td>${productData.productCodes[0].productCodeName}</td>
+                <td><button class="button btn-succes">Görüntüle</button></td>
+                <td><button class="btn btn-danger" data-product-id="${productId}">Sil</button></td>
+            `;
+
+            // İlk satır
+            var firstRow = `
+                <tr>
+                    ${productInfo}
+                </tr>
+            `;
+
+            // İlk satırı tabloya ekle
+            tableBody.innerHTML += firstRow;
+
+            // Diğer ürün kodlarını tabloya ekle
+            for (var i = 1; i < productData.productCodes.length; i++) {
+                var productCode = productData.productCodes[i];
+                var row = `
+                    <tr>
+                        <td>${productCode.productCodeName}</td>
+                        <td><button class="button">Görüntüle</button></td>
+                        <td><button class="btn btn-danger" data-product-id="${productId}">Sil</button></td>
+                    </tr>
+                `;
+
+                // Satırı tabloya ekle
+                tableBody.innerHTML += row;
+            }
+
+            // Sil butonlarına tıklama olayını ekle
+            var deleteButtons = document.querySelectorAll(".btn");
+            deleteButtons.forEach(function (button) {
+                button.addEventListener("click", function () {
+                    var productIdToDelete = this.getAttribute("data-product-id");
+                    showConfirmation(productIdToDelete);
+                });
+            });
+        })
+        .catch(error => console.error('Hata:', error)); // Fetch hatasını yakala
+
+    // Silme onayı gösterme fonksiyonu
+    function showConfirmation(productId) {
+        var confirmation = confirm("Silmek istiyor musunuz?");
+        if (confirmation) {
+            deleteProduct(productId);
+        }
+    }
+
+    // Ürünü silme fonksiyonu
+    function deleteProduct(productId) {
+        fetch('http://localhost:8080/product-code/delete?id=' + productId, {
+            method: 'DELETE'
+        })
+            .then(response => {
+                if (response.ok) {
+                    console.log("Ürün başarıyla silindi.");
+                    // Silinen ürünü tablodan kaldır
+                    // Örnek olarak sayfayı yenileme işlemi yapılabilir
+                    window.location.reload();
+                    location.reload();
+                } else {
+                    console.error("Ürün silinirken bir hata oluştu.");
+
+                }
+            })
+            .catch(error => console.error('Hata:', error));
+    }
+
     var popupOverlay = document.getElementById("popup-overlay");
     var popup = document.getElementById("popup");
+    var addButton = document.querySelector(".gg-add-r");
+    var openPopupBtn = document.getElementById("openPopupBtn");
+    var productCodeInput = document.getElementById("productCodeInput");
+    var saveButton = document.getElementById("saveButton");
 
+    // İlk popup'u açan butonun click olayı
     addButton.addEventListener("click", function () {
         popupOverlay.classList.add("show");
         popup.classList.add("show");
     });
 
+    // İkinci popup'u açan butonun click olayı
+    openPopupBtn.addEventListener("click", function () {
+        popupOverlay.classList.add("show");
+        popup.classList.add("show");
+    });
+
+    // Popup dışındaki alanlara tıklama olayı
     popupOverlay.addEventListener("click", function () {
         popupOverlay.classList.remove("show");
         popup.classList.remove("show");
     });
 
-    // Kaydet butonuna tıklandığında çalışacak fonksiyon
-    document.getElementById("saveButton").addEventListener("click", function () {
-        // Seçilen seçeneğin değerini al
-        var selectedOption = document.getElementById("categoryDropdown").value;
+    // Kaydet butonunun click olayı
+    saveButton.addEventListener("click", function () {
+        var productId = getProductIdFromURL(); // URL'den ürün ID'sini al
+        var productCode = productCodeInput.value; // Kullanıcının girdiği ürün kodunu al
 
-        // Eğer "Seçiniz" seçeneği seçili kaldıysa uyarı göster
-        if (!selectedOption) {
-            alert("Lütfen bir seçenek seçiniz!");
-            return;
-        }
-
-        // Kaydetme işlemini buraya yazabilirsiniz
-        // Örneğin: form.submit() gibi bir işlem
-    });
-
-    // Dropdown değiştirildiğinde çalışacak fonksiyon
-    document.getElementById("categoryDropdown").addEventListener("change", function () {
-        // Seçilen seçeneğin değerini al
-        var selectedOption = document.getElementById("categoryDropdown").value;
-        var selectedOptionInfo = document.getElementById("selectedOptionInfo");
-
-        // Varsayılan seçenek seçilmişse, hiçbir şey gösterme
-        if (!selectedOption) {
-            selectedOptionInfo.innerHTML = "";
-            return;
-        }
-
-        // Seçeneğe göre resim ve metni güncelle
-        if (selectedOption === "option1") {
-            selectedOptionInfo.innerHTML = '<img src="assets/img/banner_img_01.jpg" alt="Resim 1" style="width: 100px; height: 100px;"> <span style="margin-left: 20px;">Örnek İsim 1</span>';
-        } else if (selectedOption === "option2") {
-            selectedOptionInfo.innerHTML = '<img src="assets/img/banner_img_02.jpg" alt="Resim 2" style="width: 100px; height: 100px;"> <span style="margin-left: 20px;">Örnek İsim 2</span>';
-        } else if (selectedOption === "option3") {
-            selectedOptionInfo.innerHTML = '<img src="assets/img/banner_img_03.jpg" alt="Resim 3" style="width: 100px; height: 100px;"> <span style="margin-left: 20px;">Örnek İsim 3</span>';
-        }
-    });
-
-    // Resim seçme işlevi
-    var fileInput = document.getElementById("fileInput");
-    var fileNameDisplay = document.getElementById("fileName");
-    var preview = document.getElementById("preview");
-    var imageCaption = document.getElementById("imageCaption");
-
-    fileInput.addEventListener("change", function (event) {
-        var file = event.target.files[0];
-
-        // Seçilen dosyanın adını göster
-        fileNameDisplay.textContent = file.name;
-
-        // Resmi önizle
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            var img = document.createElement("img");
-            img.src = e.target.result;
-            img.style.maxWidth = "100%";
-            img.style.height = "auto";
-            preview.innerHTML = "";
-            preview.appendChild(img);
+        // POST isteği için ürün kodu verilerini oluştur
+        var productCodeData = {
+            productId: productId,
+            productCode: productCode
         };
-        reader.readAsDataURL(file);
 
-        // Resim için isim girme alanını göster
-        imageCaption.style.display = "block";
+        // Backend'e POST isteği gönderme
+        fetch('http://localhost:8080/product-code/create?productId=' + productCodeData.productId + '&productCode=' + productCodeData.productCode, {
+            method: 'POST',
+        })
+            .then(response => {
+                if (response.ok) {
+                    console.log("Başarılı: Ürün kodu eklendi.");
+                    // Başka işlemler yapılabilir, örneğin popup'ı kapatma
+                    popupOverlay.classList.remove("show");
+                    popup.classList.remove("show");
+
+                    // Sayfayı yenile
+                    window.location.reload();
+                    location.reload();
+                } else {
+                    console.error("Hata: Ürün kodu eklenirken bir sorun oluştu.");
+                }
+            })
+            .catch((error) => {
+                console.error('Hata:', error);
+                // Hata durumunda kullanıcıya bilgilendirme yapılabilir
+            });
+
     });
+
+    // URL'den ürün ID'sini alma işlevi
+    function getProductIdFromURL() {
+        var urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('id');
+    }
 });
 
-
-
-//-------------------------------------------------------------------------------------tablo
-// Örnek veri: Üst kategori ve alt kategori bilgileri
-
-var categories = [
-    {
-        categoryName: "URUN merdiven 1",
-        categoryImage: "assets/img/banner_img_03.jpg",
-        subCategories: [
-            { subCategoryName: "AKG-1" },
-            { subCategoryName: "AKG-2" },
-            { subCategoryName: "AKG-3" },
-            { subCategoryName: "AKG-4" },
-            { subCategoryName: "AKG-5" }
-            // Diğer alt kategoriler buraya eklenebilir
-        ]
-    },
-
-    // Diğer üst kategoriler buraya eklenebilir
-];
-
-// Tablo içeriğini oluşturan fonksiyon
-function createCategoryTable() {
-    var tableBody = document.getElementById("categoryTableBody");
-    tableBody.innerHTML = ""; // Tabloyu temizle
-
-    categories.forEach(function (category, categoryIndex) {
-        var rowSpan = category.subCategories.length || 1; // Satır sayısı (alt kategorilerin sayısı veya 1)
-
-        var categoryInfo = `
-                <td rowspan="${rowSpan}">
-                    <div class="category-info">
-                        <img src="${category.categoryImage}" alt="${category.categoryName}" class="category-image">
-                        <span class="category-name">${category.categoryName}</span>
-                    </div>
-                </td>
-            `;
-
-        // İlk satır
-        var firstRow = `
-                <tr>
-                    ${categoryInfo}
-                    <td >
-                        <div class="category-info">
-                            
-                            <span class="category-name h5">${category.subCategories[0].subCategoryName}</span>
-                        </div>
-                    </td>
-                    <td>
-                        <button class="view-product-button" data-category-index="${categoryIndex}" data-sub-category-index="${i}">Görüntüle</button>
-                    </td>
-                    <td>
-                        <button class="trash-button" data-category-index="${categoryIndex}" data-sub-category-index="${i}"><i class="gg-trash"></i></button>
-                    </td>
-                </tr>
-            `;
-
-        // İlk satırı tabloya ekle
-        tableBody.innerHTML += firstRow;
-
-        // Diğer alt kategorileri tabloya ekle
-        for (var i = 1; i < category.subCategories.length; i++) {
-            var subCategory = category.subCategories[i];
-            var row = `
-                    <tr>
-                        <td>
-                            <div class="category-info">
-                                <span class="category-name h5">${subCategory.subCategoryName}</span>
-                            </div>
-                        </td>
-                        <td>
-                            <button class="view-product-button" data-category-index="${categoryIndex}" data-sub-category-index="${i}">Görüntüle</button>
-                        </td>
-                        <td>
-                            <button class="trash-button" data-category-index="${categoryIndex}" data-sub-category-index="${i}"><i class="gg-trash"></i></button>
-                        </td>
-                    </tr>
-                `;
-
-            // Satırı tabloya ekle
-            tableBody.innerHTML += row;
-        }
-    });
-
-    // Tüm "View Product" düğmelerine tıklandığında yönlendirme yap
-    var viewProductButtons = document.querySelectorAll('.view-product-button');
-    viewProductButtons.forEach(function (button) {
-        button.addEventListener('click', function (event) {
-            var categoryIndex = event.target.getAttribute('data-category-index');
-            var subCategoryIndex = event.target.getAttribute('data-sub-category-index');
-            var productPage = "admin-singleProductFeatureAdd"; // Ürün sayfasının URL'si
-
-            // İstenilen ürün sayfasına yönlendirme yap
-            // Örneğin: window.location.href = productPage + "?category=" + categoryIndex + "&subcategory=" + subCategoryIndex;
-
-            window.location.href = productPage + ".html";//oldu la .html buraya ekliyince:D
-        });
-    });
-}
-
-// Sayfa yüklendiğinde tabloyu oluştur
-document.addEventListener("DOMContentLoaded", function () {
-    createCategoryTable();
-
-    // Cop kutusu butonlarını seç
-    var trashButtons = document.querySelectorAll(".trash-button");
-    trashButtons.forEach(function (trashButton) {
-        trashButton.addEventListener("click", function () {
-            // Cop kutusu butonuna tıklanınca yapılacak işlemleri burada yapabilirsiniz
-            var categoryIndex = trashButton.getAttribute("data-category-index");
-            var subCategoryIndex = trashButton.getAttribute("data-sub-category-index");
-
-            // Buradan categoryIndex ve subCategoryIndex kullanarak istediğiniz işlemleri gerçekleştirebilirsiniz
-            console.log("Silme işlemi yapılacak kategori indeksi: ", categoryIndex);
-            console.log("Silme işlemi yapılacak alt kategori indeksi: ", subCategoryIndex);
-        });
-    });
-});
 
