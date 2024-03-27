@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
         productImage.src = "data:image/jpeg;base64," + product.productMainImage;
 
         var productName = document.createElement("p");
-        productName.classList.add("product-name" );
+        productName.classList.add("product-name");
         productName.textContent = product.productName;
 
         // Ürüne tıklanıldığında yönlendirme yap
@@ -72,52 +72,35 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-    var categories = [
-        {
-            id: 1,
-            name: "Elektronik",
-            subCategories: [
-                { id: 11, name: "Telefonlar" },
-                { id: 12, name: "Bilgisayarlar" },
-                { id: 13, name: "Tabletler" }
-            ]
-        },
-        {
-            id: 2,
-            name: "Giyim",
-            subCategories: [
-                { id: 21, name: "Erkek Giyim" },
-                { id: 22, name: "Kadın Giyim" },
-                { id: 23, name: "Çocuk Giyim" }
-            ]
-        },
-        {
-            id: 3,
-            name: "Ev & Yaşam",
-            subCategories: [
-                { id: 31, name: "Mobilya" },
-                { id: 32, name: "Ev Dekorasyonu" },
-                { id: 33, name: "Ev Aletleri" }
-            ]
-        }
-    ];
+    var categories = [];
+
+    // Ana kategori ve alt kategorileri almak için GET isteği
+    fetch('http://localhost:8080/sub-category/getWithCategory')
+        .then(response => response.json())
+        .then(data => {
+            categories = data;
+            populateMainCategoryDropdown();
+        })
+        .catch(error => console.error('Error fetching categories:', error));
 
     var mainCategoryDropdown = document.getElementById("mainCategory");
     var subCategoryDropdown = document.getElementById("subCategory");
 
     // Ana kategori dropdown menüsünü doldur
-    categories.forEach(function (category) {
-        var option = document.createElement("option");
-        option.value = category.id;
-        option.textContent = category.name;
-        mainCategoryDropdown.appendChild(option);
-    });
+    function populateMainCategoryDropdown() {
+        categories.forEach(function (category) {
+            var option = document.createElement("option");
+            option.value = category.categoryId;
+            option.textContent = category.categoryName;
+            mainCategoryDropdown.appendChild(option);
+        });
+    }
 
     // Üst kategori seçildiğinde alt kategorileri doldur
     mainCategoryDropdown.addEventListener("change", function () {
         var selectedCategoryId = parseInt(this.value);
         var selectedCategory = categories.find(function (category) {
-            return category.id === selectedCategoryId;
+            return category.categoryId === selectedCategoryId;
         });
 
         // Alt kategori dropdown'ını temizle
@@ -125,8 +108,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         selectedCategory.subCategories.forEach(function (subCategory) {
             var option = document.createElement("option");
-            option.value = subCategory.id;
-            option.textContent = subCategory.name;
+            option.value = subCategory.subCategoryId;
+            option.textContent = subCategory.subCategoryName;
             subCategoryDropdown.appendChild(option);
         });
     });
@@ -155,17 +138,39 @@ document.addEventListener("DOMContentLoaded", function () {
         var mainCategory = mainCategoryDropdown.value;
         var subCategory = subCategoryDropdown.value;
         var productName = document.getElementById("productName").value;
-        var image = document.getElementById("image").files[0];
+        var productSummary = document.getElementById("productSummary").value;
+        var productDescription = document.getElementById("productDescription").value;
+        var image = preview.querySelector("img").src;
 
-        // Resim önizleme alanını göster
-        document.getElementById("imageCaption").style.display = "block";
+        // Verileri JSON formatında oluştur
+        var productData = {
+            productName: productName,
+            subCategoryId: subCategory,
+            productMainText: productSummary,
+            productPropertyText: productDescription,
+            productMainImage: image, // Eğer resmi base64 olarak JSON'a eklemek isterseniz burada yapabilirsiniz
+        };
 
-        // Verileri konsola yazdırma
-        console.log("Ana Kategori:", mainCategory);
-        console.log("Alt Kategori:", subCategory);
-        console.log("Ürün İsmi:", productName);
-        console.log("Seçilen Resim:", image);
-
+        // POST isteği gönder
+        fetch('http://localhost:8080/product/create', {
+            method: 'POST',
+            headers: {
+                
+                'Content-Type': 'application/json',
+                //'Authorization':token
+            },
+            
+            body: JSON.stringify(productData)
+        })
+        
+            .then(response => response.json())
+            .then(data => {
+                console.log('Product created successfully:', data);
+                console.log(productData);
+                // Burada başarılı bir şekilde eklendiğine dair bir mesaj veya işlem yapabilirsiniz
+            })
+            .catch(error => console.error('Error creating product:', error));
+            console.log(productData);
         // Popup'ı kapat
         popupOverlay.classList.remove("show");
         popup.classList.remove("show");
@@ -184,7 +189,7 @@ document.addEventListener("DOMContentLoaded", function () {
             var img = document.createElement("img");
             img.src = e.target.result;
             img.style.maxWidth = "100%";
-            img.style.height = "auto";
+            img.style.height = "300px";
             preview.innerHTML = "";
             preview.appendChild(img);
         };
