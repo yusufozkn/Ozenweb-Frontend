@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/templatemo.css">
     <link rel="stylesheet" href="assets/css/custom.css">
-    <script src="js/index.js" defer></script>
-    <script src="script.js"></script>
+
+    <script src="js/login.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- Load fonts style after rendering the layout styles -->
@@ -48,7 +48,7 @@
                             <a class="nav-link" href="index.html">Ana Sayfa</a>
                         </li>
                         <li class="nav-item">
-                            <a  class="nav-link" href="about.html">Hakkımızda</a>
+                            <a class="nav-link" href="about.html">Hakkımızda</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="product.html">Ürünlerimiz</a>
@@ -97,20 +97,20 @@
                 <div class="card">
                     <div class="card-header">Giriş Yap</div>
                     <div class="card-body">
-                        <form method="POST" action="#">
-                            <div class="mb-3">
-                                <label for="username" class="form-label">Kullanıcı Adı</label>
-                                <input type="text" class="form-control" id="username" name="username" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Şifre</label>
-                                <input type="password" class="form-control" id="password" name="password" required>
-                            </div>
-                            <div class="text-end">
-                                <button type="submit" class="btn btn-success">Giriş</button>
-                            </div>
 
-                        </form>
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Kullanıcı Adı</label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Şifre</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <div class="text-end">
+                            <button id="login" class="btn btn-success">Giriş</button>
+                        </div>
+
+
                     </div>
                 </div>
             </div>

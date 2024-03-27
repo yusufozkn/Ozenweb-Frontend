@@ -40,10 +40,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.log('Başarılı:', data);
                 // Sayfayı yeniden yükle
                 window.location.reload();
+                location.reload();
             })
             .catch((error) => {
                 console.error('Hata:', error);
                 // Hata durumunda kullanıcıya bilgilendirme yapılabilir
+                window.location.reload();
+                location.reload();
+
             });
     });
 

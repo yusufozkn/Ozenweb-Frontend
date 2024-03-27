@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <tr>
                         <td>${productCode.productCodeName}</td>
                         <td><button class="button">Görüntüle</button></td>
-                        <td><button class="btn btn-danger" data-product-id="${productId}">Sil</button></td>
+                        <td><button class="btn btn-danger" data-product-id="${productCode.productCodeId}">Sil</button></td>
                     </tr>
                 `;
 
@@ -74,13 +74,13 @@ document.addEventListener("DOMContentLoaded", function () {
     function showConfirmation(productId) {
         var confirmation = confirm("Silmek istiyor musunuz?");
         if (confirmation) {
-            deleteProduct(productId);
+            deleteProductCode(productId);
         }
     }
 
     // Ürünü silme fonksiyonu
-    function deleteProduct(productId) {
-        fetch('http://localhost:8080/product-code/delete?id=' + productId, {
+    function deleteProductCode(productCodeId) {
+        fetch('http://localhost:8080/product-code/delete?productCodeId=' + productCodeId, {
             method: 'DELETE'
         })
             .then(response => {

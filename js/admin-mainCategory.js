@@ -44,6 +44,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Kategori bilgilerini backend'e gönderme işlevi
     saveButton.addEventListener("click", function () {
+        const token = localStorage.getItem("token")
+        console.log(token)
         var categoryName = document.getElementById("imageCaption").value;
         var categoryImage = preview.querySelector("img").src;
 
@@ -58,6 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization':token
             },
             body: JSON.stringify(categoryData),
         })
@@ -65,6 +68,8 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(data => {
                 // POST işlemi başarılı olduysa gerçekleştirilecek işlemler
                 console.log('Başarılı:', data);
+
+                console.log(data.status)//-----------------------------------------------------------403->logine gitsin-------------------
                 // Sayfayı yeniden yükle
                 window.location.reload();
                 // Başka işlemler yapılabilir, örneğin pop-up'ı kapatma
@@ -73,7 +78,10 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .catch((error) => {
                 console.error('Hata:', error);
-                window.location.reload();
+
+
+
+                //window.location.reload();
                 // Hata durumunda kullanıcıya bilgilendirme yapılabilir
             });
     });
