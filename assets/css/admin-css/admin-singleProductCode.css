@@ -13,9 +13,9 @@
     font-weight: bold;
     text-align: center;
     text-decoration: none;
-    border: 2px solid #7efbee;
+    border: 2px solid #277a2a;
     /* Kenarlık rengi */
-    color: #000000;
+    color: #fff;
     /* Yazı rengi */
     background-color: transparent;
     /* Arka plan rengi */
@@ -25,11 +25,11 @@
 }
 
 .button:hover {
-    background-color: #7efbee;
+    background-color: #277a2a;
     /* Hover olduğunda arka plan rengi */
-    color: #000;
+    color: #fff;
     /* Hover olduğunda yazı rengi */
-    border-color: #7efbee;
+    border-color: #277a2a;
     /* Hover olduğunda kenarlık rengi */
 }
 
@@ -41,4 +41,48 @@
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+}
+
+
+
+/* Tablo stilleri */
+#productTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#productTable th,
+#productTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+/* Buton stilleri */
+.button {
+    background-color: #4CAF50; /* Yeşil */
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 2px 2px;
+    cursor: pointer;
+}
+
+.btn-danger {
+    background-color: #f44336; /* Kırmızı */
+}
+
+.btn-success {
+    background-color: #4CAF50; /* Yeşil */
+}
+
+/* H2 stilleri */
+.product-wap h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
 }

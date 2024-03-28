@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", function () {
     var productId = urlParams.get("id");
     console.log(productId)
 
-    // Ürün bilgilerini almak için istek yap
     fetch('http://localhost:8080/product/getWithProductCode?productId=' + productId)
         .then(response => response.json())
         .then(productData => {
@@ -16,30 +15,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
             var productName = productData.productName; // Ürün adı
 
-            // "Ürün İsmi" başlığını güncelle
-            var productNameHeader = document.querySelector(".product-wap h2");
+            // Ürün adını güncelle
+            var productNameHeader = document.getElementById("productNameHeader");
             productNameHeader.textContent = productName;
 
-            var rowSpan = productData.productCodes.length || 1; // Satır sayısı (ürün kodlarının sayısı veya 1)
-
-            var productInfo = `
-                <td rowspan="${rowSpan}">
+            // İlk satırı oluştur
+            var firstRow = `
+            <tr>
+                <td rowspan="${productData.productCodes.length}">
                     <div class="product-info">
                         <img src="data:image/jpeg;base64,${productData.productMainImage}" alt="${productName}" class="product-image">
-                        <span class="product-name">${productName}</span>
                     </div>
                 </td>
                 <td>${productData.productCodes[0].productCodeName}</td>
-                <td><button class="button btn-succes">Görüntüle</button></td>
-                <td><button class="btn btn-danger" data-product-id="${productId}">Sil</button></td>
-            `;
-
-            // İlk satır
-            var firstRow = `
-                <tr>
-                    ${productInfo}
-                </tr>
-            `;
+                <td><button class="button">Görüntüle</button></td>
+                <td><button class="btn btn1 btn-danger" data-product-id="${productData.productCodes[0].productCodeId}">Sil</button></td>
+            </tr>
+        `;
 
             // İlk satırı tabloya ekle
             tableBody.innerHTML += firstRow;
@@ -48,37 +40,38 @@ document.addEventListener("DOMContentLoaded", function () {
             for (var i = 1; i < productData.productCodes.length; i++) {
                 var productCode = productData.productCodes[i];
                 var row = `
-                    <tr>
-                        <td>${productCode.productCodeName}</td>
-                        <td><button class="button">Görüntüle</button></td>
-                        <td><button class="btn btn-danger" data-product-id="${productCode.productCodeId}">Sil</button></td>
-                    </tr>
-                `;
+                <tr>
+                    <td>${productCode.productCodeName}</td>
+                    <td><button class="button">Görüntüle</button></td>
+                    <td><button class="btn btn1 btn-danger" data-product-id="${productCode.productCodeId}">Sil</button></td>
+                </tr>
+            `;
 
                 // Satırı tabloya ekle
                 tableBody.innerHTML += row;
             }
 
             // Sil butonlarına tıklama olayını ekle
-            var deleteButtons = document.querySelectorAll(".btn");
+            var deleteButtons = document.querySelectorAll(".btn1");
             deleteButtons.forEach(function (button) {
                 button.addEventListener("click", function () {
                     var productIdToDelete = this.getAttribute("data-product-id");
-                    showConfirmation(productIdToDelete);
+                    showConfirmationKod(productIdToDelete);
                 });
             });
+
         })
         .catch(error => console.error('Hata:', error)); // Fetch hatasını yakala
 
     // Silme onayı gösterme fonksiyonu
-    function showConfirmation(productId) {
-        var confirmation = confirm("Silmek istiyor musunuz?");
+    function showConfirmationKod(productId) {
+        var confirmation = confirm("Ürünü Silmek istiyor musunuz?");
         if (confirmation) {
             deleteProductCode(productId);
         }
     }
 
-    // Ürünü silme fonksiyonu
+    // Silme işlemini gerçekleştiren fonksiyon
     function deleteProductCode(productCodeId) {
         fetch('http://localhost:8080/product-code/delete?productCodeId=' + productCodeId, {
             method: 'DELETE'
@@ -89,14 +82,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     // Silinen ürünü tablodan kaldır
                     // Örnek olarak sayfayı yenileme işlemi yapılabilir
                     window.location.reload();
-                    location.reload();
                 } else {
                     console.error("Ürün silinirken bir hata oluştu.");
-
                 }
             })
             .catch(error => console.error('Hata:', error));
     }
+
 
     var popupOverlay = document.getElementById("popup-overlay");
     var popup = document.getElementById("popup");
@@ -164,6 +156,66 @@ document.addEventListener("DOMContentLoaded", function () {
         var urlParams = new URLSearchParams(window.location.search);
         return urlParams.get('id');
     }
+
+
+
+
+
+
+
+
+    // Silme butonunu seçme
+    var deleteProductBtn = document.getElementById("deleteProductBtn");
+
+    // Silme butonuna tıklanınca silme işlemini gerçekleştirme
+    deleteProductBtn.addEventListener("click", function () {
+        var productId = getProductIdFromURL(); // URL'den ürün ID'sini al
+        showConfirmation(productId);
+    });
+
+    // Sil butonlarına tıklama olayını ekle
+    var deleteButtons = document.querySelectorAll(".btn2");
+    deleteButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+            var productIdToDelete = this.getAttribute("data-product-id");
+            showConfirmation(productIdToDelete);
+        });
+    });
+
+    // Silme onayı gösterme fonksiyonu
+    function showConfirmation(productId) {
+        var confirmation = confirm("Silmek istiyor musunuz?");
+        if (confirmation) {
+            deleteProduct(productId);
+        }
+    }
+
+    // Ürünü silme fonksiyonu
+    function deleteProduct(productId) {
+        fetch('http://localhost:8080/product/delete?id=' + productId, {
+            method: 'DELETE'
+        })
+            .then(response => {
+                if (response.ok) {
+                    console.log("Ürün başarıyla silindi.");
+                    // Başarılı bir şekilde silindiğinde admin-product.html sayfasına yönlendir
+                    window.location.href = '/admin-product.html'; // Yönlendirme işlemi
+                } else {
+                    console.error("Ürün silinirken bir hata oluştu.");
+                }
+            })
+            .catch(error => console.error('Hata:', error));
+    }
+
+
+    // URL'den ürün ID'sini alma işlevi
+    function getProductIdFromURL() {
+        var urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('id');
+    }
+
 });
+
+
 
 

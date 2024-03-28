@@ -13,6 +13,7 @@
     border: 2px solid;
     transform: scale(var(--ggs,1));
     border-radius: 4px;
+    background-color: #a3f8a6;
 }
 
 .gg-add-r::after,

@@ -167,6 +167,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(data => {
                 console.log('Product created successfully:', data);
                 console.log(productData);
+                window.location.reload();
                 // Burada başarılı bir şekilde eklendiğine dair bir mesaj veya işlem yapabilirsiniz
             })
             .catch(error => console.error('Error creating product:', error));
