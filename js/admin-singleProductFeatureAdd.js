@@ -1,4 +1,106 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Sayfa yüklendiğinde yapılacak işlemler
+
+    // Şu anki URL'den productCodeId'yi al
+    const urlParams = new URLSearchParams(window.location.search);
+    const productCodeId = urlParams.get('productCodeId');
+
+    // GET isteği yapmak için fonksiyon
+    function fetchData(productCodeId) {
+        fetch(`http://localhost:8080/product-code/getByProductCode?productCodeId=${productCodeId}`)
+            .then(response => response.json())
+            .then(data => {
+                // Gelen verileri tabloya doldur
+                fillTable(data);
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    // Tabloyu doldurmak için fonksiyon
+    function fillTable(data) {
+        // Tabloyu oluştur
+        const table = document.createElement('table');
+        const thead = document.createElement('thead');
+        const tbody = document.createElement('tbody');
+
+        // Tablo başlık satırı
+        const headerRow = document.createElement('tr');
+        const codeNameHeader = document.createElement('th');
+        codeNameHeader.textContent = 'KOD';
+        headerRow.appendChild(codeNameHeader);
+
+        data.productFeatureDtos.forEach(feature => {
+            const categoryHeader = document.createElement('th');
+            categoryHeader.textContent = feature.productFeatureCategoryName;
+            headerRow.appendChild(categoryHeader);
+        });
+
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+
+        // Tablo içeriği
+        const bodyRow = document.createElement('tr');
+        const codeNameCell = document.createElement('td');
+        codeNameCell.textContent = data.productCodeName;
+        bodyRow.appendChild(codeNameCell);
+
+        data.productFeatureDtos.forEach(feature => {
+            const valueCell = document.createElement('td');
+            valueCell.textContent = feature.productFeatureValue;
+            bodyRow.appendChild(valueCell);
+        });
+
+        tbody.appendChild(bodyRow);
+        table.appendChild(tbody);
+
+        // Tabloyu sayfaya ekle
+        const tableContainer = document.querySelector('.product-wap'); // .product-wap sınıfını değiştirdim
+        tableContainer.insertBefore(table, tableContainer.lastElementChild.previousElementSibling); // tabloyu istediğiniz yere ekliyoruz
+    }
+
+    // fetchData fonksiyonunu çağır
+    fetchData(productCodeId);
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    var dropdownCounter = 0; // Dropdown sayacı
+
+    // Dropdown'u dolduracak fonksiyon
+    function populateDropdown(select, categories) {
+        select.innerHTML = ''; // Önceki seçenekleri temizle
+
+        // Her kategori için bir seçenek oluştur ve dropdown'a ekle
+        categories.forEach(function(category) {
+            var option = document.createElement("option");
+            option.value = category.id;
+            option.textContent = category.categoryName;
+            select.appendChild(option);
+        });
+    }
+
+    // GET isteği göndererek kategorileri al ve dropdown'u doldur
+    function fetchAndPopulateDropdown(select) {
+        fetch('http://localhost:8080/product-feature-category/getAll')
+            .then(response => {
+                if (response.ok) {
+                    return response.json(); // JSON verisini al ve işle
+                }
+                throw new Error('Network response was not ok.');
+            })
+            .then(categories => {
+                // Dropdown'u dolduracak fonksiyonu çağır
+                populateDropdown(select, categories);
+            })
+            .catch(error => console.error('Hata:', error));
+    }
+
+    // URL'den ürün ID'sini al
+    var urlParams = new URLSearchParams(window.location.search);
+    var productId = urlParams.get("productCodeId");
+
+    console.log(productId)
+
     // Ekle butonunu oluştur
     var addButton = document.createElement("button");
     addButton.textContent = "Ekle";
@@ -26,21 +128,49 @@ document.addEventListener("DOMContentLoaded", function () {
     // Kaydet butonuna tıklandığında çalışacak fonksiyon
     saveButton.addEventListener("click", function () {
         // Seçenekleri ve değerleri al
-        var selections = [];
-        var inputDivs = document.querySelectorAll(".dropdown-with-value");
+        var productCodeId = productId; // URL'den alınan productCodeId
+        console.log(productId)
+        var productFeatures = [];
+
+        var inputDivs = document.querySelectorAll(".input-row");
 
         inputDivs.forEach(function (div) {
             var select = div.querySelector("select");
             var option = select.value;
             var input = div.querySelector(".value-input");
             var value = input.value;
-            selections.push({ option: option, value: value });
+            productFeatures.push({ productFeatureCategoryId: option, productFeatureValue: value });
         });
 
         // Alınan seçenekleri ve değerleri işlemek için buraya yazabilirsiniz
         // Bu kısımda seçimler ve değerlerin backend'e gönderilmesi sağlanacak
         // Backend bağlantısı yapıldığında bu fonksiyon yazılacak
-        console.log("Seçenekler ve değerler:", selections);
+        console.log("productCodeId:", productCodeId);
+        console.log("productFeatures:", productFeatures);
+
+        // POST isteği gönderme
+        var requestData = {
+            productCodeId: productCodeId,
+            productFeatures: productFeatures
+        };
+
+        fetch('http://localhost:8080/product-feature/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestData)
+        })
+            .then(response => {
+                if (response.ok) {
+                    console.log('POST isteği başarıyla gönderildi.');
+                    window.location.reload();
+                    // İsteğin başarılı olduğu durumda yapılacak işlemleri buraya ekleyebilirsiniz.
+                } else {
+                    console.error('POST isteği başarısız oldu.');
+                }
+            })
+            .catch(error => console.error('Hata:', error));
     });
 
     // Yeni giriş satırı ekleyen işlev
@@ -50,20 +180,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Dropdown seçeneği oluştur
         var select = document.createElement("select");
-        var option1 = document.createElement("option");
-        option1.value = "option1";
-        option1.textContent = "Seçenek 1";
-        var option2 = document.createElement("option");
-        option2.value = "option2";
-        option2.textContent = "Seçenek 2";
-        var option3 = document.createElement("option");
-        option3.value = "option3";
-        option3.textContent = "Seçenek 3";
-
-        // Seçenekleri select elementine ekle
-        select.appendChild(option1);
-        select.appendChild(option2);
-        select.appendChild(option3);
+        select.id = "categorySelect" + dropdownCounter; // Benzersiz ID ekle
+        dropdownCounter++; // Dropdown sayacını artır
+        fetchAndPopulateDropdown(select); // Dropdown'u doldur
 
         // Değer giriş alanı oluştur
         var input = document.createElement("input");
@@ -86,4 +205,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
         dropdownContainer.insertBefore(inputRow, addButton); // Yeni giriş satırını ekle
     }
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Geri butonunu seç
+    var backButton = document.getElementById("backButton");
+
+    // Geri butonuna tıklama olayını ekle
+    backButton.addEventListener("click", function () {
+        window.history.back(); // Tarayıcı geçmişinde bir sayfa geri git
+    });
 });

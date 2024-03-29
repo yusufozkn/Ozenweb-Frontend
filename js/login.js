@@ -5,11 +5,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-        const username = document.getElementById("username").value
-        const password = document.getElementById("password").value
+        const username = document.getElementById("userName").value
+        const userPassword = document.getElementById("userPassword").value
         const userData = {
             userName: username,
-            userPassword: password
+            userPassword: userPassword
         }
 
         // Backend'e POST isteği gönderme

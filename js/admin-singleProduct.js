@@ -21,17 +21,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // İlk satırı oluştur
             var firstRow = `
-            <tr>
-                <td rowspan="${productData.productCodes.length}">
-                    <div class="product-info">
-                        <img src="data:image/jpeg;base64,${productData.productMainImage}" alt="${productName}" class="product-image">
-                    </div>
-                </td>
-                <td>${productData.productCodes[0].productCodeName}</td>
-                <td><button class="button">Görüntüle</button></td>
-                <td><button class="btn btn1 btn-danger" data-product-id="${productData.productCodes[0].productCodeId}">Sil</button></td>
-            </tr>
-        `;
+        <tr>
+            <td rowspan="${productData.productCodes.length}">
+                <div class="product-info">
+                    <img src="data:image/jpeg;base64,${productData.productMainImage}" alt="${productName}" class="product-image">
+                </div>
+            </td>
+            <td>${productData.productCodes[0].productCodeName}</td>
+            <td><a href="admin-singleProductFeatureAdd.html?productCodeId=${productData.productCodes[0].productCodeId}" class="button">Görüntüle</a></td>
+            <td><button class="btn btn1 btn-danger" data-product-id="${productData.productCodes[0].productCodeId}">Sil</button></td>
+        </tr>
+    `;
 
             // İlk satırı tabloya ekle
             tableBody.innerHTML += firstRow;
@@ -40,12 +40,12 @@ document.addEventListener("DOMContentLoaded", function () {
             for (var i = 1; i < productData.productCodes.length; i++) {
                 var productCode = productData.productCodes[i];
                 var row = `
-                <tr>
-                    <td>${productCode.productCodeName}</td>
-                    <td><button class="button">Görüntüle</button></td>
-                    <td><button class="btn btn1 btn-danger" data-product-id="${productCode.productCodeId}">Sil</button></td>
-                </tr>
-            `;
+            <tr>
+                <td>${productCode.productCodeName}</td>
+                <td><a href="admin-singleProductFeatureAdd.html?productCodeId=${productCode.productCodeId}" class="button">Görüntüle</a></td>
+                <td><button class="btn btn1 btn-danger" data-product-id="${productCode.productCodeId}">Sil</button></td>
+            </tr>
+        `;
 
                 // Satırı tabloya ekle
                 tableBody.innerHTML += row;

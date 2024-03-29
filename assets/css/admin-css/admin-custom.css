@@ -2,8 +2,32 @@
     background-color: rgb(209, 209, 209) !important;
 }
 .admin-container{
-    background-color: rgb(129, 54, 54) !important;
+    background-color: #992e26 !important;
 }
+.adminCate{
+    color: #fff !important;
+
+}
+.adminCate:hover{
+    color: #bababa !important;
+}
+
+#backButton {
+    position:absolute;
+    left: 10px; /* Sola yapışık */
+    padding: 5px 20px; /* Buton boyutu */
+    background-color: rgb(201, 100, 100); /* Buton arka plan rengi */
+    border: none; /* Kenarlık yok */
+    border-radius: 5px; /* Köşeleri yuvarlat */
+    font-size: 16px; /* Yazı boyutu */
+    cursor: pointer; /* Fare işaretçisi */
+    color: #fff;
+}
+
+#backButton:hover {
+    background-color: rgb(161, 72, 72); /* Fare üstüne gelindiğinde arka plan rengi */
+}
+
 
 
 /*pop up*/
