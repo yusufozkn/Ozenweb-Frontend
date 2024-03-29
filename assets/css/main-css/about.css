@@ -1,0 +1,57 @@
+/* Butonlara kategori butonu stili uygula */
+.button-about {
+    color: black;
+    /* Yazı rengi */
+    padding: 10px 20px;
+    /* Buton içeriği ile kenarlar arasındaki boşluk */
+    cursor: pointer;
+    /* İmleci el işareti olarak değiştir */
+    margin-bottom: 10px;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+    /* Geçiş efekti: transform özelliği */
+}
+
+/* Butonun üzerine gelindiğinde */
+.button-about:hover {
+    color: red;
+    transform: scale(1.1);
+    /* Butonun boyutunu 1.1 kat büyüt */
+}
+
+.vertical-line {
+    border-left: 2px solid rgba(255, 0, 0, 0.400);
+    /* Siyah renkte 1 piksel kalınlığında çizgi */
+    height: 100%;
+    /* Yükseklik 100% */
+}
+
+.section {
+    display: none;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.section.active {
+    display: block;
+}
+
+.section-content {
+    font-size: 16px;
+    margin-bottom: 30px;
+    color: #666;
+}
+
+.values-list {
+    text-align: left;
+    margin-left: 30px;
+    color: #666;
+    padding-left: 0;
+}
+
+.values-list li {
+    margin-bottom: 10px;
+    list-style-type: none;
+}

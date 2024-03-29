@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/templatemo.css">
     <link rel="stylesheet" href="assets/css/custom.css">
+    <link rel="stylesheet" href="assets/css/main-css/about.css">
     <script src="script.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -70,7 +71,7 @@
                             <a class="nav-link" href="index.html">Ana Sayfa</a>
                         </li>
                         <li class="nav-item">
-                            <a  class="nav-link" href="about.html">Hakkımızda</a>
+                            <a class="nav-link" href="about.html">Hakkımızda</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="product.html">Ürünlerimiz</a>
@@ -80,235 +81,209 @@
                         </li>
                     </ul>
                 </div>
-                <div class="navbar align-self-center d-flex">
-                    <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
-                            <div class="input-group-text">
-                                <i class="fa fa-fw fa-search"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal"
-                        data-bs-target="#templatemo_search">
-                        <i class="fa fa-fw fa-search text-dark mr-2"></i>
-                    </a>
-
-                </div>
             </div>
         </div>
     </nav>
     <!-- Kapanış Header -->
 
-    <!-- Modal -->
-    <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="w-100 pt-1 mb-5 text-right">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="" method="get" class="modal-content modal-body border-0 p-0">
-                <div class="input-group mb-2">
-                    <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
-                    <button type="submit" class="input-group-text bg-success text-light">
-                        <i class="fa fa-fw fa-search text-white"></i>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-
-
-    <section class="bg-success py-5">
+    <section class="py-5">
         <div class="container">
-            <div class="row align-items-center py-5">
-                <div class="col-md-8 text-white">
-                    <h1>Hakkımızda</h1>
-                    <p>
-                        Yenilikçi ve dinamik bir enerjiyle yola çıkan firmamız, işkele ve platform sektöründe yeni bir
-                        soluk getiriyor. Tecrübeli kadromuz, sektöre taze bir bakış açısı ve yenilikçi çözümler sunarak
-                        müşterilerimizin beklentilerini aşma hedefinde. Henüz yeni olmamıza rağmen, sunduğumuz ürün
-                        kalitesi ve müşteri odaklı yaklaşımımızla kısa sürede sektörde adımızdan söz ettirmeye başladık.
-                        Sizlere en iyi işkele ve platform deneyimini sunmak için sürekli gelişiyor ve sizinle birlikte
-                        büyüyoruz.
-                    </p>
-                </div>
-                <div class="col-md-4">
-                    <div class="resim-container">
-                        <img src="assets/img/about-hero.jpg" alt="About Hero" class="resim">
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
-    <!-- Close Banner -->
 
-    <!-- Start Section -->
-    <section class="container py-5">
-        <div class="row text-center pt-5 pb-3">
-            <div class="col-lg-6 m-auto">
-                <h1 class="h1">
-                    Hizmetlerimiz
-                </h1>
-                <p>
-                    Müşteri memnuniyetini ön planda tutan anlayışımızla, işkele ve platform sektöründe geniş bir
-                    yelpazede hizmet sunuyoruz. Proje ihtiyaçlarınıza özel çözümler üreterek, güvenilir ve yenilikçi
-                    hizmetlerimizle projelerinizi en üst seviyeye taşıyoruz.
-                </p>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 ">
+
+                <table>
+                    <tr>
+                        <td>
+                            <span href="#hakkimizda" class="button-about"
+                                onclick="showSection('hakkimizda')">Hakkımızda</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span href="#vizyonumuz" class="button-about"
+                                onclick="showSection('vizyonumuz')">Vizyonumuz</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span href="#misyonumuz" class="button-about"
+                                onclick="showSection('misyonumuz')">Misyonumuz</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span href="#degerlerimiz" class="button-about"
+                                onclick="showSection('degerlerimiz')">Değerlerimiz</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span href="#neden-biz" class="button-about" onclick="showSection('neden-biz')">Neden
+                                Biz?</span>
+                        </td>
+                    </tr>
+                </table>
+
+
+            </div>
+            <div class="col-md-10 vertical-line">
+                <div id="hakkimizda" class="section active">
+                    <section class="container">
+                        <div class="row text-center">
+                            <div class="col-lg-6 m-auto">
+                                <h1 class="h2" style="color: red;">
+                                    Hakkımızda
+                                </h1>
+                                <p style="line-height: 2.5;">
+                                    ÖZEN MERDIVEN İSKELE VE PLATFORM SAN. TIC. LTD. ŞTİ. olarak, İstanbul’un yenilikçi
+                                    ruhunu ve
+                                    zanaatkarlık geleneğini modern mühendislikle birleştirerek 2024 yılında faaliyete
+                                    başladık.
+                                    Her bir
+                                    merdivenimiz, mekânların estetiğini ve işlevselliğini artırmak üzere özenle
+                                    tasarlanmış
+                                    ve
+                                    üretilmiştir. Güvenliğinizi ve konforunuzu ön planda tutarak, kaliteden ödün
+                                    vermeden
+                                    hizmet
+                                    veriyoruz.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div id="vizyonumuz" class="section">
+                    <section>
+                        <div class="container">
+                            <div class="row text-center">
+                                <div class="col-lg-6 m-auto">
+                                    <h1 class="h2" style="color: red;">Vizyonumuz</h1>
+                                    <p style="line-height: 2.5;">
+                                        Merdiven sektöründe, tasarım ve işlevsellik açısından öncü olmak ve
+                                        sürdürülebilir
+                                        çevre
+                                        dostu
+                                        ürünlerle global pazarda adımızı duyurmak. Müşterilerimizin hayatını
+                                        kolaylaştıran,
+                                        güvenli ve
+                                        estetik merdiven çözümleri sunarak, sektördeki liderliğimizi pekiştirmek.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div id="misyonumuz" class="section">
+                    <section class="container">
+                        <div class="row text-center">
+                            <div class="col-lg-6 m-auto">
+                                <h1 class="h2" style="color: red;">
+                                    Misyonumuz
+                                </h1>
+                                <p style="line-height: 2.5;">
+                                    Müşterilerimizin beklentilerini aşan, yenilikçi ve yüksek kaliteli merdivenler
+                                    üretmek.
+                                    Her
+                                    proje
+                                    için özgün tasarımlar geliştirerek, alanında uzman ekibimizle mükemmeli hedeflemek.
+                                    Sektörde
+                                    güvenilirlik ve mükemmellik simgesi olmak.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div id="degerlerimiz" class="section">
+                    <section>
+                        <div class="container">
+                            <div class="row text-center">
+                                <div class="col-lg-6 m-auto">
+                                    <h1 class="h2" style="color: red;">Değerlerimiz</h1>
+                                    <p style="line-height: 2.5;">
+                                        Müşteri Memnuniyeti: Müşterilerimizin ihtiyaç ve beklentilerine en iyi şekilde
+                                        cevap
+                                        vermek.
+                                    </p>
+                                    <p style="line-height: 2.5;">
+                                        Kalite: Ürün ve hizmetlerimizde uluslararası standartlara uygunluk ve süreklilik
+                                        sağlamak.
+                                    </p>
+                                    <p style="line-height: 2.5;">
+                                        Güvenlik: Üretimden montaja, tüm süreçlerde güvenliği en önemli öncelik olarak
+                                        görmek.
+                                    </p>
+                                    <p style="line-height: 2.5;">
+                                        Yenilikçilik: Teknolojiyi ve tasarımı takip ederek, sektördeki trendleri
+                                        belirlemek.
+                                    </p>
+                                    <p style="line-height: 2.5;">
+                                        Sürdürülebilirlik: Çevreye saygılı malzeme ve üretim yöntemleri kullanarak,
+                                        ekolojik
+                                        ayak
+                                        izimizi minimize etmek.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div id="neden-biz" class="section">
+                    <section class="container">
+                        <div class="row text-center">
+                            <div class="col-lg-6 m-auto">
+                                <h1 class="h2" style="color: red;">
+                                    Neden Biz?
+                                </h1>
+                                <p style="line-height: 2;">
+                                    Uzman Kadro: Alanında deneyimli ve eğitimli personelimizle, her türlü projeye özel
+                                    çözümler
+                                    sunuyoruz.
+                                </p>
+                                <p style="line-height: 2;">
+                                    Kalite Kontrol: Üretimden teslimata kadar her aşamada, ürünlerimizin kalitesini
+                                    titizlikle
+                                    kontrol
+                                    ediyoruz.
+                                </p>
+                                <p style="line-height: 2;">
+                                    Müşteri Desteği: Satış öncesi ve sonrası, müşterilerimize kapsamlı destek ve
+                                    danışmanlık
+                                    hizmeti
+                                    sağlıyoruz.
+                                </p>
+                                <p style="line-height: 2;">
+                                    Zamanında Teslimat: Söz verdiğimiz tarih ve saatte, projelerinizi eksiksiz ve
+                                    zamanında
+                                    teslim
+                                    ediyoruz.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
             </div>
         </div>
-        <div class="row">
+    </div>
+    <section class="py-5">
+        <div class="container">
 
-            <div class="col-md-6 col-lg-3 pb-5">
-                <div class="h-100 py-5 services-icon-wap shadow">
-                    <div class="h1 text-success text-center"><i class="fa fa-truck fa-lg"></i></div>
-                    <h2 class="h5 mt-4 text-center">Teslimat Hizmetleri</h2>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3 pb-5">
-                <div class="h-100 py-5 services-icon-wap shadow">
-                    <div class="h1 text-success text-center"><i class="fas fa-exchange-alt"></i></div>
-                    <h2 class="h5 mt-4 text-center">Nakliye ve İade</h2>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3 pb-5">
-                <div class="h-100 py-5 services-icon-wap shadow">
-                    <div class="h1 text-success text-center"><i class="fa fa-percent"></i></div>
-                    <h2 class="h5 mt-4 text-center">Promosyon</h2>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3 pb-5">
-                <div class="h-100 py-5 services-icon-wap shadow">
-                    <div class="h1 text-success text-center"><i class="fa fa-user"></i></div>
-                    <h2 class="h5 mt-4 text-center">24 Saat Hizmet</h2>
-                </div>
-            </div>
         </div>
     </section>
     <!-- End Section -->
+    <section class="py-1" style="background-color: rgba(255, 0, 0, 0.100);">
+        <div class="container">
 
-    <!-- Start Brands -->
-    <section class="bg-light py-5">
-        <div class="container my-4">
-            <div class="row text-center py-3">
-                <div class="col-lg-6 m-auto">
-                    <h1 class="h1">Referanslarımız</h1>
-                    <p>
-                        Müşteri portföyümüz arasında yer alan öncü markalarla birlikte çalışmanın gururunu yaşıyoruz.
-                        Güvenilir işkele ve platform çözümlerimizle sektörde öne çıkan markalar arasında yer almaktan
-                        memnuniyet duyuyoruz.
-                    </p>
-                </div>
-                <div class="col-lg-9 m-auto tempaltemo-carousel">
-                    <div class="row d-flex flex-row">
-                        <!--Controls-->
-                        <div class="col-1 align-self-center">
-                            <a class="h1" href="#templatemo-slide-brand" role="button" data-bs-slide="prev">
-                                <i class="text-light fas fa-chevron-left"></i>
-                            </a>
-                        </div>
-                        <!--End Controls-->
-
-                        <!--Carousel Wrapper-->
-                        <div class="col">
-                            <div class="carousel slide carousel-multi-item pt-2 pt-md-0" id="templatemo-slide-brand"
-                                data-bs-ride="carousel">
-                                <!--Slides-->
-                                <div class="carousel-inner product-links-wap" role="listbox">
-
-                                    <!--First slide-->
-                                    <div class="carousel-item active">
-                                        <div class="row">
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="assets/img/brand_01.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="assets/img/brand_02.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="assets/img/brand_03.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="assets/img/brand_04.png" alt="Brand Logo"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--End First slide-->
-
-                                    <!--Second slide-->
-                                    <div class="carousel-item">
-                                        <div class="row">
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="assets/img/brand_01.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="assets/img/brand_02.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="assets/img/brand_03.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="assets/img/brand_04.png" alt="Brand Logo"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--End Second slide-->
-
-                                    <!--Third slide-->
-                                    <div class="carousel-item">
-                                        <div class="row">
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="assets/img/brand_01.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="assets/img/brand_02.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="assets/img/brand_03.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="assets/img/brand_04.png" alt="Brand Logo"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--End Third slide-->
-
-                                </div>
-                                <!--End Slides-->
-                            </div>
-                        </div>
-                        <!--End Carousel Wrapper-->
-
-                        <!--Controls-->
-                        <div class="col-1 align-self-center">
-                            <a class="h1" href="#templatemo-slide-brand" role="button" data-bs-slide="next">
-                                <i class="text-light fas fa-chevron-right"></i>
-                            </a>
-                        </div>
-                        <!--End Controls-->
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
-    <!--End Brands-->
-
 
     <!-- Start Footer -->
     <footer class="bg-footer-dark" id="tempaltemo_footer">
@@ -320,7 +295,7 @@
                     <ul class="list-unstyled text-dark footer-link-list">
                         <li>
                             <i class="fas fa-map-marker-alt fa-fw"></i>
-                            Çeliktepe mah. Güzeldere cad. No:105/a Kağıthane / İstanbul
+                            Çeliktepe mah. Güzeldere cad. No:105/A Kağıthane / İstanbul
                         </li>
                         <li>
                             <i class="fa fa-phone fa-fw"></i>
@@ -404,6 +379,22 @@
     <script src="assets/js/templatemo.js"></script>
     <script src="assets/js/custom.js"></script>
     <!-- End Script -->
+
+    <script>
+        window.onload = function () {
+            showSection('hakkimizda');
+        };
+
+        function showSection(sectionId) {
+            var sections = document.querySelectorAll('.section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            document.getElementById(sectionId).classList.add('active');
+        }
+    </script>
 </body>
+
+
 
 </html>
