@@ -58,3 +58,142 @@
     text-decoration: none;
     cursor: pointer;
 }
+
+
+
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 6px;
+    overflow: hidden;
+    max-width: 960px;
+    /* Önceki 800px'den %20 daha büyük */
+    width: 100%;
+    margin: 0 auto;
+}
+
+table tbody tr {
+    transition: transform 0.3s;
+    /* Geçiş efektleri ekle */
+}
+
+table tbody tr:hover {
+    background-color: #f0f0f0;
+    /* Satırın arka plan rengini değiştir */
+    transform: scale(1.05);
+    /* Satırı biraz büyüt */
+}
+
+table td,
+table th {
+    padding: 12px;
+    text-align: center;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    /* Her hücreye 1px border ekle */
+}
+
+table thead {
+    background: #d4edba;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 35.5em) {
+    table {
+        display: block;
+    }
+
+    table>*,
+    table tr,
+    table td,
+    table th {
+        display: block;
+    }
+
+    table thead {
+        display: none;
+    }
+
+    table tbody tr {
+        border: 1px solid #ddd;
+        margin-bottom: 10px;
+    }
+
+    table tbody tr td {
+        padding: 10px;
+        font-weight: bold;
+    }
+
+    table tbody tr td:before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+    }
+}
+
+
+.buton {
+    background-color: #4CAF50; /* Yeşil renk */
+    border: 2px solid #4CAF50; /* Çerçeve */
+    color: white;
+    padding: 12px 80px; /* Düzeltildi: Sol ve sağ padding azaltıldı */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-right: 10px; /* Sağa boşluk */
+    cursor: pointer;
+    position: relative; /* Animasyonu uygulamak için */
+    overflow: hidden; /* Metnin taşmasını önlemek için */
+}
+
+/* Sadece "Teklif Al" kısmı için bold stil */
+.buton span {
+    font-weight: normal; /* Öncelikle tüm metni normal kalınlıkta yap */
+}
+
+.buton{
+    font-weight: bold; /* Sadece strong etiketine sahip içeriği kalın yap */
+    animation: pulsate 1s infinite; /* Animasyonu başlat */
+}
+
+/* Animasyon tanımı */
+@keyframes pulsate {
+    0% {
+        transform: scale(1); /* Normal boyutta başla */
+    }
+    50% {
+        transform: scale(1.01); /* 110% büyüt */
+    }
+    100% {
+        transform: scale(1); /* Normal boyuta geri dön */
+    }
+}
+
+
+.gg-mail,
+.gg-mail::after {
+ display: block;
+ box-sizing: border-box;
+ height: 14px;
+ border: 2px solid
+}
+
+.gg-mail {
+ overflow: hidden;
+ transform: scale(var(--ggs,1));
+ position: relative;
+ width: 18px;
+ border-radius: 2px
+}
+
+.gg-mail::after {
+ content: "";
+ position: absolute;
+ border-radius: 3px;
+ width: 14px;
+ transform: rotate(-45deg);
+ bottom: 3px;
+ left: 0
+} 

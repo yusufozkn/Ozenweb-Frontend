@@ -91,25 +91,17 @@
         <div class="container pb-5">
 
             <div>
-                <h2 class="h2 py-5 text-center" style="color: red;">Merdiven</h2>
+                <h2 id="productName" class="h2 py-5 text-center" style="color: red;"></h2>
             </div>
 
-            <div class="py-1 text-center">
-
-                yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi
-                yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi
-                yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi
-                yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi
-                yazi yazi
+            <div id="productMainText" class="py-1 text-center">
                 <!---urun kisa aciklamasi buraya gelecek. -->
-
-
             </div>
 
             <div class="row">
                 <div class="col-lg-5 mt-5">
-                    <div class="card mb-3">
-                        <img class="card-img img-fluid" src="assets/img/z.jpg" alt="Resim" id="product-detail">
+                    <div class="card mb-3 product-detail">
+                        <img class="card-img img-fluid" alt="Resim" id="product-detail">
                     </div>
                 </div>
                 <!-- col end -->
@@ -118,36 +110,38 @@
                         <div class="card-body">
 
                             <h1 class="h6 py-3" style="color:red;">Ürün Özellikleri</h1>
-                            <ul>
-                                yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi
-                                yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi
-                                yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi
-                                yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi
-                                yazi yazi
-                                yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi
-                                yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi
-                                yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi
-                                yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi
-                                yazi yazi
-                                yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi
-                                yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi
-                                yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi
-                                yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi
-                                yazi yazi
-                                yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi
-                                yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi
-                                yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi
-                                yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi yazi
-                                yazi yazi
+                            <ul id="productPropertyText">
+
                                 <!--urun tam aciklamasi da buraya gelecek.-->
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-5 py-3">
+                    <!-- urun diger resimleri buraya gelebilir-->
+                </div>
+                <div class="col-lg-7 py-3 text-center">
+                    <!-- Buton -->
+                    <button onclick="openPopup()" class="buton">
+                        <div class="row">
+                            <div class="col-lg-2" style="margin-top:6px">
+                                <i class="gg-mail"></i>
+                            </div>
+                            <div class="col-lg-10">
+                                Bu ürün için <span><strong>teklif al</strong> </span>
+                                <span id="iconPlaceholder"></span>
+                            </div>
+                        </div>
 
-            <div>
-                <!--tablo buraya gelecek-->
+                    </button>
+
+                </div>
+            </div>
+
+            <div class="product-table-container py-5">
+                <!-- Tablo buraya gelecek -->
             </div>
 
 
@@ -237,6 +231,11 @@
         <img class="popup-img" id="popupImg" src="" alt="Resim">
     </div>
 
+    <!-- Popup -->
+    <div id="popup" class="popup">
+        <span class="popup-close" onclick="closePopup()">&times;</span>
+        <p>Popup İçeriği Buraya Gelecek</p>
+    </div>
 
     <!-- Start Script -->
     <script src="assets/js/jquery-1.11.0.min.js"></script>
@@ -245,6 +244,7 @@
     <script src="assets/js/templatemo.js"></script>
     <script src="assets/js/custom.js"></script>
     <script src="js/product-single.js"></script>
+    <script src="js/footer.js"></script>
     <!-- End Script -->
 </body>
 
