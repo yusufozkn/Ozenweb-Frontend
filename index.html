@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="assets/css/custom.css">
 
     <script src="script.js"></script>
+    <script src="js/footer.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- Load fonts style after rendering the layout styles -->
@@ -68,21 +69,13 @@
                 <div class="flex-fill">
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="/">Ana Sayfa</a>
+                            <a class="nav-link" href="index.html">Ana Sayfa</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="about.html">Hakkımızda</a>
                         </li>
-                        <li class="nav-item position-relative">
+                        <li class="nav-item">
                             <a class="nav-link" href="product.html">Ürünlerimiz</a>
-                            <!-- Alt Menü -->
-                            <div class="submenu">
-                                <ul>
-                                    <li><a href="#">Kategori 1</a></li>
-                                    <li><a href="#">Kategori 2</a></li>
-                                    <!-- İstediğiniz kadar alt kategori ekleyebilirsiniz -->
-                                </ul>
-                            </div>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="contact.html">İletişim</a>
@@ -320,12 +313,10 @@
     <!-- End Featured Product -->
     <div style="background-color: #ed1c24; padding-top: 3px;">
     </div>
-
     <!-- Start Footer -->
     <footer class="bg-footer-dark" id="tempaltemo_footer">
         <div class="container">
             <div class="row">
-
                 <div class="col-md-5 pt-5">
                     <h2 class="h2 border-bottom pb-3   logo-footer">ÖZEN Merdiven İskele ve Platform</h2>
                     <ul class="list-unstyled text-dark footer-link-list">
@@ -351,14 +342,8 @@
 
                 <div class="col-md-3 pt-5">
                     <h2 class="h2 text-dark border-bottom pb-3 border-dark">Ürünlerimiz</h2>
-                    <ul class="list-unstyled text-dark footer-link-list">
-                        <li><a class="text-decoration-none" href="#">1</a></li>
-                        <li><a class="text-decoration-none" href="#">2</a></li>
-                        <li><a class="text-decoration-none" href="#">3</a></li>
-                        <li><a class="text-decoration-none" href="#">4</a></li>
-                        <li><a class="text-decoration-none" href="#">5</a></li>
-                        <li><a class="text-decoration-none" href="#">6</a></li>
-
+                    <ul class="list-unstyled text-dark footer-link-list" id="productList">
+                        <!-- Dinamik olarak oluşturulacak ürünler buraya eklenecek -->
                     </ul>
                 </div>
 
@@ -387,11 +372,8 @@
                         </ul>
                     </div>
                 </div>
-
             </div>
-
         </div>
-
         <div class="w-100 bg-black py-3 bg-footer-light">
             <div class="container">
                 <div class="row pt-2">
@@ -404,7 +386,6 @@
                 </div>
             </div>
         </div>
-
     </footer>
     <!-- End Footer -->
 

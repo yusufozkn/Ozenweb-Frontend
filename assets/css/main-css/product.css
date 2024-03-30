@@ -1,0 +1,72 @@
+/* Butonlara kategori butonu stili uygula */
+.button-product {
+    color: black;
+    /* Yazı rengi */
+    padding: 10px 20px;
+    /* Buton içeriği ile kenarlar arasındaki boşluk */
+    cursor: pointer;
+    /* İmleci el işareti olarak değiştir */
+    margin-bottom: 10px;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+    /* Geçiş efekti: transform özelliği */
+}
+
+/* Butonun üzerine gelindiğinde */
+.button-product:hover {
+    color: red;
+    transform: scale(1.1);
+    /* Butonun boyutunu 1.1 kat büyüt */
+}
+
+.vertical-line {
+    border-left: 2px solid rgba(255, 0, 0, 0.400);
+    /* Siyah renkte 1 piksel kalınlığında çizgi */
+    height: 100%;
+    /* Yükseklik 100% */
+}
+
+.gg-arrow-up {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 22px;
+    height: 22px
+}
+
+.gg-arrow-up::after,
+.gg-arrow-up::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    top: 4px
+}
+
+.gg-arrow-up::after {
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid;
+    border-left: 2px solid;
+    transform: rotate(45deg);
+    left: 7px
+}
+
+.gg-arrow-up::before {
+    width: 2px;
+    height: 16px;
+    left: 10px;
+    background: currentColor
+}
+
+.card-img {
+    max-width: 100%; /* Resmin maksimum genişliği */
+    max-height: 300px; /* Resmin maksimum yüksekliği */
+    width: auto; /* Genişlik otomatik ayarlanır */
+    height: auto; /* Yükseklik otomatik ayarlanır */
+    object-fit: contain; /* Resmi kartın içine sığacak şekilde otomatik olarak boyutlandır */
+}
+

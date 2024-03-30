@@ -1,0 +1,71 @@
+.submenu {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.submenu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.submenu ul li {
+    padding: 8px 0;
+}
+
+.submenu ul li a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.submenu ul li a:hover {
+    color: #ff7f00;
+}
+
+.sub-submenu {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.submenu ul li:hover .sub-submenu {
+    display: block;
+}
+
+/* Ek CSS */
+.subcategories-container {
+    position: relative;
+}
+
+.category {
+    cursor: pointer;
+}
+
+.category.active {
+    color: #ff7f00;
+}
+
+.subcategory-list {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.subcategories-container:hover .subcategory-list {
+    display: block;
+}

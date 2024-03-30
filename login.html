@@ -15,6 +15,7 @@
 
     <script src="js/login.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/footer.js"></script>
 
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet"
@@ -58,23 +59,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="navbar align-self-center d-flex">
-                    <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
-                            <div class="input-group-text">
-                                <i class="fa fa-fw fa-search"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal"
-                        data-bs-target="#templatemo_search">
-                        <i class="fa fa-fw fa-search text-dark mr-2"></i>
-                    </a>
-
-                </div>
             </div>
-
         </div>
     </nav>
     <!-- Close Header -->
@@ -122,7 +107,6 @@
     <footer class="bg-footer-dark" id="tempaltemo_footer">
         <div class="container">
             <div class="row">
-
                 <div class="col-md-5 pt-5">
                     <h2 class="h2 border-bottom pb-3   logo-footer">ÖZEN Merdiven İskele ve Platform</h2>
                     <ul class="list-unstyled text-dark footer-link-list">
@@ -148,14 +132,8 @@
 
                 <div class="col-md-3 pt-5">
                     <h2 class="h2 text-dark border-bottom pb-3 border-dark">Ürünlerimiz</h2>
-                    <ul class="list-unstyled text-dark footer-link-list">
-                        <li><a class="text-decoration-none" href="#">1</a></li>
-                        <li><a class="text-decoration-none" href="#">2</a></li>
-                        <li><a class="text-decoration-none" href="#">3</a></li>
-                        <li><a class="text-decoration-none" href="#">4</a></li>
-                        <li><a class="text-decoration-none" href="#">5</a></li>
-                        <li><a class="text-decoration-none" href="#">6</a></li>
-
+                    <ul class="list-unstyled text-dark footer-link-list" id="productList">
+                        <!-- Dinamik olarak oluşturulacak ürünler buraya eklenecek -->
                     </ul>
                 </div>
 
@@ -184,11 +162,8 @@
                         </ul>
                     </div>
                 </div>
-
             </div>
-
         </div>
-
         <div class="w-100 bg-black py-3 bg-footer-light">
             <div class="container">
                 <div class="row pt-2">
@@ -201,7 +176,6 @@
                 </div>
             </div>
         </div>
-
     </footer>
     <!-- End Footer -->
 
