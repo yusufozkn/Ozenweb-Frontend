@@ -70,3 +70,18 @@
     object-fit: contain; /* Resmi kartın içine sığacak şekilde otomatik olarak boyutlandır */
 }
 
+.card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 150px; /* Kartın minimum yüksekliği */
+}
+
+.card-body a {
+    text-align: center;
+    display: inline-block;
+    max-width: 100%; /* Ürün isminin kartın genişliğini aşmamasını sağlar */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; /* Metnin satır sonu olmamasını sağlar */
+}

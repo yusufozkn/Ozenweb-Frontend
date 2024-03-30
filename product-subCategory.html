@@ -6,23 +6,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="apple-touch-icon" href="">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/logo/logo.ico">
-
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/templatemo.css">
     <link rel="stylesheet" href="assets/css/custom.css">
     <link rel="stylesheet" href="assets/css/main-css/product.css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="js/mainCategory.js"></script>
-    <script src="js/footer.js"></script>
 
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -90,16 +84,14 @@
 
     <div class="container py-5">
         <div class="text-center">
-            <h1 class="h1" style="color: red;">
-                Ürün Kategorilerimiz
-            </h1>
+            <h1 class="h1" style="color: red;"></h1>
             <p>Her alanın ihtiyaçları ve tarzı farklı olduğundan, sizin için en uygun merdiven tasarımını seçmek
                 önemlidir. Firmamız, geniş bir kategori yelpazesiyle size bu seçimde yardımcı olmaktan memnuniyet duyar.
             </p>
         </div>
 
-        <div class="row py-5">
-            <!-- Kategoriler buraya eklenecek -->
+        <div class="row py-5" id="subCategoryList">
+            <!-- Alt kategoriler dinamik olarak buraya eklenecek -->
         </div>
     </div>
 
@@ -186,6 +178,9 @@
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/templatemo.js"></script>
     <script src="assets/js/custom.js"></script>
+    <script src="js/subCategory.js">
+        
+    </script>
     <!-- End Script -->
 </body>
 
