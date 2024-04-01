@@ -1,3 +1,32 @@
+.siyah-beyaz {
+    position: absolute;
+    /* Mutlak konumlandırma */
+    top: 0;
+    /* Sayfanın en üstüne hizala */
+    left: 0;
+    /* Sayfanın soluna hizala */
+    width: 100%;
+    /* Genişlik 100% */
+    height: 100%;
+    /* Yükseklik 100% */
+    z-index: -1;
+    /* Sayfa içeriğinin önünde olması için z-index değerini negatif yap */
+    filter: grayscale(80%) blur(0px) contrast(0.7);
+    /* Siyah beyaz efekti, bulanıklık ve düşük kontrast */
+    opacity: 0.8;
+    /* %50 opaklık */
+}
+
+
+.container {
+    position: relative;
+    /* Göreceli konumlandırma */
+    z-index: 1;
+    /* Sayfa içeriğinin arka plan resminin önünde olmasını sağla */
+}
+
+
+
 .submenu {
     display: none;
     position: absolute;
@@ -68,4 +97,55 @@
 
 .subcategories-container:hover .subcategory-list {
     display: block;
+}
+
+.column {
+    float: left;
+    /* Kolonların yan yana olması için */
+    width: 33.33%;
+    /* Kolonların genişliği, 3 kolon olduğunu varsayıyoruz */
+    padding: 0 20px;
+    /* Kolonlar arası boşluk */
+}
+
+.card {
+    border: 3px solid #eee;
+    padding: 40px;
+    background-color: #f9f9f9;
+    text-align: center;
+    /* İçerikleri ortalamak için */
+    transition: border-color 0.3s ease;
+    /* Yumuşak hover geçişi */
+    height: 600px;
+}
+
+.card:hover {
+    border: 3px solid #b6acac;
+    cursor: pointer;
+}
+
+.card img {
+    width: 100%;
+    height: 400px;
+    max-height: 400px;
+}
+
+.card h2 {
+    font-size: 1.5em;
+    margin-top: 15px;
+    color: red;
+}
+
+.card p {
+    font-size: 1em;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+    text-decoration: none;
+    color: inherit;
 }

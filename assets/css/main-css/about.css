@@ -1,6 +1,24 @@
+.siyah-beyaz {
+    position: absolute; /* Mutlak konumlandırma */
+    top: 0; /* Sayfanın en üstüne hizala */
+    left: 0; /* Sayfanın soluna hizala */
+    width: 100%; /* Genişlik 100% */
+    height: 100%; /* Yükseklik 100% */
+    z-index: -1; /* Sayfa içeriğinin önünde olması için z-index değerini negatif yap */
+    filter: grayscale(80%) blur(10px) contrast(0.7); /* Siyah beyaz efekti, bulanıklık ve düşük kontrast */
+    opacity: 0.8; /* %50 opaklık */
+}
+
+
+.container {
+    position: relative; /* Göreceli konumlandırma */
+    z-index: 1; /* Sayfa içeriğinin arka plan resminin önünde olmasını sağla */
+}
+
+
 /* Butonlara kategori butonu stili uygula */
 .button-about {
-    color: black;
+    color: rgb(255, 255, 255);
     /* Yazı rengi */
     padding: 10px 20px;
     /* Buton içeriği ile kenarlar arasındaki boşluk */
@@ -16,13 +34,13 @@
 
 /* Butonun üzerine gelindiğinde */
 .button-about:hover {
-    color: red;
+    color: rgb(232, 232, 232);
     transform: scale(1.1);
     /* Butonun boyutunu 1.1 kat büyüt */
 }
 
 .vertical-line {
-    border-left: 2px solid rgba(255, 0, 0, 0.400);
+    border-left: 2px solid rgba(255, 255, 255, 0.4);
     /* Siyah renkte 1 piksel kalınlığında çizgi */
     height: 100%;
     /* Yükseklik 100% */

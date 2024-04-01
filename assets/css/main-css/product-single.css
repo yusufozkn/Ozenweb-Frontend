@@ -95,8 +95,9 @@ table th {
 }
 
 table thead {
-    background: #d4edba;
+    background: #f71515;
     font-weight: bold;
+    color: #fff;
 }
 
 @media screen and (max-width: 35.5em) {
