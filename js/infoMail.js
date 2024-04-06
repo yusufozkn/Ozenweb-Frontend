@@ -81,6 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
             submitButton.disabled = false;
             submittingText.style.display = "none";
             // Hata durumunda yapılacak işlemler buraya eklenebilir
+            window.location.reload();
         });
     };
 

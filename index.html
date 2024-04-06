@@ -70,7 +70,7 @@
                 <div class="flex-fill">
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html">Ana Sayfa</a>
+                            <a class="nav-link" href="/">Ana Sayfa</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="about.html">Hakkımızda</a>
@@ -281,8 +281,8 @@
                                     <!-- Telefon numarası alanı -->
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <input id="form_phone" type="tel" name="phoneNumber"
-                                                placeholder=" Telefon Numarası">
+                                            <input id="form_phone" type="tel" required name="phoneNumber"
+                                                placeholder=" Telefon Numarası *">
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
@@ -296,13 +296,13 @@
                                     <div class="col-lg-12 text-center">
                                         <button class="bttn">Gönder</button>
                                         <!-- Gönderme durumu metni -->
-                                        <div id="empty-field-alert" style="display: none; color: red;" class="py-1">Lütfen tüm alanları doldurun.
-                                        <p id="submitting-text" style="display: none; color:green;" class="h3 py-3">Gönderiliyor...</p>
+                                        <div id="empty-field-alert" style="display: none; color: red;" class="py-1">
+                                            Lütfen tüm alanları doldurun.
+                                            <p id="submitting-text" style="display: none; color:green;" class="h3 py-3">
+                                                Gönderiliyor...</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- Boş veri uyarısı -->
-                            
                             </div>
                         </form>
                     </div>

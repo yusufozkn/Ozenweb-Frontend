@@ -1,4 +1,26 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Kullanıcının token bilgisini al
+    const token = localStorage.getItem("token");
+
+    // Admin sayfalarının URL'lerini tanımla
+    const adminPages = ["/admin-mainCategory.html", "/admin-subCategory.html", "/admin-feature.html", "/admin-product.html","/admin-singleProduct.html","/admin-singleProductFeatureAdd.html"];
+
+    // Kullanıcının token bilgisinin olup olmadığını ve admin sayfalarına erişmeye çalışıp çalışmadığını kontrol et
+    if (!token && adminPages.includes(window.location.pathname)) {
+        // Kullanıcı giriş yapmadıysa ve admin sayfasına erişmeye çalışıyorsa, giriş sayfasına yönlendir
+        console.warn("Giriş yapmadan admin sayfalarını görüntüleyemezsiniz.");
+        window.location.href = "/login.html";
+    }
+
+    // Hata durumunda kullanıcıya bilgilendirme yap
+    window.addEventListener('error', function (event) {
+        console.error('Bir hata oluştu:', event.message);
+        alert('Bir hata oluştu. Lütfen tekrar deneyin.');
+    });
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
     // Sayfa yüklendiğinde yapılacak işlemler
 
     // Şu anki URL'den productCodeId'yi al

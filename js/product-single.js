@@ -128,3 +128,69 @@ function fillTable(data) {
     const tableContainer = document.querySelector('.product-table-container');
     tableContainer.appendChild(table);
 }
+
+// Butonun id'sini kullanarak butona tıklama olayını dinleme
+document.getElementById('offerButton').addEventListener('click', openCustomPopup);
+
+
+// Yeni popup açma fonksiyonu
+function openCustomPopup() {
+    document.getElementById('customPopup').style.display = 'block';
+}
+
+// Popup'ı kapatma fonksiyonunu güncelleme
+function closeCustomPopup() {
+    document.getElementById('customPopup').style.display = 'none';
+}
+
+// Popup dışındaki karanlık bölgeye tıklamayla da popup'ı kapatma
+window.addEventListener('click', function (event) {
+    var popup = document.getElementById('customPopup');
+    if (event.target === popup) {
+        closeCustomPopup(); // Popup'ı kapat
+    }
+});
+
+
+// Form gönderme işlemi
+document.getElementById('mailForm').addEventListener('submit', function (event) {
+    event.preventDefault(); // Sayfanın yenilenmesini önle
+
+    // Form verilerini al
+    const formData = new FormData(this);
+
+    // FormData'dan JSON objesi oluştur
+    const jsonData = {};
+    formData.forEach((value, key) => {
+        jsonData[key] = value;
+    });
+
+    // Ürün ID'sini al
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('productId');
+
+    // JSON verilerini gönder
+    fetch('http://localhost:8080/product/createProductInfoMail', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            ...jsonData,
+            productId: productId
+        })
+    })
+        .then(response => {
+            if (response.ok) {
+                console.log('Mail gönderimi başarılı.'); // Başarılı mail gönderimini doğrulama
+                alert('Mail başarıyla gönderildi!');
+                closeCustomPopup(); // Popup'ı kapat
+            } else {
+                throw new Error('Mail gönderilirken bir hata oluştu!');
+            }
+        })
+        .catch(error => {
+            console.error('Hata:', error.message);
+            alert('Mail gönderilirken bir hata oluştu!');
+        });
+});

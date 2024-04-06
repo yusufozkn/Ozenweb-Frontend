@@ -65,7 +65,7 @@
                 <div class="flex-fill">
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html">Ana Sayfa</a>
+                            <a class="nav-link" href="/">Ana Sayfa</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="about.html">Hakkımızda</a>
@@ -125,7 +125,7 @@
                 </div>
                 <div class="col-lg-7 py-3 text-center">
                     <!-- Buton -->
-                    <button onclick="openPopup()" class="buton">
+                    <button id="offerButton" class="buton" onclick="openCustomPopup()">
                         <div class="row">
                             <div class="col-lg-2" style="margin-top:6px">
                                 <i class="gg-mail"></i>
@@ -135,8 +135,8 @@
                                 <span id="iconPlaceholder"></span>
                             </div>
                         </div>
-
                     </button>
+
 
                 </div>
             </div>
@@ -233,10 +233,19 @@
     </div>
 
     <!-- Popup -->
-    <div id="popup" class="popup">
-        <span class="popup-close" onclick="closePopup()">&times;</span>
-        <p>Popup İçeriği Buraya Gelecek</p>
+    <div id="customPopup" class="popup">
+        <span class="popup-close" onclick="closeCustomPopup()">&times;</span>
+        <form id="mailForm">
+            <h1 class="text-center h2">Teklif formu</h1>
+            <input type="text" id="fullName" name="name" required placeholder="İsim Soyisim">
+            <input type="email" id="email" name="email" required placeholder="E-posta Adresi">
+            <input type="tel" id="phoneNumber" name="phoneNumber" required placeholder="Telefon Numarası">
+            <textarea id="message" name="message" required placeholder="Mesaj"></textarea>
+
+            <button type="submit">Gönder</button>
+        </form>
     </div>
+
 
     <!-- Start Script -->
     <script src="assets/js/jquery-1.11.0.min.js"></script>
