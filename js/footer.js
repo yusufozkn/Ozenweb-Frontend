@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 var listItem = document.createElement('li'); // Yeni bir liste öğesi oluştur
                 var link = document.createElement('a'); // Yeni bir bağlantı oluştur
                 link.textContent = product.categoryName; // Bağlantının metnini ürün adıyla doldur
-                link.href = '#'; // Bağlantının hedefini belirt (gerektiği gibi düzenleyebilirsin)
+                link.href = 'product-subCategory.html?categoryId=' + product.id; // Yönlendirme için href belirt
                 link.classList.add('text-decoration-none'); // Bağlantıya stil sınıfı ekle
                 listItem.appendChild(link); // Bağlantıyı liste öğesine ekle
                 productContainer.appendChild(listItem); // Liste öğesini ürün listesi container'ına ekle
