@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const token = localStorage.getItem("token");
 
     // Admin sayfalarının URL'lerini tanımla
-    const adminPages = ["/admin-mainCategory.html", "/admin-subCategory.html", "/admin-feature.html", "/admin-product.html","/admin-singleProduct.html","/admin-singleProductFeatureAdd.html"];
+    const adminPages = ["/admin-mainCategory.html", "/admin-subCategory.html", "/admin-feature.html", "/admin-product.html", "/admin-singleProduct.html", "/admin-singleProductFeatureAdd.html"];
 
     // Kullanıcının token bilgisinin olup olmadığını ve admin sayfalarına erişmeye çalışıp çalışmadığını kontrol et
     if (!token && adminPages.includes(window.location.pathname)) {
@@ -83,21 +83,27 @@ document.addEventListener("DOMContentLoaded", function () {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                //'Authorization':token
+                'Authorization': token
             },
             body: JSON.stringify(categoryData),
         })
-            .then(response => response.json())
-            .then(data => {
-                // POST işlemi başarılı olduysa gerçekleştirilecek işlemler
-                console.log('Başarılı:', data);
-
-                console.log(data.status)//-----------------------------------------------------------403->logine gitsin-------------------
-                // Sayfayı yeniden yükle
-                window.location.reload();
-                // Başka işlemler yapılabilir, örneğin pop-up'ı kapatma
-                popupOverlay.classList.remove("show");
-                popup.classList.remove("show");
+            .then(response => {
+                if (response.ok) {
+                    // POST işlemi başarılı olduysa gerçekleştirilecek işlemler
+                    console.log('Başarılı:', response);
+                    // Sayfayı yeniden yükle
+                    window.location.reload();
+                    // Başka işlemler yapılabilir, örneğin pop-up'ı kapatma
+                    popupOverlay.classList.remove("show");
+                    popup.classList.remove("show");
+                } else if (response.status === 403) {
+                    console.error("Yetkisiz erişim! Lütfen giriş yapın.");
+                    // Başarısız yetkilendirme durumunda login sayfasına yönlendir
+                    localStorage.removeItem("token");
+                    window.location.href = "/login.html";
+                } else {
+                    console.error("Kategori oluşturulurken bir hata oluştu.");
+                }
             })
             .catch((error) => {
                 console.error('Hata:', error);
@@ -113,6 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch('http://localhost:8080/category/getAll')
         .then(response => response.json())
         .then(data => {
+            
             // Gelen kategorileri işle
             var categoryContainer = document.querySelector(".row.py-3.text-center");
             categoryContainer.innerHTML = ""; // Önceki içeriği temizle
@@ -161,17 +168,25 @@ document.addEventListener("DOMContentLoaded", function () {
     function deleteCategory(id) {
         // Silme işleminden önce kullanıcıya onay mesajı göster
         var confirmation = confirm("Silmek istiyor musunuz?");
-
+        const token = localStorage.getItem("token")
         if (confirmation) {
             // Silme işlemi
             fetch('http://localhost:8080/category/delete?id=' + id, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: {
+                    'Authorization': token
+                }
             })
                 .then(response => {
                     if (response.ok) {
                         console.log("Kategori başarıyla silindi.");
                         // Sayfayı yeniden yükle
                         window.location.reload();
+                    } else if (response.status === 403) {
+                        console.error("Yetkisiz erişim! Lütfen giriş yapın.");
+                        // Başarısız yetkilendirme durumunda login sayfasına yönlendir
+                        localStorage.removeItem("token");
+                        window.location.href = "/login.html";
                     } else {
                         console.error("Kategori silinirken bir hata oluştu.");
                     }

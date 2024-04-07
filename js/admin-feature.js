@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const token = localStorage.getItem("token");
 
     // Admin sayfalarının URL'lerini tanımla
-    const adminPages = ["/admin-mainCategory.html", "/admin-subCategory.html", "/admin-feature.html", "/admin-product.html","/admin-singleProduct.html","/admin-singleProductFeatureAdd.html"];
+    const adminPages = ["/admin-mainCategory.html", "/admin-subCategory.html", "/admin-feature.html", "/admin-product.html", "/admin-singleProduct.html", "/admin-singleProductFeatureAdd.html"];
 
     // Kullanıcının token bilgisinin olup olmadığını ve admin sayfalarına erişmeye çalışıp çalışmadığını kontrol et
     if (!token && adminPages.includes(window.location.pathname)) {
@@ -41,38 +41,50 @@ document.addEventListener("DOMContentLoaded", function () {
     // Özellik eklemek için backend'e POST isteği gönderme işlevi
     saveButton.addEventListener("click", function () {
         var categoryName = document.getElementById("imageCaption").value;
-        
-        
+
         // Kategori bilgilerini oluştur
         var categoryData = {
             categoryName: categoryName,
             categoryImage: null//---------------------------------------------burda problem
         };
 
+        // Kullanıcının token bilgisini al
+        const token = localStorage.getItem("token");
+
         // Backend'e POST isteği gönderme
         fetch('http://localhost:8080/product-feature-category/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': token
             },
             body: JSON.stringify(categoryData),
         })
-            .then(response => response.json())
-            .then(data => {
-                // POST işlemi başarılı olduysa gerçekleştirilecek işlemler
-                console.log('Başarılı:', data);
-                // Sayfayı yeniden yükle
-                window.location.reload();
-                location.reload();
+            .then(response => {
+                if (!response.ok) {
+                    if (response.status === 403) {
+                        console.log("Token geçersiz. Yönlendiriliyor...");
+                        // Token geçersizse login sayfasına yönlendir
+                        localStorage.removeItem("token");
+                        window.location.href = "/login.html";
+                    } else {
+                        throw new Error("HTTP Hatası: " + response.status);
+                    }
+                }
+                if (response.ok) {
+                    console.log("Özellik başarıyla eklendi.");
+                    window.location.reload(); // Sayfayı yeniden yükle
+                } else {
+                    console.error("Özellik eklenirken bir hata oluştu.");
+                }
             })
             .catch((error) => {
                 console.error('Hata:', error);
                 // Hata durumunda kullanıcıya bilgilendirme yapılabilir
                 window.location.reload();
-                location.reload();
-
             });
     });
+
 
     // Backend'den kategorileri almak için fetch işlemi
     fetch('http://localhost:8080/product-feature-category/getAll')
@@ -116,10 +128,26 @@ document.addEventListener("DOMContentLoaded", function () {
         var confirmation = confirm("Silmek istiyor musunuz?");
 
         if (confirmation) {
+            // Kullanıcının token bilgisini al
+            const token = localStorage.getItem("token");
+
             fetch('http://localhost:8080/product-feature-category/delete?id=' + id, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: {
+                    'Authorization': token
+                }
             })
                 .then(response => {
+                    if (!response.ok) {
+                        if (response.status === 403) {
+                            console.log("Token geçersiz. Yönlendiriliyor...");
+                            // Token geçersizse login sayfasına yönlendir
+                            localStorage.removeItem("token");
+                            window.location.href = "/login.html";
+                        } else {
+                            throw new Error("HTTP Hatası: " + response.status);
+                        }
+                    }
                     if (response.ok) {
                         console.log("Özellik başarıyla silindi.");
                         window.location.reload(); // Sayfayı yeniden yükle
@@ -132,4 +160,5 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
         }
     }
+
 });

@@ -21,8 +21,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         throw new Error('Çıkış işlemi başarısız.');
                     }
                     // Tokeni localStorage'den sil
-                    localStorage.removeItem("token");
+                    
                     // Giriş sayfasına yönlendir
+                    localStorage.removeItem("token");
                     window.location.href = "/login.html";
                 })
                 .catch((error) => {

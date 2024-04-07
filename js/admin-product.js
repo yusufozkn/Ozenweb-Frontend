@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const token = localStorage.getItem("token");
 
     // Admin sayfalarının URL'lerini tanımla
-    const adminPages = ["/admin-mainCategory.html", "/admin-subCategory.html", "/admin-feature.html", "/admin-product.html","/admin-singleProduct.html","/admin-singleProductFeatureAdd.html"];
+    const adminPages = ["/admin-mainCategory.html", "/admin-subCategory.html", "/admin-feature.html", "/admin-product.html", "/admin-singleProduct.html", "/admin-singleProductFeatureAdd.html"];
 
     // Kullanıcının token bilgisinin olup olmadığını ve admin sayfalarına erişmeye çalışıp çalışmadığını kontrol et
     if (!token && adminPages.includes(window.location.pathname)) {
@@ -158,6 +158,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // Kaydet butonuna tıklanınca verileri al ve popup'ı kapat
     var saveButton = document.getElementById("saveButton");
     saveButton.addEventListener("click", function () {
+        // Kullanıcının token bilgisini al
+        const token = localStorage.getItem("token");
+
         var mainCategory = mainCategoryDropdown.value;
         var subCategory = subCategoryDropdown.value;
         var productName = document.getElementById("productName").value;
@@ -178,27 +181,38 @@ document.addEventListener("DOMContentLoaded", function () {
         fetch('http://localhost:8080/product/create', {
             method: 'POST',
             headers: {
-                
                 'Content-Type': 'application/json',
-                //'Authorization':token
+                'Authorization': token
             },
-            
             body: JSON.stringify(productData)
         })
-        
-            .then(response => response.json())
-            .then(data => {
-                console.log('Product created successfully:', data);
-                console.log(productData);
-                window.location.reload();
-                // Burada başarılı bir şekilde eklendiğine dair bir mesaj veya işlem yapabilirsiniz
+            .then(response => {
+                if (!response.ok) {
+                    if (response.status === 403) {
+                        console.log("Token geçersiz. Yönlendiriliyor...");
+                        // Token geçersizse login sayfasına yönlendir
+                        localStorage.removeItem("token");
+                        window.location.href = "/login.html";
+                    } else {
+                        throw new Error("HTTP Hatası: " + response.status);
+                    }
+                }
+                if (response.ok) {
+                    console.log("urun başarıyla eklendi.");
+                    window.location.reload(); // Sayfayı yeniden yükle
+                } else {
+                    console.error("urun eklenirken bir hata oluştu.");
+                }
             })
+
             .catch(error => console.error('Error creating product:', error));
-            console.log(productData);
+        console.log(productData);
+
         // Popup'ı kapat
         popupOverlay.classList.remove("show");
         popup.classList.remove("show");
     });
+
 
     // Resim seçme işlevi
     var imageInput = document.getElementById("image");

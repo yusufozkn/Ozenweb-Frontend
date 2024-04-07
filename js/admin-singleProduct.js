@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const token = localStorage.getItem("token");
 
     // Admin sayfalarının URL'lerini tanımla
-    const adminPages = ["/admin-mainCategory.html", "/admin-subCategory.html", "/admin-feature.html", "/admin-product.html","/admin-singleProduct.html","/admin-singleProductFeatureAdd.html"];
+    const adminPages = ["/admin-mainCategory.html", "/admin-subCategory.html", "/admin-feature.html", "/admin-product.html", "/admin-singleProduct.html", "/admin-singleProductFeatureAdd.html"];
 
     // Kullanıcının token bilgisinin olup olmadığını ve admin sayfalarına erişmeye çalışıp çalışmadığını kontrol et
     if (!token && adminPages.includes(window.location.pathname)) {
@@ -96,21 +96,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Silme işlemini gerçekleştiren fonksiyon
     function deleteProductCode(productCodeId) {
+        // Kullanıcının token bilgisini al
+        const token = localStorage.getItem("token");
+
         fetch('http://localhost:8080/product-code/delete?productCodeId=' + productCodeId, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                'Authorization': token
+            }
         })
             .then(response => {
+                if (!response.ok) {
+                    if (response.status === 403) {
+                        console.log("Token geçersiz. Yönlendiriliyor...");
+                        // Token geçersizse login sayfasına yönlendir
+                        localStorage.removeItem("token");
+                        window.location.href = "/login.html";
+                    } else {
+                        throw new Error("HTTP Hatası: " + response.status);
+                    }
+                }
                 if (response.ok) {
                     console.log("Ürün başarıyla silindi.");
-                    // Silinen ürünü tablodan kaldır
-                    // Örnek olarak sayfayı yenileme işlemi yapılabilir
-                    window.location.reload();
+                    window.location.reload(); // Sayfayı yeniden yükle
                 } else {
-                    console.error("Ürün silinirken bir hata oluştu.");
+                    console.error("urun silinirken bir hata oluştu.");
                 }
+
             })
             .catch(error => console.error('Hata:', error));
     }
+
 
 
     var popupOverlay = document.getElementById("popup-overlay");
@@ -140,6 +156,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Kaydet butonunun click olayı
     saveButton.addEventListener("click", function () {
+        // Kullanıcının token bilgisini al
+        const token = localStorage.getItem("token");
+
         var productId = getProductIdFromURL(); // URL'den ürün ID'sini al
         var productCode = productCodeInput.value; // Kullanıcının girdiği ürün kodunu al
 
@@ -152,19 +171,27 @@ document.addEventListener("DOMContentLoaded", function () {
         // Backend'e POST isteği gönderme
         fetch('http://localhost:8080/product-code/create?productId=' + productCodeData.productId + '&productCode=' + productCodeData.productCode, {
             method: 'POST',
+            headers: {
+                'Authorization': token
+            }
         })
             .then(response => {
+                if (!response.ok) {
+                    if (response.status === 403) {
+                        console.log("Token geçersiz. Yönlendiriliyor...");
+                        // Token geçersizse login sayfasına yönlendi
+                        localStorage.removeItem("token");
+                        window.location.href = "/login.html";
+                    } else {
+                        throw new Error("HTTP Hatası: " + response.status);
+                    }
+                }
                 if (response.ok) {
-                    console.log("Başarılı: Ürün kodu eklendi.");
-                    // Başka işlemler yapılabilir, örneğin popup'ı kapatma
-                    popupOverlay.classList.remove("show");
-                    popup.classList.remove("show");
+                    console.log("kod başarıyla eklendi.");
+                    window.location.reload(); // Sayfayı yeniden yükle
 
-                    // Sayfayı yenile
-                    window.location.reload();
-                    location.reload();
                 } else {
-                    console.error("Hata: Ürün kodu eklenirken bir sorun oluştu.");
+                    console.error("kod eklenirken bir hata oluştu.");
                 }
             })
             .catch((error) => {
@@ -173,6 +200,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
     });
+
 
     // URL'den ürün ID'sini alma işlevi
     function getProductIdFromURL() {
@@ -215,20 +243,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Ürünü silme fonksiyonu
     function deleteProduct(productId) {
+        // Kullanıcının token bilgisini al
+        const token = localStorage.getItem("token");
+
         fetch('http://localhost:8080/product/delete?id=' + productId, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                'Authorization': token
+            }
         })
             .then(response => {
+                if (!response.ok) {
+                    if (response.status === 403) {
+                        console.log("Token geçersiz. Yönlendiriliyor...");
+                        // Token geçersizse login sayfasına yönlendir
+                        localStorage.removeItem("token");
+                        window.location.href = "/login.html";
+                    } else {
+                        throw new Error("HTTP Hatası: " + response.status);
+                    }
+                }
                 if (response.ok) {
-                    console.log("Ürün başarıyla silindi.");
-                    // Başarılı bir şekilde silindiğinde admin-product.html sayfasına yönlendir
-                    window.location.href = '/admin-product.html'; // Yönlendirme işlemi
+                    console.log("kod başarıyla silindi.");
+                    window.location.href = '/admin-product.html';
                 } else {
-                    console.error("Ürün silinirken bir hata oluştu.");
+                    console.error("kod eklenirken bir hata oluştu.");
                 }
             })
             .catch(error => console.error('Hata:', error));
     }
+
 
 
     // URL'den ürün ID'sini alma işlevi

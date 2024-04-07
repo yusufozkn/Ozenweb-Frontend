@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const token = localStorage.getItem("token");
 
     // Admin sayfalarının URL'lerini tanımla
-    const adminPages = ["/admin-mainCategory.html", "/admin-subCategory.html", "/admin-feature.html", "/admin-product.html","/admin-singleProduct.html","/admin-singleProductFeatureAdd.html"];
+    const adminPages = ["/admin-mainCategory.html", "/admin-subCategory.html", "/admin-feature.html", "/admin-product.html", "/admin-singleProduct.html", "/admin-singleProductFeatureAdd.html"];
 
     // Kullanıcının token bilgisinin olup olmadığını ve admin sayfalarına erişmeye çalışıp çalışmadığını kontrol et
     if (!token && adminPages.includes(window.location.pathname)) {
@@ -20,15 +20,21 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-// Kategoriyi silme işlevi
+// Alt kategoriyi silme işlevi
 function deleteSubCategory(id) {
+    // Kullanıcının token bilgisini al
+    const token = localStorage.getItem("token");
+
     // Silme işleminden önce kullanıcıya onay mesajı göster
     var confirmation = confirm("Silmek istiyor musunuz?");
 
     if (confirmation) {
         // Silme işlemi
         fetch('http://localhost:8080/sub-category/delete?id=' + id, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                'Authorization': token
+            }
         })
             .then(response => {
                 if (response.ok) {
@@ -37,7 +43,13 @@ function deleteSubCategory(id) {
                     window.location.reload();
                     location.reload();
                 } else {
-                    console.error("Alt kategori silinirken bir hata oluştu.");
+                    if (response.status === 403) {
+                        console.warn("Yetkilendirme hatası (403). Yönlendiriliyor...");
+                        localStorage.removeItem("token");
+                        window.location.href = "/login.html"; // Kullanıcıyı giriş sayfasına yönlendir
+                    } else {
+                        console.error("Alt kategori silinirken bir hata oluştu.");
+                    }
                 }
             })
             .catch(error => {
@@ -45,6 +57,8 @@ function deleteSubCategory(id) {
             });
     }
 }
+
+
 
 document.addEventListener("DOMContentLoaded", function () {
     var popupOverlay = document.getElementById("popup-overlay");
@@ -96,6 +110,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     saveButton.addEventListener("click", function () {
+        // Kullanıcının token bilgisini al
+        const token = localStorage.getItem("token");
+
         // Alt kategori adını, üst kategori ID'sini ve resmi al
         var subCategoryName = document.getElementById("subCategoryNameInput").value;
         var categoryId = document.getElementById("categoryDropdown").value;
@@ -113,20 +130,28 @@ document.addEventListener("DOMContentLoaded", function () {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': token
             },
             body: JSON.stringify(subCategoryData),
         })
-            .then(response => response.json())
-            .then(data => {
-                // POST işlemi başarılı olduysa gerçekleştirilecek işlemler
-                console.log('Başarılı:', data);
-                console.log(subCategoryData)
-                // Başka işlemler yapılabilir, örneğin popup'ı kapatma
-                popupOverlay.classList.remove("show");
-                popup.classList.remove("show");
+            .then(response => {
+                if (response.ok) {
+                    console.log("Alt kategori başarıyla oluşturuldu.");
+                    // Başka işlemler yapılabilir, örneğin popup'ı kapatma
+                    popupOverlay.classList.remove("show");
+                    popup.classList.remove("show");
 
-                // Sayfayı yenile
-                window.location.reload();
+                    // Sayfayı yenile
+                    window.location.reload();
+                } else {
+                    if (response.status === 403) {
+                        console.warn("Yetkilendirme hatası (403). Yönlendiriliyor...");
+                        localStorage.removeItem("token");
+                        window.location.href = "/login.html"; // Kullanıcıyı giriş sayfasına yönlendir
+                    } else {
+                        console.error("Alt kategori oluşturulurken bir hata oluştu.");
+                    }
+                }
             })
             .catch((error) => {
                 console.error('Hata:', error);
@@ -134,6 +159,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Hata durumunda kullanıcıya bilgilendirme yapılabilir
             });
     });
+
 
     var categoryTableBody = document.getElementById("categoryTableBody");
 

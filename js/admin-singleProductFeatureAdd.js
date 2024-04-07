@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const token = localStorage.getItem("token");
 
     // Admin sayfalarının URL'lerini tanımla
-    const adminPages = ["/admin-mainCategory.html", "/admin-subCategory.html", "/admin-feature.html", "/admin-product.html","/admin-singleProduct.html","/admin-singleProductFeatureAdd.html"];
+    const adminPages = ["/admin-mainCategory.html", "/admin-subCategory.html", "/admin-feature.html", "/admin-product.html", "/admin-singleProduct.html", "/admin-singleProductFeatureAdd.html"];
 
     // Kullanıcının token bilgisinin olup olmadığını ve admin sayfalarına erişmeye çalışıp çalışmadığını kontrol et
     if (!token && adminPages.includes(window.location.pathname)) {
@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
         select.innerHTML = ''; // Önceki seçenekleri temizle
 
         // Her kategori için bir seçenek oluştur ve dropdown'a ekle
-        categories.forEach(function(category) {
+        categories.forEach(function (category) {
             var option = document.createElement("option");
             option.value = category.id;
             option.textContent = category.categoryName;
@@ -149,6 +149,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Kaydet butonuna tıklandığında çalışacak fonksiyon
     saveButton.addEventListener("click", function () {
+        // Kullanıcının token bilgisini al
+        const token = localStorage.getItem("token");
+
         // Seçenekleri ve değerleri al
         var productCodeId = productId; // URL'den alınan productCodeId
         console.log(productId)
@@ -166,7 +169,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Alınan seçenekleri ve değerleri işlemek için buraya yazabilirsiniz
         // Bu kısımda seçimler ve değerlerin backend'e gönderilmesi sağlanacak
-        // Backend bağlantısı yapıldığında bu fonksiyon yazılacak
         console.log("productCodeId:", productCodeId);
         console.log("productFeatures:", productFeatures);
 
@@ -179,21 +181,29 @@ document.addEventListener("DOMContentLoaded", function () {
         fetch('http://localhost:8080/product-feature/create', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': token // Token'i istek başlığına ekle
             },
             body: JSON.stringify(requestData)
         })
             .then(response => {
-                if (response.ok) {
-                    console.log('POST isteği başarıyla gönderildi.');
-                    window.location.reload();
-                    // İsteğin başarılı olduğu durumda yapılacak işlemleri buraya ekleyebilirsiniz.
-                } else {
-                    console.error('POST isteği başarısız oldu.');
+                if (!response.ok) {
+                    if (response.status === 403) {
+                        console.log("Token geçersiz. Yönlendiriliyor...");
+                        // Token geçersizse login sayfasına yönlendir
+                        localStorage.removeItem("token");
+                        window.location.href = "/login.html";
+                    } else {
+                        throw new Error("HTTP Hatası: " + response.status);
+                    }
                 }
+                console.log('POST isteği başarıyla gönderildi.');
+                window.location.reload();
+                // İsteğin başarılı olduğu durumda yapılacak işlemleri buraya ekleyebilirsiniz.
             })
             .catch(error => console.error('Hata:', error));
     });
+
 
     // Yeni giriş satırı ekleyen işlev
     function addNewInputRow() {
