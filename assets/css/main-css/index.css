@@ -110,13 +110,12 @@
 
 .card {
     border: 3px solid #eee;
-    padding: 40px;
+    padding: 20px;
     background-color: #f9f9f9;
     text-align: center;
-    /* İçerikleri ortalamak için */
     transition: border-color 0.3s ease;
-    /* Yumuşak hover geçişi */
-    height: 600px;
+    height: auto;
+    margin-bottom: 20px; /* Kartlar arasında boşluk bırak */
 }
 
 .card:hover {
@@ -125,20 +124,37 @@
 }
 
 .card img {
-    width: 100%;
-    height: 400px;
-    max-height: 400px;
+    max-width: 100%;
+    height: auto;
 }
 
 .card h2 {
-    font-size: 1.5em;
-    margin-top: 15px;
+    font-size: 1.2em;
+    margin-top: 10px;
     color: red;
 }
 
 .card p {
     font-size: 1em;
 }
+
+.column {
+    float: left;
+    width: 33.33%;
+    padding: 0 10px; /* Sağ ve sol kenar boşluğunu azalt */
+    box-sizing: border-box; /* Padding değerlerini genişlik hesabına dahil et */
+}
+
+
+@media (max-width: 768px) {
+    .column {
+        width: 100%; /* Mobilde tam genişlik */
+        float: none; /* Float'ı kaldır */
+        padding: 0; /* Paddingi sıfırla */
+        margin-bottom: 20px; /* Kartlar arasında boşluk bırak */
+    }
+}
+
 
 a {
     text-decoration: none;
