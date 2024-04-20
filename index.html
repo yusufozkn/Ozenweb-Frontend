@@ -328,10 +328,12 @@
                         </li>
                         <li>
                             <i class="fa fa-phone fa-fw"></i>
+
                             0212 871 34 58
                         </li>
                         <li>
                             <i class="fa fa-phone fa-fw"></i>
+                            <button id="whatsappButton">WhatsApp'ta Mesaj Gönder</button>
                             0532 416 54 58
                         </li>
                         <li>
@@ -399,6 +401,49 @@
     <script src="assets/js/templatemo.js"></script>
     <script src="assets/js/custom.js"></script>
     <script src="js/infoMail.js"></script>
+
+    <script>
+        function redirectToWhatsApp() {
+            // Telefon numaranızı buraya ekleyin
+            var phoneNumber = "+905360661132";
+            // WhatsApp'ı açmak için gerekli URL oluşturma
+            var whatsappUrl = "https://api.whatsapp.com/send?phone=" + phoneNumber;
+            // Yeni bir pencerede WhatsApp'ı açma
+            window.open(whatsappUrl, "_blank");
+        }
+    </script>
+
+    <script>
+        // Kullanıcı web tarayıcısında mı yoksa mobil cihazda mı kontrol et
+        function isMobile() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+
+        // WhatsApp'a mesaj gönderme işlevi
+        function sendMessageToWhatsApp() {
+            // Hedef numara
+            var phoneNumber = "905360661132"; // Telefon numarasını uluslararası formatla girin (+90XXXXXXXXXX gibi)
+            // Mesaj
+            var message = "Merhaba, bilgi almak istiyorum.";
+
+            // WhatsApp Web URL'si oluşturma
+            var whatsappWebUrl = "https://web.whatsapp.com/send?phone=" + phoneNumber + "&text=" + encodeURIComponent(message);
+
+            // Mobil cihazda mı kontrol et
+            if (isMobile()) {
+                // WhatsApp mobil uygulaması için URL oluşturma
+                var whatsappMobileUrl = "whatsapp://send?phone=" + phoneNumber + "&text=" + encodeURIComponent(message);
+                // Mobilde ise WhatsApp uygulamasını aç
+                window.location.href = whatsappMobileUrl;
+            } else {
+                // Web tarayıcısında ise yeni bir pencerede WhatsApp Web sayfasını aç
+                window.open(whatsappWebUrl, "_blank");
+            }
+        }
+
+        // Düğmeye tıklama işlevi ekle
+        document.getElementById("whatsappButton").addEventListener("click", sendMessageToWhatsApp);
+    </script>
     <!-- End Script -->
 </body>
 
