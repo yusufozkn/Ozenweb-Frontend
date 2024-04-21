@@ -152,7 +152,6 @@ window.addEventListener('click', function (event) {
 });
 
 
-// Form gönderme işlemi
 document.getElementById('mailForm').addEventListener('submit', function (event) {
     event.preventDefault(); // Sayfanın yenilenmesini önle
 
@@ -168,6 +167,10 @@ document.getElementById('mailForm').addEventListener('submit', function (event) 
     // Ürün ID'sini al
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get('productId');
+
+    // Loader'ı göster
+    const loader = this.querySelector('.loader');
+    loader.style.display = 'block';
 
     // JSON verilerini gönder
     fetch('http://localhost:8080/product/createProductInfoMail', {
@@ -192,5 +195,12 @@ document.getElementById('mailForm').addEventListener('submit', function (event) 
         .catch(error => {
             console.error('Hata:', error.message);
             alert('Mail gönderilirken bir hata oluştu!');
+        })
+        .finally(() => {
+            // Loader'ı gizle
+            loader.style.display = 'none';
         });
 });
+
+
+

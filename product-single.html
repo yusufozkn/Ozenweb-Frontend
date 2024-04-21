@@ -123,8 +123,9 @@
             </div>
             <div class="row">
                 <div class="col-lg-5 py-3">
-                    
-                    <img src="assets/logo/CE.svg" alt="CE Logo" width="50" height="auto" style="border:solid 1px; padding: 5px;">`
+
+                    <img src="assets/logo/CE.svg" alt="CE Logo" width="50" height="auto"
+                        style="border:solid 1px; padding: 5px;">`
                     <img src="" alt="" width="50" style="border:solid 1px; padding: 50px;">
                     <img src="" alt="" width="50" style="border:solid 1px; padding: 50px;">
                     <img src="" alt="" width="50" style="border:solid 1px; padding: 50px;">
@@ -250,9 +251,19 @@
             <input type="tel" id="phoneNumber" name="phoneNumber" required placeholder="Telefon Numarası">
             <textarea id="message" name="message" required placeholder="Mesaj"></textarea>
 
-            <button type="submit">Gönder</button>
+            <!-- Loader eklendi ve varsayılan olarak gizlendi -->
+            <div class="row">
+                <div class="col-lg-6">
+                    <button type="submit" class="bttn">Gönder</button>
+                </div>
+                <div class="col-auto py-3">
+                    <div class="loader" style="display: none;"></div>
+                </div>
+            </div>
         </form>
     </div>
+
+
 
 
     <!-- Start Script -->
