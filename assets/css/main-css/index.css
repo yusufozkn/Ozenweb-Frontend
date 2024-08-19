@@ -114,29 +114,33 @@
     background-color: #f9f9f9;
     text-align: center;
     transition: border-color 0.3s ease;
-    height: auto;
-    margin-bottom: 20px; /* Kartlar arasında boşluk bırak */
-}
-
-.card:hover {
-    border: 3px solid #b6acac;
-    cursor: pointer;
+    height: 600px; /* Kartların sabit yüksekliği */
+    width: 400px; /* Kartların sabit genişliği */
+    margin: 0 auto 20px; /* Kartları yatayda ortala ve aralarına boşluk bırak */
+    overflow: hidden; /* İçerik taşmasını engelle */
+    display: flex; /* Kart içeriğini dikey hizalamak için */
+    flex-direction: column; /* Kart içeriğini dikey hizalamak için */
+    justify-content: space-between; /* Yazi ve en yukarisi arasinda ortalama hizalama */
+    position: relative; /* Mutlak konumlandırmak için */
 }
 
 .card img {
-    max-width: 100%;
-    height: auto;
-}
-
-.card h2 {
-    font-size: 1.2em;
-    margin-top: 10px;
-    color: red;
+    max-width: calc(100% - 40px); /* Resimlerin maksimum genişliği kartın içerisindeki metne göre ayarlanır */
+    height: auto; /* Oranları koruyarak yüksekliği otomatik ayarla */
+    margin: 0 auto; /* Resmi yatayda ortala */
 }
 
 .card p {
     font-size: 1em;
 }
+
+.card h2 {
+    font-size: 1.2em;
+    margin-top: auto; /* Kartın en altına hizala */
+    color: red;
+}
+
+
 
 .column {
     float: left;
